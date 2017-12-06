@@ -12,7 +12,7 @@ export class HomePage {
   }
 
   onClick(): void {
-    this.navCtrl.setRoot('ClientesPage');
+    this.navCtrl.push('ClientesPage');
   }
 
 }

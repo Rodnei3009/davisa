@@ -1,14 +1,14 @@
 webpackJsonp([0],{
 
-/***/ 421:
+/***/ 422:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ClientesPageModule", function() { return ClientesPageModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "NovoClientePageModule", function() { return NovoClientePageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(75);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__clientes__ = __webpack_require__(422);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__novo_cliente__ = __webpack_require__(424);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -18,34 +18,33 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var ClientesPageModule = (function () {
-    function ClientesPageModule() {
+var NovoClientePageModule = (function () {
+    function NovoClientePageModule() {
     }
-    ClientesPageModule = __decorate([
+    NovoClientePageModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
             declarations: [
-                __WEBPACK_IMPORTED_MODULE_2__clientes__["a" /* ClientesPage */],
+                __WEBPACK_IMPORTED_MODULE_2__novo_cliente__["a" /* NovoClientePage */],
             ],
             imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__clientes__["a" /* ClientesPage */]),
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__novo_cliente__["a" /* NovoClientePage */]),
             ],
         })
-    ], ClientesPageModule);
-    return ClientesPageModule;
+    ], NovoClientePageModule);
+    return NovoClientePageModule;
 }());
 
-//# sourceMappingURL=clientes.module.js.map
+//# sourceMappingURL=novo-cliente.module.js.map
 
 /***/ }),
 
-/***/ 422:
+/***/ 424:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ClientesPage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__providers_firebase_service_cliente_service__ = __webpack_require__(269);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(75);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return NovoClientePage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(75);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -57,42 +56,30 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
-
 /**
- * Generated class for the ClientesPage page.
+ * Generated class for the NovoClientePage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
  */
-var ClientesPage = (function () {
-    function ClientesPage(navCtrl, navParams, ClienteServiceProvider) {
+var NovoClientePage = (function () {
+    function NovoClientePage(navCtrl, navParams) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
-        this.ClienteServiceProvider = ClienteServiceProvider;
-        this.novoCliente = '';
-        this.idCliente = '';
-        this.listaClientes = this.ClienteServiceProvider.listarCliente();
     }
-    ClientesPage.prototype.addCliente = function () {
-        this.ClienteServiceProvider.adicionarCliente(this.novoCliente);
+    NovoClientePage.prototype.ionViewDidLoad = function () {
+        console.log('ionViewDidLoad NovoClientePage');
     };
-    ClientesPage.prototype.delCliente = function (idcliente) {
-        this.ClienteServiceProvider.deletarCliente(idcliente);
-    };
-    ClientesPage.prototype.ionViewDidLoad = function () {
-        console.log('ionViewDidLoad ClientesPage');
-    };
-    ClientesPage = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["m" /* Component */])({
-            selector: 'page-clientes',template:/*ion-inline-start:"C:\Users\rodnei.brassoroto\Documents\GitHub\ionic\davisa\src\pages\clientes\clientes.html"*/`<!--\n  Generated template for the ClientesPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>Clientes</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content>\n\n  <ion-row>\n    <ion-col col-9>\n      <ion-input type="text" [(ngModel)]="novoCliente" placeholder="Novo Cliente"></ion-input>\n    </ion-col>\n    <ion-col>\n      <button ion-button (click)="addCliente()" color=primary>Novo Cliente</button>\n    </ion-col>\n  </ion-row>\n\n  <ion-list>\n    <ion-item-sliding *ngFor="let item of listaClientes | async">\n      <ion-item>\n        {{item.$value}}\n      </ion-item>\n      <ion-item-options side="right">\n        <button ion-button color="danger" icon-only (click)="delCliente(item.$key)">\n            <ion-icon name="trash"></ion-icon>\n        </button>\n      </ion-item-options>\n    </ion-item-sliding>\n  </ion-list>\n\n</ion-content>\n`/*ion-inline-end:"C:\Users\rodnei.brassoroto\Documents\GitHub\ionic\davisa\src\pages\clientes\clientes.html"*/,
+    NovoClientePage = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
+            selector: 'page-novo-cliente',template:/*ion-inline-start:"C:\Users\rodnei.brassoroto\Documents\GitHub\ionic\davisa\src\pages\novo-cliente\novo-cliente.html"*/`<!--\n  Generated template for the ClientesPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>Novo Cliente</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content>\n\n  <form>\n    <ion-item>\n      <ion-icon name="person" item-left></ion-icon>\n      <ion-input type="text" placeholder="Nome"></ion-input>\n    </ion-item>\n\n    <ion-item>\n      <ion-icon name="at" item-left></ion-icon>\n      <ion-input type="text" placeholder="e-mail"></ion-input>\n    </ion-item>\n\n    <ion-item>\n      <ion-icon name="phone-portrait" item-left></ion-icon>\n      <ion-input type="tel" placeholder="Celular"></ion-input>\n    </ion-item>\n\n    <ion-item>\n      <ion-icon name="woman" item-left></ion-icon>\n      <ion-input type="text" placeholder="Sexo"></ion-input>\n    </ion-item>\n\n    <ion-item>\n      <ion-icon name="woman" item-left></ion-icon>\n      <ion-input type="text" placeholder="Profissão"></ion-input>\n    </ion-item>\n    <ion-item>\n      <ion-icon name="woman" item-left></ion-icon>\n      <ion-input type="text" placeholder="Estado Civil"></ion-input>\n    </ion-item>\n    <ion-item>\n      <ion-icon name="woman" item-left></ion-icon>\n      <ion-input type="text" placeholder="Aniversário"></ion-input>\n    </ion-item>\n    <ion-item>\n      <ion-icon name="woman" item-left></ion-icon>\n      <ion-input type="text" placeholder="CPF"></ion-input>\n    </ion-item>\n    <ion-item>\n      <ion-icon name="woman" item-left></ion-icon>\n      <ion-input type="text" placeholder="RG"></ion-input>\n    </ion-item>\n    <ion-item>\n      <ion-icon name="woman" item-left></ion-icon>\n      <ion-input type="text" placeholder="Endereço"></ion-input>\n    </ion-item>\n    <ion-item>\n      <ion-icon name="woman" item-left></ion-icon>\n      <ion-input type="text" placeholder="Complemento"></ion-input>\n    </ion-item>\n\n  </form>\n\n\n</ion-content>\n    `/*ion-inline-end:"C:\Users\rodnei.brassoroto\Documents\GitHub\ionic\davisa\src\pages\novo-cliente\novo-cliente.html"*/,
         }),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["e" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["e" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["f" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["f" /* NavParams */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_0__providers_firebase_service_cliente_service__["a" /* ClienteServiceProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__providers_firebase_service_cliente_service__["a" /* ClienteServiceProvider */]) === "function" && _c || Object])
-    ], ClientesPage);
-    return ClientesPage;
-    var _a, _b, _c;
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */]])
+    ], NovoClientePage);
+    return NovoClientePage;
 }());
 
-//# sourceMappingURL=clientes.js.map
+//# sourceMappingURL=novo-cliente.js.map
 
 /***/ })
 

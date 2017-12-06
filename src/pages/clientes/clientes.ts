@@ -39,4 +39,8 @@ export class ClientesPage {
     console.log('ionViewDidLoad ClientesPage');
   }
 
+  novo_Cliente() {
+    this.navCtrl.push('NovoClientePage');
+  }
+
 }

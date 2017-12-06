@@ -16,12 +16,10 @@
 <ion-content>
 
   <ion-row>
-    <ion-col col-9>
       <ion-input type="text" [(ngModel)]="novoCliente" placeholder="Novo Cliente"></ion-input>
-    </ion-col>
-    <ion-col>
-      <button ion-button (click)="addCliente()" color=primary>Novo Cliente</button>
-    </ion-col>
+  </ion-row>
+  <ion-row>
+      <button ion-button block (click)="addCliente()" color="primary">Incluir</button>
   </ion-row>
 
   <ion-list>
@@ -36,5 +34,7 @@
       </ion-item-options>
     </ion-item-sliding>
   </ion-list>
+
+  <button ion-button block (click)="novo_Cliente()" color="danger">Novo Cliente</button>
 
 </ion-content>
