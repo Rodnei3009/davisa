@@ -31,8 +31,8 @@ export class ClientesPage {
     this.ClienteServiceProvider.adicionarCliente(this.novoCliente);
   }
 
-  delCliente() {
-    this.ClienteServiceProvider.deletarCliente(this.idCliente);
+  delCliente(idcliente) {
+    this.ClienteServiceProvider.deletarCliente(idcliente);
   }
 
   ionViewDidLoad() {
