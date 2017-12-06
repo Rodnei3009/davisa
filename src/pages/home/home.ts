@@ -11,4 +11,8 @@ export class HomePage {
 
   }
 
+  onClick(): void {
+    this.navCtrl.setRoot('ClientesPage');
+  }
+
 }

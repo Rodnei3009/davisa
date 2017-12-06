@@ -7,6 +7,20 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 
+import { HttpModule } from '@angular/http';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { AngularFireModule } from 'angularfire2';
+import { ClienteServiceProvider } from '../providers/firebase-service/cliente-service';
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBJfyA0HoyDRGspLSWQ8g8oCfJYYg2l6XQ",
+  authDomain: "davisa-modaintima.firebaseapp.com",
+  databaseURL: "https://davisa-modaintima.firebaseio.com",
+  projectId: "davisa-modaintima",
+  storageBucket: "davisa-modaintima.appspot.com",
+  messagingSenderId: "410435296849"
+};
+
 @NgModule({
   declarations: [
     MyApp,
@@ -14,6 +28,9 @@ import { HomePage } from '../pages/home/home';
   ],
   imports: [
     BrowserModule,
+    HttpModule,
+    AngularFireDatabaseModule,
+    AngularFireModule.initializeApp(firebaseConfig),
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
@@ -24,7 +41,8 @@ import { HomePage } from '../pages/home/home';
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    ClienteServiceProvider
   ]
 })
 export class AppModule {}
