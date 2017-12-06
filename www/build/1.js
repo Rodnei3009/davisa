@@ -58,12 +58,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-/**
- * Generated class for the ClientesPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 var ClientesPage = (function () {
     function ClientesPage(navCtrl, navParams, ClienteServiceProvider) {
         this.navCtrl = navCtrl;

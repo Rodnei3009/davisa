@@ -1,3 +1,4 @@
+import { Cliente } from './../../models/cliente.models';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from 'angularfire2/database';
@@ -12,8 +13,8 @@ export class ClienteServiceProvider {
     return this.afd.list('/clientes/');
   }
 
-  adicionarCliente (nome) {
-    this.afd.list('/clientes/').push(nome);
+  adicionarCliente (Cliente) {
+    this.afd.list('/clientes/').push(Cliente);
   }
 
   deletarCliente (idCliente) {

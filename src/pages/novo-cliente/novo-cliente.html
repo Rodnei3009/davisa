@@ -15,55 +15,57 @@
 
 <ion-content>
 
-  <form>
+  <form [formGroup]="clienteForm" (ngSubmit)="onSubmit(); $event.preventDefault()">
     <ion-item>
       <ion-icon name="person" item-left></ion-icon>
-      <ion-input type="text" placeholder="Nome"></ion-input>
+      <ion-input type="text" placeholder="Nome" formControlName="nome"></ion-input>
     </ion-item>
 
     <ion-item>
       <ion-icon name="at" item-left></ion-icon>
-      <ion-input type="text" placeholder="e-mail"></ion-input>
+      <ion-input type="text" placeholder="email" formControlName="email"></ion-input>
     </ion-item>
 
     <ion-item>
       <ion-icon name="phone-portrait" item-left></ion-icon>
-      <ion-input type="tel" placeholder="Celular"></ion-input>
+      <ion-input type="tel" placeholder="Celular" formControlName="celular"></ion-input>
     </ion-item>
 
     <ion-item>
       <ion-icon name="woman" item-left></ion-icon>
-      <ion-input type="text" placeholder="Sexo"></ion-input>
+      <ion-input type="text" placeholder="Sexo" formControlName="Sexo"></ion-input>
     </ion-item>
 
     <ion-item>
       <ion-icon name="woman" item-left></ion-icon>
-      <ion-input type="text" placeholder="Profissão"></ion-input>
+      <ion-input type="text" placeholder="Profissão" formControlName="prof"></ion-input>
     </ion-item>
     <ion-item>
       <ion-icon name="woman" item-left></ion-icon>
-      <ion-input type="text" placeholder="Estado Civil"></ion-input>
+      <ion-input type="text" placeholder="Estado Civil" formControlName="estcivil"></ion-input>
     </ion-item>
     <ion-item>
       <ion-icon name="woman" item-left></ion-icon>
-      <ion-input type="text" placeholder="Aniversário"></ion-input>
+      <ion-input type="text" placeholder="Aniversário" formControlName="aniver"></ion-input>
     </ion-item>
     <ion-item>
       <ion-icon name="woman" item-left></ion-icon>
-      <ion-input type="text" placeholder="CPF"></ion-input>
+      <ion-input type="text" placeholder="CPF" formControlName="CPF"></ion-input>
     </ion-item>
     <ion-item>
       <ion-icon name="woman" item-left></ion-icon>
-      <ion-input type="text" placeholder="RG"></ion-input>
+      <ion-input type="text" placeholder="RG" formControlName="RG"></ion-input>
     </ion-item>
     <ion-item>
       <ion-icon name="woman" item-left></ion-icon>
-      <ion-input type="text" placeholder="Endereço"></ion-input>
+      <ion-input type="text" placeholder="Endereço" formControlName="endereco"></ion-input>
     </ion-item>
     <ion-item>
       <ion-icon name="woman" item-left></ion-icon>
-      <ion-input type="text" placeholder="Complemento"></ion-input>
+      <ion-input type="text" placeholder="Complemento" formControlName="complemento"></ion-input>
     </ion-item>
+    <br>
+    <button ion-button block type="submit" [disabled]="clienteForm.invalid" color="primary">Salvar</button>
 
   </form>
 

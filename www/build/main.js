@@ -75,10 +75,9 @@ var HomePage = (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
             selector: 'page-home',template:/*ion-inline-start:"C:\Users\rodnei.brassoroto\Documents\GitHub\ionic\davisa\src\pages\home\home.html"*/`<ion-header>\n  <ion-navbar>\n    <ion-title>\n      Ionic Blank\n    </ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n  \n<button ion-button block (click)="onClick()" color="primary">Clientes</button>\n\n</ion-content>\n`/*ion-inline-end:"C:\Users\rodnei.brassoroto\Documents\GitHub\ionic\davisa\src\pages\home\home.html"*/
         }),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */]) === "function" && _a || Object])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */]])
     ], HomePage);
     return HomePage;
-    var _a;
 }());
 
 //# sourceMappingURL=home.js.map
@@ -110,8 +109,8 @@ var ClienteServiceProvider = (function () {
     ClienteServiceProvider.prototype.listarCliente = function () {
         return this.afd.list('/clientes/');
     };
-    ClienteServiceProvider.prototype.adicionarCliente = function (nome) {
-        this.afd.list('/clientes/').push(nome);
+    ClienteServiceProvider.prototype.adicionarCliente = function (Cliente) {
+        this.afd.list('/clientes/').push(Cliente);
     };
     ClienteServiceProvider.prototype.deletarCliente = function (idCliente) {
         this.afd.list('/clientes/').remove(idCliente);
