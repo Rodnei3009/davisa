@@ -57,7 +57,7 @@
         <icon height="100" src="resources/ios/icon/icon-50@2x.png" width="100" />
         <icon height="60" src="resources/ios/icon/icon-60.png" width="60" />
         <icon height="120" src="resources/ios/icon/icon-60@2x.png" width="120" />
-        <icon height="180" src="resources/ios/icon/icon-60@3x.png" width="180" />
+        <icon height="180" src="resources/ios/icon/davisa_logo_180.png" width="180" />
         <icon height="72" src="resources/ios/icon/icon-72.png" width="72" />
         <icon height="144" src="resources/ios/icon/icon-72@2x.png" width="144" />
         <icon height="76" src="resources/ios/icon/icon-76.png" width="76" />
