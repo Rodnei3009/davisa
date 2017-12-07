@@ -10,7 +10,7 @@ export class ClienteServiceProvider {
   constructor(public afd: AngularFireDatabase) { }
 
   listarCliente () {
-    return this.afd.list('/clientes/');
+    return this.afd.list('/clientes');
   }
 
   adicionarCliente (Cliente) {
