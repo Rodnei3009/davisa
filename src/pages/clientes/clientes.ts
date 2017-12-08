@@ -28,11 +28,12 @@ export class ClientesPage {
   delCliente(idcliente) {
     this.ClienteServiceProvider.deletarCliente(idcliente);
   }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad ClientesPage');
+  
+  selecionaCliente(cliente) {
+    console.log(cliente);
+    this.navCtrl.push('NovoClientePage', cliente);
   }
-
+  
   novo_Cliente() {
     this.navCtrl.push('NovoClientePage');
   }

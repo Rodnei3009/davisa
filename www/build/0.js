@@ -67,36 +67,36 @@ var NovoClientePage = (function () {
         this.formBuilder = formBuilder;
         this.ClienteServiceProvider = ClienteServiceProvider;
         this.clienteForm = this.formBuilder.group({
-            nome: ['', __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required],
-            email: ['', __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required],
-            celular: ['', __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required],
-            Sexo: [''],
-            prof: [''],
-            estcivil: [''],
-            aniver: [''],
-            CPF: ['', __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required],
-            RG: ['', __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required],
-            endereco: ['', __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required],
-            complemento: ['', __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required]
+            nome: [this.navParams.get('nome'), __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required],
+            email: [this.navParams.get('email'), __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required],
+            celular: [this.navParams.get('celular'), __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required],
+            Sexo: [this.navParams.get('Sexo')],
+            prof: [this.navParams.get('prof')],
+            estcivil: [this.navParams.get('estcivil')],
+            aniver: [this.navParams.get('aniver')],
+            CPF: [this.navParams.get('CPF'), __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required],
+            RG: [this.navParams.get('RG'), __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required],
+            endereco: [this.navParams.get('endereco'), __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required],
+            complemento: [this.navParams.get('complemento'), __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required]
         });
+        this.dadosCliente = this.navParams.get('nome');
+        console.log(this.dadosCliente);
     }
     NovoClientePage.prototype.ionViewDidLoad = function () {
-        console.log('ionViewDidLoad NovoClientePage');
+        console.log(this.dadosCliente);
     };
     NovoClientePage.prototype.onSubmit = function () {
         console.log(this.clienteForm.value);
         this.ClienteServiceProvider.adicionarCliente(this.clienteForm.value);
     };
-    NovoClientePage.prototype.addCliente = function () {
-        this.ClienteServiceProvider.adicionarCliente(this.novoCliente);
-    };
     NovoClientePage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-novo-cliente',template:/*ion-inline-start:"C:\Users\rodnei.brassoroto\Documents\GitHub\ionic\davisa\src\pages\novo-cliente\novo-cliente.html"*/`<!--\n  Generated template for the ClientesPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>Novo Cliente</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content>\n\n  <form [formGroup]="clienteForm" (ngSubmit)="onSubmit(); $event.preventDefault()">\n    <ion-item>\n      <ion-icon name="person" item-left></ion-icon>\n      <ion-input type="text" placeholder="Nome" formControlName="nome"></ion-input>\n    </ion-item>\n\n    <ion-item>\n      <ion-icon name="at" item-left></ion-icon>\n      <ion-input type="text" placeholder="email" formControlName="email"></ion-input>\n    </ion-item>\n\n    <ion-item>\n      <ion-icon name="phone-portrait" item-left></ion-icon>\n      <ion-input type="tel" placeholder="Celular" formControlName="celular"></ion-input>\n    </ion-item>\n\n    <ion-item>\n      <ion-icon name="woman" item-left></ion-icon>\n      <ion-input type="text" placeholder="Sexo" formControlName="Sexo"></ion-input>\n    </ion-item>\n\n    <ion-item>\n      <ion-icon name="woman" item-left></ion-icon>\n      <ion-input type="text" placeholder="Profissão" formControlName="prof"></ion-input>\n    </ion-item>\n    <ion-item>\n      <ion-icon name="woman" item-left></ion-icon>\n      <ion-input type="text" placeholder="Estado Civil" formControlName="estcivil"></ion-input>\n    </ion-item>\n    <ion-item>\n      <ion-icon name="woman" item-left></ion-icon>\n      <ion-input type="text" placeholder="Aniversário" formControlName="aniver"></ion-input>\n    </ion-item>\n    <ion-item>\n      <ion-icon name="woman" item-left></ion-icon>\n      <ion-input type="text" placeholder="CPF" formControlName="CPF"></ion-input>\n    </ion-item>\n    <ion-item>\n      <ion-icon name="woman" item-left></ion-icon>\n      <ion-input type="text" placeholder="RG" formControlName="RG"></ion-input>\n    </ion-item>\n    <ion-item>\n      <ion-icon name="woman" item-left></ion-icon>\n      <ion-input type="text" placeholder="Endereço" formControlName="endereco"></ion-input>\n    </ion-item>\n    <ion-item>\n      <ion-icon name="woman" item-left></ion-icon>\n      <ion-input type="text" placeholder="Complemento" formControlName="complemento"></ion-input>\n    </ion-item>\n    <br>\n    <button ion-button block type="submit" [disabled]="clienteForm.invalid" color="primary">Salvar</button>\n\n  </form>\n\n\n</ion-content>\n    `/*ion-inline-end:"C:\Users\rodnei.brassoroto\Documents\GitHub\ionic\davisa\src\pages\novo-cliente\novo-cliente.html"*/,
+            selector: 'page-novo-cliente',template:/*ion-inline-start:"C:\Users\rodnei.brassoroto\Documents\GitHub\ionic\davisa\src\pages\novo-cliente\novo-cliente.html"*/`<!--\n  Generated template for the ClientesPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>Novo Cliente</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content>\n\n  <form [formGroup]="clienteForm" (ngSubmit)="onSubmit(); $event.preventDefault()">\n    <ion-item>\n      <ion-icon name="person" item-left></ion-icon>\n      <ion-input type="text" placeholder="Nome" formControlName="nome"></ion-input>\n    </ion-item>\n\n    <ion-item>\n      <ion-icon name="at" item-left></ion-icon>\n      <ion-input type="text" placeholder="email" formControlName="email"></ion-input>\n    </ion-item>\n\n    <ion-item>\n      <ion-icon name="phone-portrait" item-left></ion-icon>\n      <ion-input type="tel" placeholder="Celular" formControlName="celular"></ion-input>\n    </ion-item>\n\n    <ion-item>\n      <ion-icon name="body" item-left></ion-icon>\n      <ion-input type="text" placeholder="Sexo" formControlName="Sexo"></ion-input>\n    </ion-item>\n\n    <ion-item>\n      <ion-icon name="construct" item-left></ion-icon>\n      <ion-input type="text" placeholder="Profissão" formControlName="prof"></ion-input>\n    </ion-item>\n    <ion-item>\n      <ion-icon name="contacts" item-left></ion-icon>\n      <ion-input type="text" placeholder="Estado Civil" formControlName="estcivil"></ion-input>\n    </ion-item>\n    <ion-item>\n      <ion-icon name="hand" item-left></ion-icon>\n      <ion-input type="text" placeholder="Aniversário" formControlName="aniver"></ion-input>\n    </ion-item>\n    <ion-item>\n      <ion-icon name="card" item-left></ion-icon>\n      <ion-input type="text" placeholder="CPF" formControlName="CPF"></ion-input>\n    </ion-item>\n    <ion-item>\n      <ion-icon name="finger-print" item-left></ion-icon>\n      <ion-input type="text" placeholder="RG" formControlName="RG"></ion-input>\n    </ion-item>\n    <ion-item>\n      <ion-icon name="home" item-left></ion-icon>\n      <ion-input type="text" placeholder="Endereço" formControlName="endereco"></ion-input>\n    </ion-item>\n    <ion-item>\n      <ion-icon name="infinite" item-left></ion-icon>\n      <ion-input type="text" placeholder="Complemento" formControlName="complemento"></ion-input>\n    </ion-item>\n    <br>\n    <button ion-button block type="submit" [disabled]="clienteForm.invalid" color="primary">Salvar</button>\n\n  </form>\n\n\n</ion-content>\n    `/*ion-inline-end:"C:\Users\rodnei.brassoroto\Documents\GitHub\ionic\davisa\src\pages\novo-cliente\novo-cliente.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__angular_forms__["a" /* FormBuilder */], __WEBPACK_IMPORTED_MODULE_3__providers_firebase_service_cliente_service__["a" /* ClienteServiceProvider */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__angular_forms__["a" /* FormBuilder */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_forms__["a" /* FormBuilder */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_3__providers_firebase_service_cliente_service__["a" /* ClienteServiceProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__providers_firebase_service_cliente_service__["a" /* ClienteServiceProvider */]) === "function" && _d || Object])
     ], NovoClientePage);
     return NovoClientePage;
+    var _a, _b, _c, _d;
 }());
 
 //# sourceMappingURL=novo-cliente.js.map
