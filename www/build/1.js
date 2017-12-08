@@ -75,10 +75,10 @@ var ClientesPage = (function () {
     };
     ClientesPage.prototype.selecionaCliente = function (cliente) {
         console.log(cliente);
-        this.navCtrl.push('NovoClientePage', cliente);
+        this.navCtrl.push('NovoClientePage', { dadosCliente: cliente, funcao: 'atualizar' });
     };
     ClientesPage.prototype.novo_Cliente = function () {
-        this.navCtrl.push('NovoClientePage');
+        this.navCtrl.push('NovoClientePage', { dadosCliente: {}, funcao: 'incluir' });
     };
     ClientesPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["m" /* Component */])({

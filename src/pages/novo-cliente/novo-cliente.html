@@ -65,7 +65,8 @@
       <ion-input type="text" placeholder="Complemento" formControlName="complemento"></ion-input>
     </ion-item>
     <br>
-    <button ion-button block type="submit" [disabled]="clienteForm.invalid" color="primary">Salvar</button>
+    <button ion-button block type="submit" [disabled]="clienteForm.invalid" *ngIf="!isAtualizar" color="primary">Salvar</button>
+    <button ion-button block type="submit" [disabled]="clienteForm.invalid" *ngIf="isAtualizar" color="danger">Atualizar</button>
 
   </form>
 

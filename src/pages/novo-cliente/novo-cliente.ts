@@ -16,23 +16,34 @@ export class NovoClientePage {
 
   clienteForm: FormGroup;
   dadosCliente: string;
+  funcao: string;
+  isAtualizar: boolean = false;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public formBuilder: FormBuilder, public ClienteServiceProvider: ClienteServiceProvider) {
     this.clienteForm = this.formBuilder.group({
-      nome: [this.navParams.get('nome'), Validators.required],
-      email: [this.navParams.get('email'), Validators.required],
-      celular: [this.navParams.get('celular'), Validators.required],
-      Sexo: [this.navParams.get('Sexo')],
-      prof: [this.navParams.get('prof')],
-      estcivil: [this.navParams.get('estcivil')],
-      aniver: [this.navParams.get('aniver')],
-      CPF: [this.navParams.get('CPF'), Validators.required],
-      RG: [this.navParams.get('RG'), Validators.required],
-      endereco: [this.navParams.get('endereco'), Validators.required],
-      complemento: [this.navParams.get('complemento'), Validators.required]
+      nome: [this.navParams.get('dadosCliente').nome, Validators.required],
+      email: [this.navParams.get('dadosCliente').email, Validators.required],
+      celular: [this.navParams.get('dadosCliente').celular, Validators.required],
+      Sexo: [this.navParams.get('dadosCliente').Sexo],
+      prof: [this.navParams.get('dadosCliente').prof],
+      estcivil: [this.navParams.get('dadosCliente').estcivil],
+      aniver: [this.navParams.get('dadosCliente').aniver],
+      CPF: [this.navParams.get('dadosCliente').CPF, Validators.required],
+      RG: [this.navParams.get('dadosCliente').RG, Validators.required],
+      endereco: [this.navParams.get('dadosCliente').endereco, Validators.required],
+      complemento: [this.navParams.get('dadosCliente').complemento, Validators.required]
     });
-    this.dadosCliente = this.navParams.get('nome');
+    this.dadosCliente = this.navParams.get('dadosCliente');
+    this.funcao = this.navParams.get('funcao');
     console.log(this.dadosCliente);
+    console.log(this.funcao);
+
+    if (this.funcao === 'atualizar') {
+      this.isAtualizar = true;
+    } else {
+      this.isAtualizar = false;
+    }
+
   }
 
   ionViewDidLoad() {
@@ -42,6 +53,7 @@ export class NovoClientePage {
   onSubmit(): void {
     console.log(this.clienteForm.value);
     this.ClienteServiceProvider.adicionarCliente(this.clienteForm.value);
+    this.navCtrl.pop();
   }
 
 }

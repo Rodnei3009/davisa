@@ -31,11 +31,11 @@ export class ClientesPage {
   
   selecionaCliente(cliente) {
     console.log(cliente);
-    this.navCtrl.push('NovoClientePage', cliente);
+    this.navCtrl.push('NovoClientePage', {dadosCliente: cliente, funcao: 'atualizar'});
   }
   
   novo_Cliente() {
-    this.navCtrl.push('NovoClientePage');
+    this.navCtrl.push('NovoClientePage', {dadosCliente: {}, funcao: 'incluir'});
   }
 
 }
