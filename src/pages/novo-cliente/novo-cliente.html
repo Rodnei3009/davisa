@@ -46,15 +46,15 @@
     </ion-item>
     <ion-item>
       <ion-icon name="hand" item-left></ion-icon>
-      <ion-input type="text" placeholder="Aniversário" formControlName="aniver"></ion-input>
+      <ion-input type="number" placeholder="Aniversário" formControlName="aniver"></ion-input>
     </ion-item>
     <ion-item>
       <ion-icon name="card" item-left></ion-icon>
-      <ion-input type="text" placeholder="CPF" formControlName="CPF"></ion-input>
+      <ion-input type="number" placeholder="CPF" formControlName="CPF"></ion-input>
     </ion-item>
     <ion-item>
       <ion-icon name="finger-print" item-left></ion-icon>
-      <ion-input type="text" placeholder="RG" formControlName="RG"></ion-input>
+      <ion-input type="number" placeholder="RG" formControlName="RG"></ion-input>
     </ion-item>
     <ion-item>
       <ion-icon name="home" item-left></ion-icon>
@@ -64,12 +64,16 @@
       <ion-icon name="infinite" item-left></ion-icon>
       <ion-input type="text" placeholder="Complemento" formControlName="complemento"></ion-input>
     </ion-item>
+    <ion-item>
+      <ion-icon name="information-circle" item-left></ion-icon>
+      <ion-input type="text" placeholder="indicacao" formControlName="indicacao"></ion-input>
+    </ion-item>
     <br>
-    <button ion-button block type="submit" [disabled]="clienteForm.invalid" *ngIf="!isAtualizar" color="primary">Salvar</button>
-    <button ion-button block type="submit" [disabled]="clienteForm.invalid" *ngIf="isAtualizar" color="danger">Atualizar</button>
+    
+    <button ion-button block type="button" [disabled]="clienteForm.invalid" *ngIf="!isAtualizar" color="primary" (click)="onSubmit()">Salvar</button>
+    <button ion-button block type="button" [disabled]="clienteForm.invalid" *ngIf="isAtualizar" color="danger" (click)="onUpdate()">Atualizar</button>
 
   </form>
-
 
 </ion-content>
     

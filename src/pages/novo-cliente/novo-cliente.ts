@@ -18,20 +18,22 @@ export class NovoClientePage {
   dadosCliente: string;
   funcao: string;
   isAtualizar: boolean = false;
+  idCliente: string;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public formBuilder: FormBuilder, public ClienteServiceProvider: ClienteServiceProvider) {
     this.clienteForm = this.formBuilder.group({
       nome: [this.navParams.get('dadosCliente').nome, Validators.required],
-      email: [this.navParams.get('dadosCliente').email, Validators.required],
+      email: [this.navParams.get('dadosCliente').email],
       celular: [this.navParams.get('dadosCliente').celular, Validators.required],
       Sexo: [this.navParams.get('dadosCliente').Sexo],
       prof: [this.navParams.get('dadosCliente').prof],
       estcivil: [this.navParams.get('dadosCliente').estcivil],
       aniver: [this.navParams.get('dadosCliente').aniver],
-      CPF: [this.navParams.get('dadosCliente').CPF, Validators.required],
-      RG: [this.navParams.get('dadosCliente').RG, Validators.required],
-      endereco: [this.navParams.get('dadosCliente').endereco, Validators.required],
-      complemento: [this.navParams.get('dadosCliente').complemento, Validators.required]
+      CPF: [this.navParams.get('dadosCliente').CPF],
+      RG: [this.navParams.get('dadosCliente').RG],
+      endereco: [this.navParams.get('dadosCliente').endereco],
+      complemento: [this.navParams.get('dadosCliente').complemento],
+      indicacao: [this.navParams.get('dadosCliente').indicacao]
     });
     this.dadosCliente = this.navParams.get('dadosCliente');
     this.funcao = this.navParams.get('funcao');
@@ -40,6 +42,7 @@ export class NovoClientePage {
 
     if (this.funcao === 'atualizar') {
       this.isAtualizar = true;
+      this.idCliente = this.navParams.get('dadosCliente').$key;
     } else {
       this.isAtualizar = false;
     }
@@ -55,5 +58,12 @@ export class NovoClientePage {
     this.ClienteServiceProvider.adicionarCliente(this.clienteForm.value);
     this.navCtrl.pop();
   }
+
+  onUpdate(): void {
+    console.log(this.clienteForm.value);
+    this.ClienteServiceProvider.atualizarCliente(this.idCliente, this.clienteForm.value);
+    this.navCtrl.pop();
+  }
+  
 
 }

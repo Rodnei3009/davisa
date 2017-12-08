@@ -17,6 +17,10 @@ export class ClienteServiceProvider {
     this.afd.list('/clientes/').push(Cliente);
   }
 
+  atualizarCliente (idCliente, dadosCliente) {
+    this.afd.list('/clientes/').update(idCliente, dadosCliente);
+  }
+
   deletarCliente (idCliente) {
     this.afd.list('/clientes/').remove(idCliente);    
   }
