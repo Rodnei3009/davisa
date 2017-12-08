@@ -112,6 +112,9 @@ var ClienteServiceProvider = (function () {
     ClienteServiceProvider.prototype.adicionarCliente = function (Cliente) {
         this.afd.list('/clientes/').push(Cliente);
     };
+    ClienteServiceProvider.prototype.atualizarCliente = function (idCliente, dadosCliente) {
+        this.afd.list('/clientes/').update(idCliente, dadosCliente);
+    };
     ClienteServiceProvider.prototype.deletarCliente = function (idCliente) {
         this.afd.list('/clientes/').remove(idCliente);
     };
