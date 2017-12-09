@@ -14,10 +14,12 @@ export class ClientesPage {
   listaClientes: FirebaseListObservable<any[]>;
   novoCliente = '';
   idCliente = '';
+  showSpinnerCliente: boolean = true;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public ClienteServiceProvider: ClienteServiceProvider) {
     
-    this.listaClientes = this.ClienteServiceProvider.listarCliente();
+    this.listaClientes = this.ClienteServiceProvider.listarCliente();    
+    //this.showSpinnerCliente = false;
   
   }
 

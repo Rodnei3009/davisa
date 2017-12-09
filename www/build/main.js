@@ -73,7 +73,7 @@ var HomePage = (function () {
     };
     HomePage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-home',template:/*ion-inline-start:"C:\Users\rodnei.brassoroto\Documents\GitHub\ionic\davisa\src\pages\home\home.html"*/`<ion-header>\n  <ion-navbar>\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title>\n      Davisa Moda Íntima\n    </ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content text-center padding>\n  \n  <br><br><br><br><br>\n  <h6 class="animated fadeInLeft">Bem-vinda! :-)</h6>\n  \n  <div>\n    <img class="animated fadeInRight" src="assets/imgs/davisa_logo_180.png" style=" width: 180px; vertical-align: middle;">\n  </div>\n\n  <h6 class="animated fadeInLeft">Sua última visita: 17/10/2017</h6>\n\n</ion-content>\n`/*ion-inline-end:"C:\Users\rodnei.brassoroto\Documents\GitHub\ionic\davisa\src\pages\home\home.html"*/
+            selector: 'page-home',template:/*ion-inline-start:"C:\Users\rodnei.brassoroto\Documents\GitHub\ionic\davisa\src\pages\home\home.html"*/`<ion-header>\n  <ion-navbar>\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title>\n      Davisa Moda Íntima\n    </ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content text-center padding>\n  \n  <br><br><br><br><br>\n  <h6 class="animated fadeInLeft">Bem-vinda! :-)</h6>\n  \n  <div>\n    <img class="animated fadeInRight" src="assets/imgs/davisa_logo_semfundo.png" style=" width: 180px; vertical-align: middle;">\n  </div>\n\n  <h6 class="animated fadeInLeft">Sua última visita: 17/10/2017</h6>\n\n</ion-content>\n`/*ion-inline-end:"C:\Users\rodnei.brassoroto\Documents\GitHub\ionic\davisa\src\pages\home\home.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */]])
     ], HomePage);
@@ -105,9 +105,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var ClienteServiceProvider = (function () {
     function ClienteServiceProvider(afd) {
         this.afd = afd;
+        this.showSpinnerCliente = true;
     }
     ClienteServiceProvider.prototype.listarCliente = function () {
-        return this.afd.list('/clientes');
+        return this.afd.list('/clientes', { query: { orderByChild: 'nome' } });
     };
     ClienteServiceProvider.prototype.adicionarCliente = function (Cliente) {
         this.afd.list('/clientes/').push(Cliente);

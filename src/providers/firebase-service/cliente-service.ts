@@ -9,8 +9,10 @@ export class ClienteServiceProvider {
 
   constructor(public afd: AngularFireDatabase) { }
 
+  showSpinnerCliente: boolean = true;
+
   listarCliente () {
-    return this.afd.list('/clientes');
+    return this.afd.list('/clientes', { query: {orderByChild: 'nome'} });    
   }
 
   adicionarCliente (Cliente) {
