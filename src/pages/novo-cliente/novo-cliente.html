@@ -15,65 +15,73 @@
 
 <ion-content>
 
-  <form [formGroup]="clienteForm" (ngSubmit)="onSubmit(); $event.preventDefault()">
-    <ion-item>
-      <ion-icon name="person" item-left></ion-icon>
-      <ion-input type="text" placeholder="Nome" formControlName="nome"></ion-input>
-    </ion-item>
+    <ion-grid>
+      <ion-row justify-content-center>
+        <ion-col col-11>
 
-    <ion-item>
-      <ion-icon name="at" item-left></ion-icon>
-      <ion-input type="text" placeholder="email" formControlName="email"></ion-input>
-    </ion-item>
+          <form [formGroup]="clienteForm" (ngSubmit)="onSubmit(); $event.preventDefault()">
+            <ion-item>
+              <ion-icon name="person" item-left></ion-icon>
+              <ion-input type="text" placeholder="Nome" formControlName="nome"></ion-input>
+            </ion-item>
 
-    <ion-item>
-      <ion-icon name="phone-portrait" item-left></ion-icon>
-      <ion-input type="tel" placeholder="Celular" formControlName="celular"></ion-input>
-    </ion-item>
+            <ion-item>
+              <ion-icon name="at" item-left></ion-icon>
+              <ion-input type="text" placeholder="email" formControlName="email"></ion-input>
+            </ion-item>
 
-    <ion-item>
-      <ion-icon name="body" item-left></ion-icon>
-      <ion-input type="text" placeholder="Sexo" formControlName="Sexo"></ion-input>
-    </ion-item>
+            <ion-item>
+              <ion-icon name="phone-portrait" item-left></ion-icon>
+              <ion-input type="tel" placeholder="Celular" formControlName="celular"></ion-input>
+            </ion-item>
 
-    <ion-item>
-      <ion-icon name="construct" item-left></ion-icon>
-      <ion-input type="text" placeholder="Profissão" formControlName="prof"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-icon name="contacts" item-left></ion-icon>
-      <ion-input type="text" placeholder="Estado Civil" formControlName="estcivil"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-icon name="hand" item-left></ion-icon>
-      <ion-input type="number" placeholder="Aniversário" formControlName="aniver"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-icon name="card" item-left></ion-icon>
-      <ion-input type="number" placeholder="CPF" formControlName="CPF"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-icon name="finger-print" item-left></ion-icon>
-      <ion-input type="number" placeholder="RG" formControlName="RG"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-icon name="home" item-left></ion-icon>
-      <ion-input type="text" placeholder="Endereço" formControlName="endereco"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-icon name="infinite" item-left></ion-icon>
-      <ion-input type="text" placeholder="Complemento" formControlName="complemento"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-icon name="information-circle" item-left></ion-icon>
-      <ion-input type="text" placeholder="indicacao" formControlName="indicacao"></ion-input>
-    </ion-item>
-    <br>
-    
-    <button ion-button block type="button" [disabled]="clienteForm.invalid" *ngIf="!isAtualizar" color="primary" (click)="onSubmit()">Salvar</button>
-    <button ion-button block type="button" [disabled]="clienteForm.invalid" *ngIf="isAtualizar" color="danger" (click)="onUpdate()">Atualizar</button>
+            <ion-item>
+              <ion-icon name="body" item-left></ion-icon>
+              <ion-input type="text" placeholder="Sexo" formControlName="Sexo"></ion-input>
+            </ion-item>
 
-  </form>
+            <ion-item>
+              <ion-icon name="construct" item-left></ion-icon>
+              <ion-input type="text" placeholder="Profissão" formControlName="prof"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-icon name="contacts" item-left></ion-icon>
+              <ion-input type="text" placeholder="Estado Civil" formControlName="estcivil"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-icon name="hand" item-left></ion-icon>
+              <ion-input type="number" placeholder="Aniversário" formControlName="aniver"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-icon name="card" item-left></ion-icon>
+              <ion-input type="number" placeholder="CPF" formControlName="CPF"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-icon name="finger-print" item-left></ion-icon>
+              <ion-input type="number" placeholder="RG" formControlName="RG"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-icon name="home" item-left></ion-icon>
+              <ion-input type="text" placeholder="Endereço" formControlName="endereco"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-icon name="infinite" item-left></ion-icon>
+              <ion-input type="text" placeholder="Complemento" formControlName="complemento"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-icon name="information-circle" item-left></ion-icon>
+              <ion-input type="text" placeholder="indicacao" formControlName="indicacao"></ion-input>
+            </ion-item>
+            <br>
+            
+            <button ion-button block type="button" [disabled]="clienteForm.invalid" *ngIf="!isAtualizar" color="primary" (click)="onSubmit()">Salvar</button>
+            <button ion-button block type="button" [disabled]="clienteForm.invalid" *ngIf="isAtualizar" color="danger" (click)="onUpdate()">Atualizar</button>
+
+          </form>
+
+        </ion-col>  
+      </ion-row>
+    </ion-grid>
 
 </ion-content>
     
