@@ -1,18 +1,70 @@
-<!--
-  Generated template for the ProdutoPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
-
+  <br>
   <ion-navbar>
-    <ion-title>produto</ion-title>
+    <ion-title>Produto</ion-title>
   </ion-navbar>
 
 </ion-header>
 
+<ion-content>
 
-<ion-content padding>
+  <ion-grid>
+    <ion-row justify-content-center>
+      <ion-col>
+
+        <form [formGroup]="produtoForm" (ngSubmit)="onSubmit(); $event.preventDefault()">
+          
+          <ion-item>
+            <ion-icon name="person" item-left></ion-icon>
+            <ion-input type="text" placeholder="produto" formControlName="desc"></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-icon name="person" item-left></ion-icon>
+            <ion-input type="text" placeholder="código de barras" formControlName="codBarras"></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-icon name="at" item-left></ion-icon>
+            <ion-input type="text" placeholder="código" formControlName="codigo"></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-icon name="phone-portrait" item-left></ion-icon>
+            <ion-input type="tel" placeholder="marca" formControlName="marca"></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-icon name="body" item-left></ion-icon>
+            <ion-label>Cor</ion-label>
+            <ion-select interface="action-sheet" placeholder="cor" formControlName="cor">
+              <ion-option value="A">Amarelo</ion-option>
+              <ion-option value="V">Vermelho</ion-option>
+            </ion-select>  
+            <!--  
+            <ion-icon name="body" item-left></ion-icon>
+            <ion-input type="text" placeholder="Sexo" formControlName="Sexo"></ion-input>
+            -->  
+          </ion-item>
+
+          <ion-item>
+            <ion-icon name="phone-portrait" item-left></ion-icon>
+            <ion-input type="tel" placeholder="valor compra" formControlName="valCompra"></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-icon name="phone-portrait" item-left></ion-icon>
+            <ion-input type="tel" placeholder="valor venda" formControlName="valVenda"></ion-input>
+          </ion-item>
+
+          <br>
+          <button ion-button block type="button" [disabled]="produtoForm.invalid" *ngIf="!isAtualizar" color="primary" round (click)="onSubmit()">Salvar</button>
+          <button ion-button block type="button" [disabled]="produtoForm.invalid" *ngIf="isAtualizar" color="danger" round (click)="onUpdate()">Atualizar</button>
+
+        </form>
+
+      </ion-col>  
+    </ion-row>
+  </ion-grid>  
 
 </ion-content>

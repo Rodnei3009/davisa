@@ -24,4 +24,13 @@ export class ProdutosPage {
     console.log('ionViewDidLoad ProdutosPage');
   }
 
+  novo_Produto() {
+    this.navCtrl.push('ProdutoPage');
+  }
+
+  selecionaProduto(produto) {
+    console.log(produto);
+    this.navCtrl.push('ProdutoPage', {dadosProduto: produto, funcao: 'atualizar'});
+  }
+
 }
