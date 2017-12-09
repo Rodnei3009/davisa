@@ -37,7 +37,15 @@
 
             <ion-item>
               <ion-icon name="body" item-left></ion-icon>
+              <ion-label>Sexo</ion-label>
+              <ion-select interface="action-sheet" placeholder="Sexo" formControlName="Sexo">
+                <ion-option value="F">Feminino</ion-option>
+                <ion-option value="M">Masculino</ion-option>
+              </ion-select>  
+              <!--  
+              <ion-icon name="body" item-left></ion-icon>
               <ion-input type="text" placeholder="Sexo" formControlName="Sexo"></ion-input>
+              -->  
             </ion-item>
 
             <ion-item>
@@ -74,8 +82,8 @@
             </ion-item>
             <br>
             
-            <button ion-button block type="button" [disabled]="clienteForm.invalid" *ngIf="!isAtualizar" color="primary" (click)="onSubmit()">Salvar</button>
-            <button ion-button block type="button" [disabled]="clienteForm.invalid" *ngIf="isAtualizar" color="danger" (click)="onUpdate()">Atualizar</button>
+            <button ion-button block type="button" [disabled]="clienteForm.invalid" *ngIf="!isAtualizar" color="primary" round (click)="onSubmit()">Salvar</button>
+            <button ion-button block type="button" [disabled]="clienteForm.invalid" *ngIf="isAtualizar" color="danger" round (click)="onUpdate()">Atualizar</button>
 
           </form>
 

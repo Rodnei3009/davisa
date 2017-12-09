@@ -2,9 +2,16 @@
   <br>
   <ion-navbar>
       <ion-buttons right>
+          <ion-fab right middle>
+            <button ion-fab mini color="primary" (click)="novo_Cliente()">
+              <ion-icon name="add"></ion-icon>
+            </button>
+          </ion-fab>
+          <!--
           <button ion-button icon-only (click)="novo_Cliente()">
             <ion-icon name="add-circle"></ion-icon>
           </button>
+        -->
       </ion-buttons>
     <ion-title>Clientes</ion-title>
   </ion-navbar>
@@ -23,7 +30,7 @@
         <ion-list>
           <ion-item-sliding *ngFor="let item of listaClientes | async">
             <ion-item (click)="selecionaCliente(item)" detail-push>
-              <ion-icon name="person" item-left></ion-icon>
+              <ion-icon name="contact" item-left></ion-icon>
               {{item.nome}}
               <i class="icon ion-chevron-right"></i>
             </ion-item>
@@ -37,8 +44,8 @@
 
         <!--
         <button ion-button block (click)="novo_Cliente()" color="danger">Novo Cliente</button>
-        -->
-      
+        -->  
+
       </ion-col>  
     </ion-row>
   </ion-grid>

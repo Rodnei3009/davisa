@@ -25682,6 +25682,13 @@ ion-title {
   text-align: center;
 }
 
+.fab[mini] {
+  margin: 8px;
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+}
+
 .imagem {
   background-color: black;
 }
