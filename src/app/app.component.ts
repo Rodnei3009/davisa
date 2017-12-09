@@ -5,6 +5,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { HomePage } from '../pages/home/home';
 import { ClientesPage } from './../pages/clientes/clientes';
+import { ProdutosPage } from './../pages/produtos/produtos';
 
 @Component({
   templateUrl: 'app.html'
@@ -27,5 +28,8 @@ export class MyApp {
     this.nav.push('ClientesPage');
   }
 
+  goProdutos () {
+    this.nav.push('ProdutosPage');
+  }
 
 }

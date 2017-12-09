@@ -1,14 +1,14 @@
 webpackJsonp([1],{
 
-/***/ 421:
+/***/ 424:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ClientesPageModule", function() { return ClientesPageModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ProdutoPageModule", function() { return ProdutoPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(75);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__clientes__ = __webpack_require__(423);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__produto__ = __webpack_require__(428);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -18,34 +18,33 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var ClientesPageModule = (function () {
-    function ClientesPageModule() {
+var ProdutoPageModule = (function () {
+    function ProdutoPageModule() {
     }
-    ClientesPageModule = __decorate([
+    ProdutoPageModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
             declarations: [
-                __WEBPACK_IMPORTED_MODULE_2__clientes__["a" /* ClientesPage */],
+                __WEBPACK_IMPORTED_MODULE_2__produto__["a" /* ProdutoPage */],
             ],
             imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__clientes__["a" /* ClientesPage */]),
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__produto__["a" /* ProdutoPage */]),
             ],
         })
-    ], ClientesPageModule);
-    return ClientesPageModule;
+    ], ProdutoPageModule);
+    return ProdutoPageModule;
 }());
 
-//# sourceMappingURL=clientes.module.js.map
+//# sourceMappingURL=produto.module.js.map
 
 /***/ }),
 
-/***/ 423:
+/***/ 428:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ClientesPage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__providers_firebase_service_cliente_service__ = __webpack_require__(269);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(75);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ProdutoPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(75);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -57,41 +56,30 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 
 
-
-var ClientesPage = (function () {
-    function ClientesPage(navCtrl, navParams, ClienteServiceProvider) {
+/**
+ * Generated class for the ProdutoPage page.
+ *
+ * See https://ionicframework.com/docs/components/#navigation for more info on
+ * Ionic pages and navigation.
+ */
+var ProdutoPage = (function () {
+    function ProdutoPage(navCtrl, navParams) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
-        this.ClienteServiceProvider = ClienteServiceProvider;
-        this.novoCliente = '';
-        this.idCliente = '';
-        this.showSpinnerCliente = true;
-        this.listaClientes = this.ClienteServiceProvider.listarCliente();
-        //this.showSpinnerCliente = false;
     }
-    ClientesPage.prototype.addCliente = function () {
-        this.ClienteServiceProvider.adicionarCliente(this.novoCliente);
+    ProdutoPage.prototype.ionViewDidLoad = function () {
+        console.log('ionViewDidLoad ProdutoPage');
     };
-    ClientesPage.prototype.delCliente = function (idcliente) {
-        this.ClienteServiceProvider.deletarCliente(idcliente);
-    };
-    ClientesPage.prototype.selecionaCliente = function (cliente) {
-        console.log(cliente);
-        this.navCtrl.push('NovoClientePage', { dadosCliente: cliente, funcao: 'atualizar' });
-    };
-    ClientesPage.prototype.novo_Cliente = function () {
-        this.navCtrl.push('NovoClientePage', { dadosCliente: {}, funcao: 'incluir' });
-    };
-    ClientesPage = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["m" /* Component */])({
-            selector: 'page-clientes',template:/*ion-inline-start:"C:\Users\rodnei.brassoroto\Documents\GitHub\ionic\davisa\src\pages\clientes\clientes.html"*/`<ion-header>\n  <br>\n  <ion-navbar>\n      <ion-buttons right>\n          <ion-fab right middle>\n            <button ion-fab mini color="primary" (click)="novo_Cliente()">\n              <ion-icon name="add"></ion-icon>\n            </button>\n          </ion-fab>\n          <!--\n          <button ion-button icon-only (click)="novo_Cliente()">\n            <ion-icon name="add-circle"></ion-icon>\n          </button>\n        -->\n      </ion-buttons>\n    <ion-title>Clientes</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content>\n  <br>\n\n  <ion-grid>\n    <ion-row justify-content-center>\n      <ion-col>\n\n        <!--\n        <ion-spinner name="circles"></ion-spinner>\n        -->\n        <ion-list>\n          <ion-item-sliding *ngFor="let item of listaClientes | async">\n            <ion-item (click)="selecionaCliente(item)" detail-push>\n              <ion-icon name="contact" item-left></ion-icon>\n              {{item.nome}}\n              <i class="icon ion-chevron-right"></i>\n            </ion-item>\n            <ion-item-options side="right">\n              <button ion-button color="danger" icon-only (click)="delCliente(item.$key)">\n                  <ion-icon name="trash"></ion-icon>\n              </button>\n            </ion-item-options>\n          </ion-item-sliding>\n        </ion-list>\n\n        <!--\n        <button ion-button block (click)="novo_Cliente()" color="danger">Novo Cliente</button>\n        -->  \n\n      </ion-col>  \n    </ion-row>\n  </ion-grid>\n\n</ion-content>\n`/*ion-inline-end:"C:\Users\rodnei.brassoroto\Documents\GitHub\ionic\davisa\src\pages\clientes\clientes.html"*/,
+    ProdutoPage = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
+            selector: 'page-produto',template:/*ion-inline-start:"C:\Users\rodnei.brassoroto\Documents\GitHub\ionic\davisa\src\pages\produto\produto.html"*/`<!--\n  Generated template for the ProdutoPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>produto</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n\n</ion-content>\n`/*ion-inline-end:"C:\Users\rodnei.brassoroto\Documents\GitHub\ionic\davisa\src\pages\produto\produto.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["g" /* NavParams */], __WEBPACK_IMPORTED_MODULE_0__providers_firebase_service_cliente_service__["a" /* ClienteServiceProvider */]])
-    ], ClientesPage);
-    return ClientesPage;
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */]])
+    ], ProdutoPage);
+    return ProdutoPage;
 }());
 
-//# sourceMappingURL=clientes.js.map
+//# sourceMappingURL=produto.js.map
 
 /***/ })
 

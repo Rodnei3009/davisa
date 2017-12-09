@@ -1,0 +1,53 @@
+<ion-header>
+  <br>
+  <ion-navbar>
+      <ion-buttons right>
+          <ion-fab right middle>
+            <button ion-fab mini color="primary" (click)="novo_Produto()">
+              <ion-icon name="add"></ion-icon>
+            </button>
+          </ion-fab>
+          <!--
+          <button ion-button icon-only (click)="novo_Produto()">
+            <ion-icon name="add-circle"></ion-icon>
+          </button>
+        -->
+      </ion-buttons>
+    <ion-title>Produtos</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <br>
+
+  <ion-grid>
+    <ion-row justify-content-center>
+      <ion-col>
+
+        <!--
+        <ion-spinner name="circles"></ion-spinner>
+        -->
+        <ion-list>
+          <ion-item-sliding *ngFor="let item of listaProdutos | async">
+            <ion-item (click)="selecionaProduto(item)" detail-push>
+              <ion-icon name="shirt" item-left></ion-icon>
+              {{item.desc}}
+              <i class="icon ion-chevron-right"></i>
+            </ion-item>
+            <ion-item-options side="right">
+              <button ion-button color="danger" icon-only (click)="delProduto(item.$key)">
+                  <ion-icon name="trash"></ion-icon>
+              </button>
+            </ion-item-options>
+          </ion-item-sliding>
+        </ion-list>
+
+        <!--
+        <button ion-button block (click)="novo_Produto()" color="danger">Novo Produto</button>
+        -->  
+
+      </ion-col>  
+    </ion-row>
+  </ion-grid>
+
+</ion-content>
