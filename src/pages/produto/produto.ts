@@ -5,6 +5,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ProdutoServiceProvider } from './../../providers/produto-service/produto-service';
 import { FirebaseListObservable } from 'angularfire2/database';
 
+import { BarcodeScanner, BarcodeScanResult } from '@ionic-native/barcode-scanner';
 
 @IonicPage()
 @Component({
@@ -17,8 +18,14 @@ export class ProdutoPage {
   funcao: string;
   isAtualizar: boolean = false;
   codBarras: string;
+  barcodeResult: BarcodeScanResult;
  
-  constructor(public navCtrl: NavController, public navParams: NavParams, public formBuilder: FormBuilder, public ProdutoServiceProvider: ProdutoServiceProvider) {
+  constructor(public navCtrl: NavController, 
+    public navParams: NavParams, 
+    public formBuilder: FormBuilder, 
+    public ProdutoServiceProvider: ProdutoServiceProvider,
+    public BarcodeScanner: BarcodeScanner
+  ) {
     this.produtoForm = this.formBuilder.group({
       codBarras: [this.navParams.get('dadosProduto').codBarras, Validators.required],
       marca: [this.navParams.get('dadosProduto').marca],
@@ -57,6 +64,17 @@ export class ProdutoPage {
     console.log(this.produtoForm.value);
     this.ProdutoServiceProvider.atualizarProduto(this.codBarras, this.produtoForm.value);
     this.navCtrl.pop();
+  }
+
+  onGetBarcode(): void {
+    this.BarcodeScanner.scan()
+      .then((barcodeResult: BarcodeScanResult) => {
+        this.barcodeResult = barcodeResult;
+        console.log('barcode result: ', barcodeResult);
+        console.log('barcode result: ', this.barcodeResult.text);
+      }).catch((error: Error) => {
+        console.log('barcode error: ', error);
+      });
   }
 
 }

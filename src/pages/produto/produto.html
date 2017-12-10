@@ -70,6 +70,11 @@
           <br>
           <button ion-button block type="button" [disabled]="produtoForm.invalid" *ngIf="!isAtualizar" color="primary" round (click)="onSubmit()">Salvar</button>
           <button ion-button block type="button" [disabled]="produtoForm.invalid" *ngIf="isAtualizar" color="danger" round (click)="onUpdate()">Atualizar</button>
+          <button ion-button block type="button" color="primary" round (click)="onGetBarcode()">Código de Barras</button>
+          
+          <div *ngIf="barcodeResult">
+            {{barcodeResult | json}}
+          </div>
 
         </form>
 

@@ -60,23 +60,31 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 var ProdutosPage = (function () {
     function ProdutosPage(navCtrl, navParams, ProdutoServiceProvider) {
+        var _this = this;
         this.navCtrl = navCtrl;
         this.navParams = navParams;
         this.ProdutoServiceProvider = ProdutoServiceProvider;
         this.novoProduto = '';
         this.codBarras = '';
+        this.showSpinner = true;
+        console.log(this.showSpinner);
         this.listaProdutos = this.ProdutoServiceProvider.listarProduto();
+        this.listaProdutos.subscribe(function () { return _this.showSpinner = false; });
         console.log(this.listaProdutos);
+        console.log(this.showSpinner);
     }
     ProdutosPage.prototype.ionViewDidLoad = function () {
         console.log('ionViewDidLoad ProdutosPage');
     };
     ProdutosPage.prototype.novo_Produto = function () {
-        this.navCtrl.push('ProdutoPage');
+        this.navCtrl.push('ProdutoPage', { dadosProduto: {}, funcao: 'incluir' });
     };
     ProdutosPage.prototype.selecionaProduto = function (produto) {
         console.log(produto);
         this.navCtrl.push('ProdutoPage', { dadosProduto: produto, funcao: 'atualizar' });
+    };
+    ProdutosPage.prototype.delProduto = function (codBarras) {
+        this.ProdutoServiceProvider.deletarProduto(codBarras);
     };
     ProdutosPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["m" /* Component */])({
