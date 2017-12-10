@@ -30,11 +30,11 @@ var map = {
 		2
 	],
 	"../pages/produto/produto.module": [
-		425,
+		424,
 		1
 	],
 	"../pages/produtos/produtos.module": [
-		424,
+		425,
 		0
 	]
 };
@@ -129,9 +129,10 @@ var ClienteServiceProvider = (function () {
     };
     ClienteServiceProvider = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])(),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_angularfire2_database__["a" /* AngularFireDatabase */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_angularfire2_database__["a" /* AngularFireDatabase */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_angularfire2_database__["a" /* AngularFireDatabase */]) === "function" && _a || Object])
     ], ClienteServiceProvider);
     return ClienteServiceProvider;
+    var _a;
 }());
 
 //# sourceMappingURL=cliente-service.js.map
@@ -163,11 +164,21 @@ var ProdutoServiceProvider = (function () {
     ProdutoServiceProvider.prototype.listarProduto = function () {
         return this.afd.list('/produtos', { query: { orderByChild: 'desc' } });
     };
+    ProdutoServiceProvider.prototype.adicionarProduto = function (Produto) {
+        this.afd.list('/produtos/').push(Produto);
+    };
+    ProdutoServiceProvider.prototype.atualizarProduto = function (codBarras, dadosProduto) {
+        this.afd.list('/produtos/').update(codBarras, dadosProduto);
+    };
+    ProdutoServiceProvider.prototype.deletarProduto = function (codBarras) {
+        this.afd.list('/produtos/').remove(codBarras);
+    };
     ProdutoServiceProvider = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])(),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_angularfire2_database__["a" /* AngularFireDatabase */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_angularfire2_database__["a" /* AngularFireDatabase */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_angularfire2_database__["a" /* AngularFireDatabase */]) === "function" && _a || Object])
     ], ProdutoServiceProvider);
     return ProdutoServiceProvider;
+    var _a;
 }());
 
 //# sourceMappingURL=produto-service.js.map
@@ -249,8 +260,8 @@ var AppModule = (function () {
                     links: [
                         { loadChildren: '../pages/clientes/clientes.module#ClientesPageModule', name: 'ClientesPage', segment: 'clientes', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/novo-cliente/novo-cliente.module#NovoClientePageModule', name: 'NovoClientePage', segment: 'novo-cliente', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/produtos/produtos.module#ProdutosPageModule', name: 'ProdutosPage', segment: 'produtos', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/produto/produto.module#ProdutoPageModule', name: 'ProdutoPage', segment: 'produto', priority: 'low', defaultHistory: [] }
+                        { loadChildren: '../pages/produto/produto.module#ProdutoPageModule', name: 'ProdutoPage', segment: 'produto', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/produtos/produtos.module#ProdutosPageModule', name: 'ProdutosPage', segment: 'produtos', priority: 'low', defaultHistory: [] }
                     ]
                 })
             ],

@@ -15,46 +15,56 @@
         <form [formGroup]="produtoForm" (ngSubmit)="onSubmit(); $event.preventDefault()">
           
           <ion-item>
-            <ion-icon name="person" item-left></ion-icon>
-            <ion-input type="text" placeholder="produto" formControlName="desc"></ion-input>
+            <ion-icon name="shirt" item-left></ion-icon>
+            <ion-input type="text" placeholder="Produto" formControlName="desc"></ion-input>
           </ion-item>
 
           <ion-item>
-            <ion-icon name="person" item-left></ion-icon>
-            <ion-input type="text" placeholder="código de barras" formControlName="codBarras"></ion-input>
+            <ion-icon name="barcode" item-left></ion-icon>
+            <ion-input type="text" placeholder="Código de barras" formControlName="codBarras"></ion-input>
           </ion-item>
 
           <ion-item>
-            <ion-icon name="at" item-left></ion-icon>
-            <ion-input type="text" placeholder="código" formControlName="codigo"></ion-input>
+            <ion-icon name="grid" item-left></ion-icon>
+            <ion-input type="text" placeholder="Código" formControlName="codigo"></ion-input>
           </ion-item>
 
           <ion-item>
-            <ion-icon name="phone-portrait" item-left></ion-icon>
-            <ion-input type="tel" placeholder="marca" formControlName="marca"></ion-input>
-          </ion-item>
-
-          <ion-item>
-            <ion-icon name="body" item-left></ion-icon>
-            <ion-label>Cor</ion-label>
-            <ion-select interface="action-sheet" placeholder="cor" formControlName="cor">
-              <ion-option value="A">Amarelo</ion-option>
-              <ion-option value="V">Vermelho</ion-option>
-            </ion-select>  
-            <!--  
-            <ion-icon name="body" item-left></ion-icon>
-            <ion-input type="text" placeholder="Sexo" formControlName="Sexo"></ion-input>
+            <ion-icon name="list" item-left></ion-icon>
+            <ion-label>Marca</ion-label>
+            <ion-select interface="action-sheet" placeholder="Marca" formControlName="marca">
+              <ion-option value="DM">DeMillus</ion-option>
+              <ion-option value="VL">Valisére</ion-option>
+              <ion-option value="VF">ValFrance</ion-option>
+              <ion-option value="PO">Pingo de Ouro</ion-option>
+            </ion-select>
+            <!--
+            <ion-icon name="list" item-left></ion-icon>
+            <ion-input type="tel" placeholder="Marca" formControlName="marca"></ion-input>
             -->  
           </ion-item>
 
           <ion-item>
-            <ion-icon name="phone-portrait" item-left></ion-icon>
-            <ion-input type="tel" placeholder="valor compra" formControlName="valCompra"></ion-input>
+            <ion-icon name="square" item-left></ion-icon>
+            <!--
+            <ion-label>Cor</ion-label>
+            <ion-select interface="action-sheet" placeholder="Cor" formControlName="cor">
+              <ion-option value="A">Amarelo</ion-option>
+              <ion-option value="V">Vermelho</ion-option>
+            </ion-select>  
+          -->  
+            <ion-input type="text" placeholder="Cor" formControlName="cor"></ion-input>
+            -->  
           </ion-item>
 
           <ion-item>
-            <ion-icon name="phone-portrait" item-left></ion-icon>
-            <ion-input type="tel" placeholder="valor venda" formControlName="valVenda"></ion-input>
+            <ion-icon name="calculator" item-left></ion-icon>
+            <ion-input type="number" placeholder="Valor compra" formControlName="valCompra"></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-icon name="calculator" item-left></ion-icon>
+            <ion-input type="number" placeholder="Valor venda" formControlName="valVenda"></ion-input>
           </ion-item>
 
           <br>

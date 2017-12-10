@@ -25,12 +25,16 @@ export class ProdutosPage {
   }
 
   novo_Produto() {
-    this.navCtrl.push('ProdutoPage');
+    this.navCtrl.push('ProdutoPage', {dadosProduto: {}, funcao: 'incluir'});
   }
 
   selecionaProduto(produto) {
     console.log(produto);
     this.navCtrl.push('ProdutoPage', {dadosProduto: produto, funcao: 'atualizar'});
+  }
+
+  delProduto(codBarras) {
+    this.ProdutoServiceProvider.deletarProduto(codBarras);
   }
 
 }

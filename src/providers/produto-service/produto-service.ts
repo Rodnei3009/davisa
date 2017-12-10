@@ -11,5 +11,17 @@ export class ProdutoServiceProvider {
   listarProduto () {
     return this.afd.list('/produtos', { query: {orderByChild: 'desc'} });
   }
+
+  adicionarProduto (Produto) {
+    this.afd.list('/produtos/').push(Produto);
+  }
+
+  atualizarProduto (codBarras, dadosProduto) {
+    this.afd.list('/produtos/').update(codBarras, dadosProduto);
+  }
+
+  deletarProduto (codBarras) {
+    this.afd.list('/produtos/').remove(codBarras);    
+  }
  
 }

@@ -33,10 +33,30 @@ export class ProdutoPage {
     this.funcao = this.navParams.get('funcao');
     console.log(this.dadosProduto);
     console.log(this.funcao);
+
+    if (this.funcao === 'atualizar') {
+      this.isAtualizar = true;
+      this.codBarras = this.navParams.get('dadosProduto').$key;
+    } else {
+      this.isAtualizar = false;
+    }
+
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ProdutoPage');
+  }
+
+  onSubmit(): void {
+    console.log(this.produtoForm.value);
+    this.ProdutoServiceProvider.adicionarProduto(this.produtoForm.value);
+    this.navCtrl.pop();
+  }
+
+  onUpdate(): void {
+    console.log(this.produtoForm.value);
+    this.ProdutoServiceProvider.atualizarProduto(this.codBarras, this.produtoForm.value);
+    this.navCtrl.pop();
   }
 
 }
