@@ -26,8 +26,11 @@ export class ProdutoPage {
     public ProdutoServiceProvider: ProdutoServiceProvider,
     public BarcodeScanner: BarcodeScanner
   ) {
+
+    this.codBarras = this.navParams.get('dadosProduto').codBarras;
+
     this.produtoForm = this.formBuilder.group({
-      codBarras: [this.navParams.get('dadosProduto').codBarras, Validators.required],
+      codBarras: [this.codBarras, Validators.required],
       marca: [this.navParams.get('dadosProduto').marca],
       codigo: [this.navParams.get('dadosProduto').codigo, Validators.required],
       desc: [this.navParams.get('dadosProduto').desc],

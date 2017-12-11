@@ -71,8 +71,9 @@ var ProdutoPage = (function () {
         this.BarcodeScanner = BarcodeScanner;
         this.isAtualizar = false;
         this.codBarras = "";
+        this.codBarras = this.navParams.get('dadosProduto').codBarras;
         this.produtoForm = this.formBuilder.group({
-            codBarras: [this.navParams.get('dadosProduto').codBarras, __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required],
+            codBarras: [this.codBarras, __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required],
             marca: [this.navParams.get('dadosProduto').marca],
             codigo: [this.navParams.get('dadosProduto').codigo, __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required],
             desc: [this.navParams.get('dadosProduto').desc],
