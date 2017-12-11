@@ -70,6 +70,7 @@ export class ProdutoPage {
     this.BarcodeScanner.scan()
       .then((barcodeResult: BarcodeScanResult) => {
         this.barcodeResult = barcodeResult;
+        this.codBarras = this.barcodeResult.text;
         console.log('barcode result: ', barcodeResult);
         console.log('barcode result: ', this.barcodeResult.text);
       }).catch((error: Error) => {

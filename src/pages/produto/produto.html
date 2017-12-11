@@ -21,7 +21,7 @@
 
           <ion-item>
             <ion-icon name="barcode" item-left></ion-icon>
-            <ion-input type="text" *ngIf="barcodeResult" placeholder="Código de barras" formControlName="codBarras">{{barcodeResult.text}}</ion-input>
+            <ion-input type="text" placeholder="Código de barras" formControlName="codBarras">{{codBarras}}</ion-input>
           </ion-item>
 
           <ion-item>
@@ -36,7 +36,7 @@
               <ion-option value="DM">DeMillus</ion-option>
               <ion-option value="VL">Valisére</ion-option>
               <ion-option value="VF">ValFrance</ion-option>
-              <ion-option value="PO">Pingo de Ouro</ion-option>
+              <ion-option value="TI">Toque Íntimo</ion-option>
             </ion-select>
             <!--
             <ion-icon name="list" item-left></ion-icon>
