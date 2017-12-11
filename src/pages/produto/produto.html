@@ -74,6 +74,9 @@
           
           <div *ngIf="barcodeResult">
             {{barcodeResult | json}}
+            <div>
+              {{barcodeResult.text}}
+            </div>
           </div>
 
         </form>
