@@ -21,7 +21,7 @@
 
           <ion-item>
             <ion-icon name="barcode" item-left></ion-icon>
-            <ion-input type="text" placeholder="Código de barras" formControlName="codBarras">{{barcodeResult.text}}</ion-input>
+            <ion-input type="text" *ngIf="barcodeResult" placeholder="Código de barras" formControlName="codBarras">{{barcodeResult.text}}</ion-input>
           </ion-item>
 
           <ion-item>
@@ -74,9 +74,6 @@
           
           <div *ngIf="barcodeResult">
             {{barcodeResult | json}}
-            <div>
-              {{barcodeResult.text}}
-            </div>
           </div>
 
         </form>
