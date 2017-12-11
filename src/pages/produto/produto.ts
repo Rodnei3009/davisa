@@ -17,7 +17,7 @@ export class ProdutoPage {
   dadosProduto: string;
   funcao: string;
   isAtualizar: boolean = false;
-  codBarras: string;
+  codBarras: string = "";
   barcodeResult: BarcodeScanResult;
  
   constructor(public navCtrl: NavController, 
