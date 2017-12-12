@@ -77,7 +77,6 @@ export class ProdutoPage {
         alert(this.codBarras);
         alert(this.barcodeResult.text);
         this.produtoForm.setValue({'codBarras' : this.codBarras});
-        
         console.log('barcode result: ', barcodeResult);
         console.log('barcode result: ', this.barcodeResult.text);
       }).catch((error: Error) => {

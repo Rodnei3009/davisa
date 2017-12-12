@@ -23,19 +23,15 @@ webpackEmptyAsyncContext.id = 145;
 var map = {
 	"../pages/clientes/clientes.module": [
 		423,
-		3
+		8
 	],
 	"../pages/novo-cliente/novo-cliente.module": [
 		424,
-		2
-	],
-	"../pages/produto/produto.module": [
-		425,
-		1
+		7
 	],
 	"../pages/produtos/produtos.module": [
 		426,
-		0
+		6
 	]
 };
 function webpackAsyncContext(req) {
@@ -260,7 +256,6 @@ var AppModule = (function () {
                     links: [
                         { loadChildren: '../pages/clientes/clientes.module#ClientesPageModule', name: 'ClientesPage', segment: 'clientes', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/novo-cliente/novo-cliente.module#NovoClientePageModule', name: 'NovoClientePage', segment: 'novo-cliente', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/produto/produto.module#ProdutoPageModule', name: 'ProdutoPage', segment: 'produto', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/produtos/produtos.module#ProdutosPageModule', name: 'ProdutosPage', segment: 'produtos', priority: 'low', defaultHistory: [] }
                     ]
                 })
