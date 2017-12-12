@@ -71,9 +71,12 @@ export class ProdutoPage {
   onGetBarcode(): void {
     this.BarcodeScanner.scan()
       .then((barcodeResult: BarcodeScanResult) => {
-        this.produtoForm.setValue({codBarras: this.barcodeResult.text});
-        this.barcodeResult = barcodeResult;
         this.codBarras = this.barcodeResult.text;
+        alert(this.codBarras);
+        alert(this.barcodeResult.text);
+        this.produtoForm.setValue({codBarras: this.codBarras});
+        this.barcodeResult = barcodeResult;
+        
         console.log('barcode result: ', barcodeResult);
         console.log('barcode result: ', this.barcodeResult.text);
       }).catch((error: Error) => {
