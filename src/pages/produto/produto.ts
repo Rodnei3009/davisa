@@ -75,13 +75,21 @@ export class ProdutoPage {
         this.barcodeResult = barcodeResult;
         this.codBarras = this.barcodeResult.text;
         alert(this.codBarras);
-        alert(this.barcodeResult.text);
+        alert('antes do setvalue' + this.barcodeResult.text);
         this.produtoForm.setValue({'codBarras' : this.codBarras});
+        alert('antes do patchValue' + this.barcodeResult.text);
+        this.produtoForm.patchValue({'codBarras' : this.codBarras});
+        alert('antes do patchValue sem aspas' + this.barcodeResult.text);
+        this.produtoForm.patchValue({codBarras : this.codBarras});
         console.log('barcode result: ', barcodeResult);
         console.log('barcode result: ', this.barcodeResult.text);
       }).catch((error: Error) => {
         console.log('barcode error: ', error);
       });
+  }
+
+  onExibeCod(): void {
+    alert(this.produtoForm.get('codBarras').value);
   }
 
 }
