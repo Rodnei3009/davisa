@@ -113,21 +113,23 @@ var ProdutoPage = (function () {
             .then(function (barcodeResult) {
             _this.barcodeResult = barcodeResult;
             _this.codBarras = _this.barcodeResult.text;
-            alert(_this.codBarras);
-            alert('antes do setvalue' + _this.barcodeResult.text);
-            _this.produtoForm.setValue({ 'codBarras': _this.codBarras });
-            alert('antes do patchValue' + _this.barcodeResult.text);
+            alert('codBarras: ' + _this.codBarras);
+            alert('codBarras 2: ' + _this.codBarras);
+            alert('antes do patchValue' + _this.codBarras);
             _this.produtoForm.patchValue({ 'codBarras': _this.codBarras });
-            alert('antes do patchValue sem aspas' + _this.barcodeResult.text);
+            alert('get: ' + _this.produtoForm.get('codBarras').value);
+            alert('antes do setvalue' + _this.codBarras);
+            _this.produtoForm.setValue({ 'codBarras': _this.codBarras });
+            alert('get: ' + _this.produtoForm.get('codBarras').value);
+            alert('antes do patchValue sem aspas' + _this.codBarras);
             _this.produtoForm.patchValue({ codBarras: _this.codBarras });
-            console.log('barcode result: ', barcodeResult);
-            console.log('barcode result: ', _this.barcodeResult.text);
+            alert('get: ' + _this.produtoForm.get('codBarras').value);
         }).catch(function (error) {
             console.log('barcode error: ', error);
         });
     };
     ProdutoPage.prototype.onExibeCod = function () {
-        alert(this.produtoForm.get('codBarras').value);
+        alert('get: ' + this.produtoForm.get('codBarras').value);
     };
     ProdutoPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
