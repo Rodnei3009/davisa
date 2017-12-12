@@ -27,10 +27,9 @@ export class ProdutoPage {
     public BarcodeScanner: BarcodeScanner
   ) {
 
-    this.codBarras = this.navParams.get('dadosProduto').codBarras;
-
+    //exemplos FormGroup https://www.concretepage.com/angular-2/angular-2-4-formbuilder-example#set-value
     this.produtoForm = this.formBuilder.group({
-      codBarras: [this.codBarras, Validators.required],
+      codBarras: [this.navParams.get('dadosProduto').codBarras, Validators.required],
       marca: [this.navParams.get('dadosProduto').marca],
       codigo: [this.navParams.get('dadosProduto').codigo, Validators.required],
       desc: [this.navParams.get('dadosProduto').desc],
@@ -72,6 +71,7 @@ export class ProdutoPage {
   onGetBarcode(): void {
     this.BarcodeScanner.scan()
       .then((barcodeResult: BarcodeScanResult) => {
+        this.produtoForm.setValue({codBarras: this.barcodeResult.text});
         this.barcodeResult = barcodeResult;
         this.codBarras = this.barcodeResult.text;
         console.log('barcode result: ', barcodeResult);

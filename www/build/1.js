@@ -71,9 +71,9 @@ var ProdutoPage = (function () {
         this.BarcodeScanner = BarcodeScanner;
         this.isAtualizar = false;
         this.codBarras = "";
-        this.codBarras = this.navParams.get('dadosProduto').codBarras;
+        //exemplos FormGroup https://www.concretepage.com/angular-2/angular-2-4-formbuilder-example#set-value
         this.produtoForm = this.formBuilder.group({
-            codBarras: [this.codBarras, __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required],
+            codBarras: [this.navParams.get('dadosProduto').codBarras, __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required],
             marca: [this.navParams.get('dadosProduto').marca],
             codigo: [this.navParams.get('dadosProduto').codigo, __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required],
             desc: [this.navParams.get('dadosProduto').desc],
@@ -111,6 +111,7 @@ var ProdutoPage = (function () {
         var _this = this;
         this.BarcodeScanner.scan()
             .then(function (barcodeResult) {
+            _this.produtoForm.setValue({ codBarras: _this.barcodeResult.text });
             _this.barcodeResult = barcodeResult;
             _this.codBarras = _this.barcodeResult.text;
             console.log('barcode result: ', barcodeResult);
