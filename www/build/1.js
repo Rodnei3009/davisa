@@ -111,9 +111,11 @@ var ProdutoPage = (function () {
         var _this = this;
         this.BarcodeScanner.scan()
             .then(function (barcodeResult) {
-            _this.produtoForm.setValue({ codBarras: _this.barcodeResult.text });
-            _this.barcodeResult = barcodeResult;
             _this.codBarras = _this.barcodeResult.text;
+            alert(_this.codBarras);
+            alert(_this.barcodeResult.text);
+            _this.produtoForm.setValue({ codBarras: _this.codBarras });
+            _this.barcodeResult = barcodeResult;
             console.log('barcode result: ', barcodeResult);
             console.log('barcode result: ', _this.barcodeResult.text);
         }).catch(function (error) {
