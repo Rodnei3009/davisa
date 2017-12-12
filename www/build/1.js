@@ -111,11 +111,13 @@ var ProdutoPage = (function () {
         var _this = this;
         this.BarcodeScanner.scan()
             .then(function (barcodeResult) {
-            _this.codBarras = _this.barcodeResult.text;
-            alert(_this.codBarras);
-            alert(_this.barcodeResult.text);
-            _this.produtoForm.setValue({ codBarras: _this.codBarras });
-            _this.barcodeResult = barcodeResult;
+            /*
+            this.codBarras = this.barcodeResult.text;
+            alert(this.codBarras);
+            alert(this.barcodeResult.text);
+            this.produtoForm.setValue({codBarras: this.codBarras});
+            this.barcodeResult = barcodeResult;
+            */
             console.log('barcode result: ', barcodeResult);
             console.log('barcode result: ', _this.barcodeResult.text);
         }).catch(function (error) {
