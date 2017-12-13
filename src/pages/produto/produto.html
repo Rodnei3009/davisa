@@ -15,11 +15,8 @@
         <form [formGroup]="produtoForm" (ngSubmit)="onSubmit(); $event.preventDefault()">
           
           <ion-item>
-            <ion-icon name="barcode" item-left></ion-icon>
-            <ion-icon name="camera" item-right (click)="onGetBarcode()"></ion-icon>
+            <ion-icon name="barcode" item-left (click)="onGetBarcode()"></ion-icon>
             <ion-input type="text" placeholder="Código de barras" formControlName="codBarras"></ion-input>
-            
-
           </ion-item>
 
           <ion-item>
@@ -61,12 +58,12 @@
           </ion-item>
 
           <ion-item>
-            <ion-icon name="usd" item-left></ion-icon>
+            <ion-icon name="calculator" item-left></ion-icon>
             <ion-input type="number" placeholder="Valor compra" formControlName="valCompra"></ion-input>
           </ion-item>
 
           <ion-item>
-            <ion-icon name="euro" item-left></ion-icon>
+            <ion-icon name="calculator" item-left></ion-icon>
             <ion-input type="number" placeholder="Valor venda" formControlName="valVenda"></ion-input>
           </ion-item>
 
