@@ -115,7 +115,7 @@ var ProdutoPage = (function () {
             _this.codBarras = _this.barcodeResult.text;
             //alert('codBarras: ' + this.codBarras);
             //alert('codBarras 2: ' + this.codBarras);
-            alert('antes do patchValue' + _this.codBarras);
+            //alert('antes do patchValue' + this.codBarras);
             _this.produtoForm.patchValue({ 'codBarras': _this.codBarras });
             //alert('get: ' + this.produtoForm.get('codBarras').value);
             //alert('antes do setvalue' + this.codBarras);
