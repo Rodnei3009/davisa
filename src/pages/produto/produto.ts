@@ -77,10 +77,10 @@ export class ProdutoPage {
         //alert('codBarras: ' + this.codBarras);
         //alert('codBarras 2: ' + this.codBarras);
         //alert('antes do patchValue' + this.codBarras);
-        this.produtoForm.patchValue({'codBarras' : this.codBarras});
+        //this.produtoForm.patchValue({'codBarras' : this.codBarras});
         //alert('get: ' + this.produtoForm.get('codBarras').value);
-        //alert('antes do setvalue' + this.codBarras);
-        //this.produtoForm.setValue({'codBarras' : this.codBarras});
+        alert('antes do setvalue' + this.codBarras);
+        this.produtoForm.setValue({'codBarras' : this.codBarras});
         //alert('get: ' + this.produtoForm.get('codBarras').value);
         //alert('antes do patchValue sem aspas' + this.codBarras);
         //this.produtoForm.patchValue({codBarras : this.codBarras});
