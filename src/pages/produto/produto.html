@@ -1,6 +1,13 @@
 <ion-header>
   <br>
   <ion-navbar>
+      <ion-buttons right>
+          <ion-fab right middle>
+            <button ion-fab mini color="primary" (click)="onGetBarcode()">
+              <ion-icon name="camera"></ion-icon>
+            </button>
+          </ion-fab>
+      </ion-buttons>
     <ion-title>Produto</ion-title>
   </ion-navbar>
 
@@ -15,8 +22,8 @@
         <form [formGroup]="produtoForm" (ngSubmit)="onSubmit(); $event.preventDefault()">
           
           <ion-item>
-            <ion-icon name="barcode" item-left (click)="onGetBarcode()"></ion-icon>
-            <ion-input type="text" placeholder="Código de barras" formControlName="codBarras"></ion-input>
+            <ion-icon name="barcode" item-left></ion-icon>
+            <ion-input type="text" placeholder="Código de barras" formControlName="codBarras"></ion-input>  
           </ion-item>
 
           <ion-item>
