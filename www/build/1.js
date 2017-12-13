@@ -115,11 +115,11 @@ var ProdutoPage = (function () {
             _this.codBarras = _this.barcodeResult.text;
             //alert('codBarras: ' + this.codBarras);
             //alert('codBarras 2: ' + this.codBarras);
-            //alert('antes do patchValue' + this.codBarras);
-            //this.produtoForm.patchValue({'codBarras' : this.codBarras});
+            alert('antes do patchValue' + _this.codBarras);
+            _this.produtoForm.patchValue({ 'codBarras': _this.codBarras });
             //alert('get: ' + this.produtoForm.get('codBarras').value);
-            alert('antes do setvalue' + _this.codBarras);
-            _this.produtoForm.setValue({ 'codBarras': _this.codBarras });
+            //alert('antes do setvalue' + this.codBarras);
+            //this.produtoForm.setValue({'codBarras' : this.codBarras});
             //alert('get: ' + this.produtoForm.get('codBarras').value);
             //alert('antes do patchValue sem aspas' + this.codBarras);
             //this.produtoForm.patchValue({codBarras : this.codBarras});
