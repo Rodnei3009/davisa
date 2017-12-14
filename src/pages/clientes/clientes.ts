@@ -1,7 +1,8 @@
 import { ClienteServiceProvider } from './../../providers/firebase-service/cliente-service';
 import { Component, OnInit } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Loading, LoadingController, IonicPage, NavController, NavParams } from 'ionic-angular';
 import { FirebaseListObservable } from 'angularfire2/database';
+//import { LoadingController } from 'ionic-angular/components/loading/loading-controller';
 
 
 @IonicPage()
@@ -14,13 +15,13 @@ export class ClientesPage {
   listaClientes: FirebaseListObservable<any[]>;
   novoCliente = '';
   idCliente = '';
-  showSpinnerCliente: boolean = true;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public ClienteServiceProvider: ClienteServiceProvider) {
-    
+  constructor(public navCtrl: NavController, public navParams: NavParams, public ClienteServiceProvider: ClienteServiceProvider, public loadingCRTL: LoadingController) {
+  
+    let loading: Loading = this.showLoading();
+
     this.listaClientes = this.ClienteServiceProvider.listarCliente();    
-    //this.showSpinnerCliente = false;
-    this.listaClientes.subscribe(() => this.showSpinnerCliente = false);
+    this.listaClientes.subscribe(() => loading.dismiss());
   }
 
   addCliente() {
@@ -38,6 +39,14 @@ export class ClientesPage {
   
   novo_Cliente() {
     this.navCtrl.push('NovoClientePage', {dadosCliente: {}, funcao: 'incluir'});
+  }
+
+  private showLoading(): Loading {
+    let loading: Loading = this.loadingCRTL.create({
+      //content: 'carregando'
+    });
+    loading.present();
+    return loading;
   }
 
 }
