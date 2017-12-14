@@ -1,5 +1,5 @@
 import { ClienteServiceProvider } from './../../providers/firebase-service/cliente-service';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { FirebaseListObservable } from 'angularfire2/database';
 
@@ -20,7 +20,7 @@ export class ClientesPage {
     
     this.listaClientes = this.ClienteServiceProvider.listarCliente();    
     //this.showSpinnerCliente = false;
-  
+    this.listaClientes.subscribe(() => this.showSpinnerCliente = false);
   }
 
   addCliente() {

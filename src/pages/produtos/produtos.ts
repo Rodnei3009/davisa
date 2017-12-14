@@ -14,14 +14,13 @@ export class ProdutosPage {
   listaProdutos: FirebaseListObservable<any[]>;
   novoProduto = '';
   codBarras = '';
-  showSpinner: boolean = true;
+  showSpinnerProduto: boolean = true;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public ProdutoServiceProvider: ProdutoServiceProvider) {
     console.log(this.showSpinner);
     this.listaProdutos = this.ProdutoServiceProvider.listarProduto();
-    this.listaProdutos.subscribe (() => this.showSpinner = false);
-    console.log(this.listaProdutos);
-    console.log(this.showSpinner); 
+    this.listaProdutos.subscribe(() => this.showSpinnerProduto = false);
+    
   }
 
   ionViewDidLoad() {

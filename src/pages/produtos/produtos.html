@@ -21,6 +21,11 @@
   <br>
 
   <ion-grid>
+
+    <ion-row *ngIf="showSpinnerProduto" justify-content-center>
+      <ion-spinner color="primary" name="crescent"></ion-spinner>
+    </ion-row>
+
     <ion-row justify-content-center>
       <ion-col>
 
