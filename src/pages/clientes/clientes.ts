@@ -16,7 +16,10 @@ export class ClientesPage {
   novoCliente = '';
   idCliente = '';
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public ClienteServiceProvider: ClienteServiceProvider, public loadingCRTL: LoadingController) {
+  constructor(public navCtrl: NavController, 
+              public navParams: NavParams, 
+              public ClienteServiceProvider: ClienteServiceProvider, 
+              public loadingCRTL: LoadingController) {
   
     let loading: Loading = this.showLoading();
 

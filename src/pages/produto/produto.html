@@ -28,8 +28,15 @@
 
           <ion-item>
             <ion-icon name="shirt" item-left></ion-icon>
-            <ion-input type="text" placeholder="Produto" formControlName="desc"></ion-input>
+            <ion-input type="text" [(ngModel)]="descricao" placeholder="Produto" formControlName="desc" (input)="lower($event)"></ion-input>
           </ion-item>
+
+          <div>
+            <ion-item>
+              <ion-icon name="shirt" item-left></ion-icon>
+              <ion-input type="text" [(ngModel)]="descricao_lower" placeholder="Produto lower" formControlName="desc_lower"></ion-input>
+            </ion-item>
+          </div>
 
           <ion-item>
             <ion-icon name="grid" item-left></ion-icon>

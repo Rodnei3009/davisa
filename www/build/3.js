@@ -1,14 +1,14 @@
 webpackJsonp([3],{
 
-/***/ 423:
+/***/ 424:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ClientesPageModule", function() { return ClientesPageModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "EstoquePageModule", function() { return EstoquePageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(75);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__clientes__ = __webpack_require__(427);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__estoque__ = __webpack_require__(429);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -18,34 +18,36 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var ClientesPageModule = (function () {
-    function ClientesPageModule() {
+var EstoquePageModule = (function () {
+    function EstoquePageModule() {
     }
-    ClientesPageModule = __decorate([
+    EstoquePageModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
             declarations: [
-                __WEBPACK_IMPORTED_MODULE_2__clientes__["a" /* ClientesPage */],
+                __WEBPACK_IMPORTED_MODULE_2__estoque__["a" /* EstoquePage */],
             ],
             imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__clientes__["a" /* ClientesPage */]),
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__estoque__["a" /* EstoquePage */]),
             ],
         })
-    ], ClientesPageModule);
-    return ClientesPageModule;
+    ], EstoquePageModule);
+    return EstoquePageModule;
 }());
 
-//# sourceMappingURL=clientes.module.js.map
+//# sourceMappingURL=estoque.module.js.map
 
 /***/ }),
 
-/***/ 427:
+/***/ 429:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ClientesPage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__providers_firebase_service_cliente_service__ = __webpack_require__(269);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(75);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return EstoquePage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(75);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_produto_service_produto_service__ = __webpack_require__(269);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_Subject__ = __webpack_require__(44);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_Subject___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs_Subject__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -58,48 +60,51 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-//import { LoadingController } from 'ionic-angular/components/loading/loading-controller';
-var ClientesPage = (function () {
-    function ClientesPage(navCtrl, navParams, ClienteServiceProvider, loadingCRTL) {
+
+var EstoquePage = (function () {
+    function EstoquePage(navCtrl, navParams, ProdutoServiceProvider) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
-        this.ClienteServiceProvider = ClienteServiceProvider;
-        this.loadingCRTL = loadingCRTL;
-        this.novoCliente = '';
-        this.idCliente = '';
-        var loading = this.showLoading();
-        this.listaClientes = this.ClienteServiceProvider.listarCliente();
-        this.listaClientes.subscribe(function () { return loading.dismiss(); });
+        this.ProdutoServiceProvider = ProdutoServiceProvider;
+        this.startAt = new __WEBPACK_IMPORTED_MODULE_3_rxjs_Subject__["Subject"]();
+        this.endAt = new __WEBPACK_IMPORTED_MODULE_3_rxjs_Subject__["Subject"]();
+        this.lastKeypress = 0;
     }
-    ClientesPage.prototype.addCliente = function () {
-        this.ClienteServiceProvider.adicionarCliente(this.novoCliente);
+    EstoquePage.prototype.ngOnInit = function () {
+        this.listaProdutos = this.ProdutoServiceProvider.filtrarProduto(this.startAt, this.endAt);
+        //this.ProdutoServiceProvider.listarProduto(this.startAt, this.endAt)
+        //              .subscribe(listaProdutos => this.listaProdutos)
     };
-    ClientesPage.prototype.delCliente = function (idcliente) {
-        this.ClienteServiceProvider.deletarCliente(idcliente);
+    EstoquePage.prototype.filtraProdutos = function ($event) {
+        var strSearch = $event.target.value;
+        if ($event.timeStamp - this.lastKeypress > 200) {
+            //alert(strSearch);
+            this.startAt.next(strSearch.toLowerCase());
+            this.endAt.next(strSearch.toLowerCase() + "\uf8ff");
+        }
+        this.lastKeypress = $event.timeStamp;
+        /*
+        // if the value is an empty string don't filter the items
+        if (!strSearch || strSearch.length < 3) {
+          return;
+        } else {
+          alert(strSearch + " - " + strSearch.length);
+          //this.listaProdutos = this.ProdutoServiceProvider.listarProduto();
+        }
+        */
+        console.log(strSearch);
     };
-    ClientesPage.prototype.selecionaCliente = function (cliente) {
-        console.log(cliente);
-        this.navCtrl.push('NovoClientePage', { dadosCliente: cliente, funcao: 'atualizar' });
-    };
-    ClientesPage.prototype.novo_Cliente = function () {
-        this.navCtrl.push('NovoClientePage', { dadosCliente: {}, funcao: 'incluir' });
-    };
-    ClientesPage.prototype.showLoading = function () {
-        var loading = this.loadingCRTL.create({});
-        loading.present();
-        return loading;
-    };
-    ClientesPage = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["m" /* Component */])({
-            selector: 'page-clientes',template:/*ion-inline-start:"C:\Users\rodnei.brassoroto\Documents\GitHub\ionic\davisa\src\pages\clientes\clientes.html"*/`<ion-header>\n  <br>\n  <ion-navbar>\n      <ion-buttons right>\n          <ion-fab right middle>\n            <button ion-fab mini color="primary" (click)="novo_Cliente()">\n              <ion-icon name="add"></ion-icon>\n            </button>\n          </ion-fab>\n          <!--\n          <button ion-button icon-only (click)="novo_Cliente()">\n            <ion-icon name="add-circle"></ion-icon>\n          </button>\n        -->\n      </ion-buttons>\n    <ion-title>Clientes</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content>\n  <br>\n\n  <ion-grid>\n    \n    <ion-row justify-content-center>\n      <ion-col>\n\n        <!--\n        <ion-spinner name="circles"></ion-spinner>\n        -->\n        <ion-list>\n          <ion-item-sliding *ngFor="let item of listaClientes | async">\n            <ion-item (click)="selecionaCliente(item)" detail-push>\n              <ion-icon name="contact" item-left></ion-icon>\n              {{item.nome}}\n              <i class="icon ion-chevron-right"></i>\n            </ion-item>\n            <ion-item-options side="right">\n              <button ion-button color="danger" icon-only (click)="delCliente(item.$key)">\n                  <ion-icon name="trash"></ion-icon>\n              </button>\n            </ion-item-options>\n          </ion-item-sliding>\n        </ion-list>\n\n        <!--\n        <button ion-button block (click)="novo_Cliente()" color="danger">Novo Cliente</button>\n        -->  \n\n      </ion-col>  \n    </ion-row>\n  </ion-grid>\n\n</ion-content>\n`/*ion-inline-end:"C:\Users\rodnei.brassoroto\Documents\GitHub\ionic\davisa\src\pages\clientes\clientes.html"*/,
+    EstoquePage = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
+            selector: 'page-estoque',template:/*ion-inline-start:"C:\Users\rodnei.brassoroto\Documents\GitHub\ionic\davisa\src\pages\estoque\estoque.html"*/`<ion-header>\n\n  <ion-navbar>\n    <ion-title>Estoque</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n  <ion-searchbar (ionInput)="filtraProdutos($event)"></ion-searchbar>\n  <br>\n  \n    <ion-grid>\n      \n      <ion-row justify-content-center>\n        <ion-col>\n  \n\n          <ion-list>\n            <ion-item *ngFor="let item of listaProdutos | async">\n              <h2> {{ item.desc }} </h2>\n              <h3> Code: <strong>{{ item.marca }}</strong> </h3>\n            </ion-item>\n          </ion-list>\n\n          <!--\n          <ion-list>\n            <ion-item-sliding *ngFor="let item of listaClientes | async">\n              <ion-item (click)="selecionaCliente(item)" detail-push>\n                <ion-icon name="contact" item-left></ion-icon>\n                {{item.nome}}\n                <i class="icon ion-chevron-right"></i>\n              </ion-item>\n              <ion-item-options side="right">\n                <button ion-button color="danger" icon-only (click)="delCliente(item.$key)">\n                    <ion-icon name="trash"></ion-icon>\n                </button>\n              </ion-item-options>\n            </ion-item-sliding>\n          </ion-list>\n        -->\n\n        </ion-col>  \n      </ion-row>\n    </ion-grid>\n\n</ion-content>\n`/*ion-inline-end:"C:\Users\rodnei.brassoroto\Documents\GitHub\ionic\davisa\src\pages\estoque\estoque.html"*/,
         }),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["g" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["g" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["h" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["h" /* NavParams */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_0__providers_firebase_service_cliente_service__["a" /* ClienteServiceProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__providers_firebase_service_cliente_service__["a" /* ClienteServiceProvider */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["e" /* LoadingController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["e" /* LoadingController */]) === "function" && _d || Object])
-    ], ClientesPage);
-    return ClientesPage;
-    var _a, _b, _c, _d;
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavParams */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__providers_produto_service_produto_service__["a" /* ProdutoServiceProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__providers_produto_service_produto_service__["a" /* ProdutoServiceProvider */]) === "function" && _c || Object])
+    ], EstoquePage);
+    return EstoquePage;
+    var _a, _b, _c;
 }());
 
-//# sourceMappingURL=clientes.js.map
+//# sourceMappingURL=estoque.js.map
 
 /***/ })
 

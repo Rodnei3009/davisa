@@ -19,6 +19,9 @@ export class ProdutoPage {
   isAtualizar: boolean = false;
   codBarras: string = "";
   barcodeResult: BarcodeScanResult;
+  descricao_lower: string;
+  descricao: string;
+  //teste: string = "BL BLA";
  
   constructor(public navCtrl: NavController, 
     public navParams: NavParams, 
@@ -33,11 +36,13 @@ export class ProdutoPage {
       marca: [this.navParams.get('dadosProduto').marca],
       codigo: [this.navParams.get('dadosProduto').codigo, Validators.required],
       desc: [this.navParams.get('dadosProduto').desc],
+      desc_lower: [this.navParams.get('dadosProduto').desc_lower],
       cor: [this.navParams.get('dadosProduto').cor],
       tamanho: [this.navParams.get('dadosProduto').tamanho],
       valCompra: [this.navParams.get('dadosProduto').valCompra],
       valVenda: [this.navParams.get('dadosProduto').valVenda]
     });
+
     this.dadosProduto = this.navParams.get('dadosProduto');
     this.funcao = this.navParams.get('funcao');
     console.log(this.dadosProduto);
@@ -66,6 +71,15 @@ export class ProdutoPage {
     console.log(this.produtoForm.value);
     this.ProdutoServiceProvider.atualizarProduto(this.codBarras, this.produtoForm.value);
     this.navCtrl.pop();
+  }
+
+  lower($event) {
+    if ($event.currentTarget.value != undefined) {
+      //alert('qq');
+      this.descricao = $event.currentTarget.value;
+      this.descricao_lower = this.descricao.toLowerCase();
+      //this.teste = this.teste + this.desc;
+    }
   }
 
   onGetBarcode(): void {

@@ -9,8 +9,30 @@ export class ProdutoServiceProvider {
   constructor(public afd: AngularFireDatabase) { }
 
   listarProduto () {
-    return this.afd.list('/produtos', { query: {orderByChild: 'desc'} });
+    return this.afd.list('/produtos', { 
+      
+      query: {
+        orderByChild: 'desc'
+      } 
+    
+    });
+    //return this.afd.list('/produtos').$ref.orderByChild('desc').startAt('Cal');
   }
+
+  filtrarProduto (start, end) {
+    return this.afd.list('/produtos', { 
+      
+      query: {
+        orderByChild: 'desc_lower',
+        startAt: start,
+        endAt: end
+      } 
+    
+    });
+    //return this.afd.list('/produtos').$ref.orderByChild('desc').startAt('Cal');
+  }
+
+  //{query: { orderByChild: this.sizeSubjectName, equalTo: this.sizeSubject,} }
 
   adicionarProduto (Produto) {
     this.afd.list('/produtos/').push(Produto);

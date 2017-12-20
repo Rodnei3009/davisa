@@ -17,10 +17,9 @@ export class ProdutosPage {
   showSpinnerProduto: boolean = true;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public ProdutoServiceProvider: ProdutoServiceProvider) {
-    console.log(this.showSpinner);
+    console.log(this.showSpinnerProduto);
     this.listaProdutos = this.ProdutoServiceProvider.listarProduto();
-    this.listaProdutos.subscribe(() => this.showSpinnerProduto = false);
-    
+    this.listaProdutos.subscribe(() => this.showSpinnerProduto = false); 
   }
 
   ionViewDidLoad() {

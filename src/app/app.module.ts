@@ -24,7 +24,7 @@ const firebaseConfig = {
   storageBucket: "davisa-modaintima.appspot.com",
   messagingSenderId: "410435296849"
 };
-  
+
 @NgModule({
   declarations: [
     MyApp,

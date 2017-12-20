@@ -1,4 +1,4 @@
-webpackJsonp([4],{
+webpackJsonp([5],{
 
 /***/ 145:
 /***/ (function(module, exports) {
@@ -23,10 +23,14 @@ webpackEmptyAsyncContext.id = 145;
 var map = {
 	"../pages/clientes/clientes.module": [
 		423,
+		4
+	],
+	"../pages/estoque/estoque.module": [
+		424,
 		3
 	],
 	"../pages/novo-cliente/novo-cliente.module": [
-		424,
+		426,
 		2
 	],
 	"../pages/produto/produto.module": [
@@ -34,7 +38,7 @@ var map = {
 		1
 	],
 	"../pages/produtos/produtos.module": [
-		426,
+		427,
 		0
 	]
 };
@@ -96,6 +100,68 @@ var HomePage = (function () {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ProdutoServiceProvider; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_angularfire2_database__ = __webpack_require__(104);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var ProdutoServiceProvider = (function () {
+    function ProdutoServiceProvider(afd) {
+        this.afd = afd;
+    }
+    ProdutoServiceProvider.prototype.listarProduto = function () {
+        return this.afd.list('/produtos', {
+            query: {
+                orderByChild: 'desc'
+            }
+        });
+        //return this.afd.list('/produtos').$ref.orderByChild('desc').startAt('Cal');
+    };
+    ProdutoServiceProvider.prototype.filtrarProduto = function (start, end) {
+        return this.afd.list('/produtos', {
+            query: {
+                orderByChild: 'desc_lower',
+                startAt: start,
+                endAt: end
+            }
+        });
+        //return this.afd.list('/produtos').$ref.orderByChild('desc').startAt('Cal');
+    };
+    //{query: { orderByChild: this.sizeSubjectName, equalTo: this.sizeSubject,} }
+    ProdutoServiceProvider.prototype.adicionarProduto = function (Produto) {
+        this.afd.list('/produtos/').push(Produto);
+    };
+    ProdutoServiceProvider.prototype.atualizarProduto = function (codBarras, dadosProduto) {
+        this.afd.list('/produtos/').update(codBarras, dadosProduto);
+    };
+    ProdutoServiceProvider.prototype.deletarProduto = function (codBarras) {
+        this.afd.list('/produtos/').remove(codBarras);
+    };
+    ProdutoServiceProvider = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])(),
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_angularfire2_database__["a" /* AngularFireDatabase */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_angularfire2_database__["a" /* AngularFireDatabase */]) === "function" && _a || Object])
+    ], ProdutoServiceProvider);
+    return ProdutoServiceProvider;
+    var _a;
+}());
+
+//# sourceMappingURL=produto-service.js.map
+
+/***/ }),
+
+/***/ 270:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ClienteServiceProvider; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_angularfire2_database__ = __webpack_require__(104);
@@ -138,51 +204,6 @@ var ClienteServiceProvider = (function () {
 
 /***/ }),
 
-/***/ 270:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ProdutoServiceProvider; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_angularfire2_database__ = __webpack_require__(104);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-var ProdutoServiceProvider = (function () {
-    function ProdutoServiceProvider(afd) {
-        this.afd = afd;
-    }
-    ProdutoServiceProvider.prototype.listarProduto = function () {
-        return this.afd.list('/produtos', { query: { orderByChild: 'desc' } });
-    };
-    ProdutoServiceProvider.prototype.adicionarProduto = function (Produto) {
-        this.afd.list('/produtos/').push(Produto);
-    };
-    ProdutoServiceProvider.prototype.atualizarProduto = function (codBarras, dadosProduto) {
-        this.afd.list('/produtos/').update(codBarras, dadosProduto);
-    };
-    ProdutoServiceProvider.prototype.deletarProduto = function (codBarras) {
-        this.afd.list('/produtos/').remove(codBarras);
-    };
-    ProdutoServiceProvider = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])(),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_angularfire2_database__["a" /* AngularFireDatabase */]])
-    ], ProdutoServiceProvider);
-    return ProdutoServiceProvider;
-}());
-
-//# sourceMappingURL=produto-service.js.map
-
-/***/ }),
-
 /***/ 272:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -213,8 +234,8 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__angular_http__ = __webpack_require__(421);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_angularfire2_database__ = __webpack_require__(104);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10_angularfire2__ = __webpack_require__(422);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__providers_firebase_service_cliente_service__ = __webpack_require__(269);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__providers_produto_service_produto_service__ = __webpack_require__(270);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__providers_firebase_service_cliente_service__ = __webpack_require__(270);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__providers_produto_service_produto_service__ = __webpack_require__(269);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -259,8 +280,9 @@ var AppModule = (function () {
                 __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["c" /* IonicModule */].forRoot(__WEBPACK_IMPORTED_MODULE_6__app_component__["a" /* MyApp */], {}, {
                     links: [
                         { loadChildren: '../pages/clientes/clientes.module#ClientesPageModule', name: 'ClientesPage', segment: 'clientes', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/novo-cliente/novo-cliente.module#NovoClientePageModule', name: 'NovoClientePage', segment: 'novo-cliente', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/estoque/estoque.module#EstoquePageModule', name: 'EstoquePage', segment: 'estoque', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/produto/produto.module#ProdutoPageModule', name: 'ProdutoPage', segment: 'produto', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/novo-cliente/novo-cliente.module#NovoClientePageModule', name: 'NovoClientePage', segment: 'novo-cliente', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/produtos/produtos.module#ProdutosPageModule', name: 'ProdutosPage', segment: 'produtos', priority: 'low', defaultHistory: [] }
                     ]
                 })
@@ -327,17 +349,19 @@ var MyApp = (function () {
     MyApp.prototype.goProdutos = function () {
         this.nav.push('ProdutosPage');
     };
+    MyApp.prototype.goEstoque = function () {
+        this.nav.push('EstoquePage');
+    };
     __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_8" /* ViewChild */])(__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* Nav */]),
-        __metadata("design:type", typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* Nav */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* Nav */]) === "function" && _a || Object)
+        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* Nav */])
     ], MyApp.prototype, "nav", void 0);
     MyApp = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({template:/*ion-inline-start:"C:\Users\rodnei.brassoroto\Documents\GitHub\ionic\davisa\src\app\app.html"*/`<ion-menu [content]="content">\n    <ion-header>\n        <br>\n        <ion-toolbar>\n            <ion-title>\n                Davisa\n            </ion-title>\n        </ion-toolbar>\n    </ion-header>\n\n    <ion-content>\n        <ion-list>\n            <ion-item (click)="goClientes()" menuToggle>\n                <ion-icon name="person" item-left></ion-icon>\n                Clientes\n            </ion-item>\n            <ion-item (click)="goProdutos()" menuToggle>\n                <ion-icon name="shirt" item-left></ion-icon>\n                Produtos\n            </ion-item>\n        </ion-list>\n    </ion-content>\n\n</ion-menu>\n\n<ion-nav [root]="rootPage" #content></ion-nav>\n`/*ion-inline-end:"C:\Users\rodnei.brassoroto\Documents\GitHub\ionic\davisa\src\app\app.html"*/
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({template:/*ion-inline-start:"C:\Users\rodnei.brassoroto\Documents\GitHub\ionic\davisa\src\app\app.html"*/`<ion-menu [content]="content">\n    <ion-header>\n        <br>\n        <ion-toolbar>\n            <ion-title>\n                Davisa\n            </ion-title>\n        </ion-toolbar>\n    </ion-header>\n\n    <ion-content>\n        <ion-list>\n            <ion-item (click)="goClientes()" menuToggle>\n                <ion-icon name="person" item-left></ion-icon>\n                Clientes\n            </ion-item>\n            <ion-item (click)="goProdutos()" menuToggle>\n                <ion-icon name="shirt" item-left></ion-icon>\n                Produtos\n            </ion-item>\n            <ion-item (click)="goEstoque()" menuToggle>\n                <ion-icon name="shirt" item-left></ion-icon>\n                Estoque\n            </ion-item>\n        </ion-list>\n    </ion-content>\n\n</ion-menu>\n\n<ion-nav [root]="rootPage" #content></ion-nav>\n`/*ion-inline-end:"C:\Users\rodnei.brassoroto\Documents\GitHub\ionic\davisa\src\app\app.html"*/
         }),
-        __metadata("design:paramtypes", [typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* Platform */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* Platform */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__["a" /* StatusBar */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__["a" /* StatusBar */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */]) === "function" && _d || Object])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* Platform */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__["a" /* StatusBar */], __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */]])
     ], MyApp);
     return MyApp;
-    var _a, _b, _c, _d;
 }());
 
 //# sourceMappingURL=app.component.js.map

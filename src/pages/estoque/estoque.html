@@ -1,0 +1,48 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Estoque</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-searchbar (ionInput)="filtraProdutos($event)"></ion-searchbar>
+  <br>
+  
+    <ion-grid>
+      
+      <ion-row justify-content-center>
+        <ion-col>
+  
+
+          <ion-list>
+            <ion-item *ngFor="let item of listaProdutos | async">
+              <h2> {{ item.desc }} </h2>
+              <h3> Code: <strong>{{ item.marca }}</strong> </h3>
+            </ion-item>
+          </ion-list>
+
+          <!--
+          <ion-list>
+            <ion-item-sliding *ngFor="let item of listaClientes | async">
+              <ion-item (click)="selecionaCliente(item)" detail-push>
+                <ion-icon name="contact" item-left></ion-icon>
+                {{item.nome}}
+                <i class="icon ion-chevron-right"></i>
+              </ion-item>
+              <ion-item-options side="right">
+                <button ion-button color="danger" icon-only (click)="delCliente(item.$key)">
+                    <ion-icon name="trash"></ion-icon>
+                </button>
+              </ion-item-options>
+            </ion-item-sliding>
+          </ion-list>
+        -->
+
+        </ion-col>  
+      </ion-row>
+    </ion-grid>
+
+</ion-content>
