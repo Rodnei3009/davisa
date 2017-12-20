@@ -37,6 +37,7 @@
             <ion-item (click)="selecionaProduto(item)" detail-push>
               <ion-icon name="shirt" item-left></ion-icon>
               {{item.desc}}
+              <h3> Tam: <strong>{{ item.tamanho }}</strong> Cor: <strong>{{ item.cor }}</strong> </h3>
               <i class="icon ion-chevron-right"></i>
             </ion-item>
             <ion-item-options side="right">
