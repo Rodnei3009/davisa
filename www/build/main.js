@@ -30,11 +30,11 @@ var map = {
 		3
 	],
 	"../pages/novo-cliente/novo-cliente.module": [
-		426,
+		425,
 		2
 	],
 	"../pages/produto/produto.module": [
-		425,
+		426,
 		1
 	],
 	"../pages/produtos/produtos.module": [
@@ -129,7 +129,7 @@ var ProdutoServiceProvider = (function () {
     ProdutoServiceProvider.prototype.filtrarProduto = function (start, end) {
         return this.afd.list('/produtos', {
             query: {
-                orderByChild: 'desc',
+                orderByChild: 'desc_lower',
                 startAt: start,
                 endAt: end
             }
@@ -280,8 +280,8 @@ var AppModule = (function () {
                     links: [
                         { loadChildren: '../pages/clientes/clientes.module#ClientesPageModule', name: 'ClientesPage', segment: 'clientes', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/estoque/estoque.module#EstoquePageModule', name: 'EstoquePage', segment: 'estoque', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/produto/produto.module#ProdutoPageModule', name: 'ProdutoPage', segment: 'produto', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/novo-cliente/novo-cliente.module#NovoClientePageModule', name: 'NovoClientePage', segment: 'novo-cliente', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/produto/produto.module#ProdutoPageModule', name: 'ProdutoPage', segment: 'produto', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/produtos/produtos.module#ProdutosPageModule', name: 'ProdutosPage', segment: 'produtos', priority: 'low', defaultHistory: [] }
                     ]
                 })

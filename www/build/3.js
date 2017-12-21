@@ -79,8 +79,8 @@ var EstoquePage = (function () {
         var strSearch = $event.target.value;
         if ($event.timeStamp - this.lastKeypress > 200) {
             //alert(strSearch);
-            this.startAt.next(strSearch);
-            this.endAt.next(strSearch + "\uf8ff");
+            this.startAt.next(strSearch.toLowerCase());
+            this.endAt.next(strSearch.toLowerCase() + "\uf8ff");
         }
         this.lastKeypress = $event.timeStamp;
         /*
