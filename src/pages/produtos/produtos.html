@@ -34,12 +34,28 @@
         -->
         <ion-list>
           <ion-item-sliding *ngFor="let item of listaProdutos | async">
+            
             <ion-item (click)="selecionaProduto(item)" detail-push>
               <ion-icon name="shirt" item-left></ion-icon>
-              {{item.desc}}
-              <h3> Tam: <strong>{{ item.tamanho }}</strong> Cor: <strong>{{ item.cor }}</strong> </h3>
+
+              <ion-row>
+                <ion-col justify-content-start>{{item.desc}}</ion-col>
+              </ion-row>
+              
+              <ion-row>
+                <ion-col justify-content-start col-4><h6> Tam: {{ item.tamanho }}</h6></ion-col>
+                <ion-col justify-content-end col-3><h6> Cor: {{ item.cor }}</h6></ion-col>
+              </ion-row>
+
+              <ion-row>
+                <ion-col justify-content-start col-4><h6> Marca: {{ item.marca }}</h6></ion-col>
+                <ion-col justify-content-end col-3><h6> Preço: {{ item.valVenda }}</h6></ion-col>
+              </ion-row>
+                         
+              
               <i class="icon ion-chevron-right"></i>
             </ion-item>
+            
             <ion-item-options side="right">
               <button ion-button color="danger" icon-only (click)="delProduto(item.$key)">
                   <ion-icon name="trash"></ion-icon>
