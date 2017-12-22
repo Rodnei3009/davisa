@@ -1,6 +1,6 @@
 webpackJsonp([0],{
 
-/***/ 427:
+/***/ 426:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -8,7 +8,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ProdutosPageModule", function() { return ProdutosPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(75);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__produtos__ = __webpack_require__(432);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__produtos__ = __webpack_require__(431);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -38,7 +38,7 @@ var ProdutosPageModule = (function () {
 
 /***/ }),
 
-/***/ 432:
+/***/ 431:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -46,6 +46,8 @@ var ProdutosPageModule = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__providers_produto_service_produto_service__ = __webpack_require__(269);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(75);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_Subject__ = __webpack_require__(44);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_Subject___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs_Subject__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -58,19 +60,33 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var ProdutosPage = (function () {
     function ProdutosPage(navCtrl, navParams, ProdutoServiceProvider) {
-        var _this = this;
         this.navCtrl = navCtrl;
         this.navParams = navParams;
         this.ProdutoServiceProvider = ProdutoServiceProvider;
         this.novoProduto = '';
         this.codBarras = '';
-        this.showSpinnerProduto = true;
-        console.log(this.showSpinnerProduto);
-        this.listaProdutos = this.ProdutoServiceProvider.listarProduto();
-        this.listaProdutos.subscribe(function () { return _this.showSpinnerProduto = false; });
+        this.showSpinnerProduto = false;
+        this.startAt = new __WEBPACK_IMPORTED_MODULE_3_rxjs_Subject__["Subject"]();
+        this.endAt = new __WEBPACK_IMPORTED_MODULE_3_rxjs_Subject__["Subject"]();
+        this.lastKeypress = 0;
     }
+    ProdutosPage.prototype.ngOnInit = function () {
+        this.listaProdutos = this.ProdutoServiceProvider.filtrarProduto(this.startAt, this.endAt);
+        //this.ProdutoServiceProvider.listarProduto(this.startAt, this.endAt)
+        //              .subscribe(listaProdutos => this.listaProdutos)
+    };
+    ProdutosPage.prototype.filtraProdutos = function ($event) {
+        var strSearch = $event.target.value;
+        if ($event.timeStamp - this.lastKeypress > 200) {
+            this.startAt.next(strSearch.toLowerCase());
+            this.endAt.next(strSearch.toLowerCase() + "\uf8ff");
+        }
+        this.lastKeypress = $event.timeStamp;
+        console.log(strSearch);
+    };
     ProdutosPage.prototype.ionViewDidLoad = function () {
         console.log('ionViewDidLoad ProdutosPage');
     };

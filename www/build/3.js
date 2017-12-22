@@ -84,7 +84,7 @@ var EstoquePage = (function () {
             //.startAt("[a-zA-Z0-9]*")
             //.endAt(searchString)
             // [a-zA-Z]{*}[ ][a-zA-Z] 
-            this.startAt.next("[a-zA-Z0-9]*" + strSearch.toLowerCase());
+            this.startAt.next(strSearch.toLowerCase());
             this.endAt.next(strSearch.toLowerCase() + "\uf8ff");
         }
         this.lastKeypress = $event.timeStamp;
