@@ -18,15 +18,19 @@
 </ion-header>
 
 <ion-content>
-  <br>
-
+  
   <ion-grid>
 
     <ion-row *ngIf="showSpinnerProduto" justify-content-center>
       <ion-spinner color="primary" name="crescent"></ion-spinner>
     </ion-row>
 
-    <ion-row justify-content-center>
+    <ion-row *ngIf="!showSpinnerProduto" justify-content-center>
+      
+      <ion-row col-12>
+        <ion-searchbar (ionInput)="filtraProdutos($event)"></ion-searchbar>
+      </ion-row>
+      
       <ion-col>
 
         <!--

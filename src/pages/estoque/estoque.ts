@@ -30,6 +30,11 @@ export class EstoquePage {
     
     if ($event.timeStamp - this.lastKeypress > 200) {
       //alert(strSearch);
+      //firebaseDatabase.getReference("parent")
+        //.orderByChild("childNode")
+        //.startAt("[a-zA-Z0-9]*")
+        //.endAt(searchString)
+        // [a-zA-Z]{*}[ ][a-zA-Z] 
       this.startAt.next(strSearch.toLowerCase())
       this.endAt.next(strSearch.toLowerCase() + "\uf8ff")
     }

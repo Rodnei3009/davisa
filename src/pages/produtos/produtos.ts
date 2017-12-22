@@ -1,8 +1,8 @@
 import { ProdutoServiceProvider } from './../../providers/produto-service/produto-service';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { FirebaseListObservable } from 'angularfire2/database';
-
+import { Subject } from 'rxjs/Subject';
 
 @IonicPage()
 @Component({
@@ -14,13 +14,32 @@ export class ProdutosPage {
   listaProdutos: FirebaseListObservable<any[]>;
   novoProduto = '';
   codBarras = '';
-  showSpinnerProduto: boolean = true;
+  showSpinnerProduto: boolean = false;
+  startAt = new Subject();
+  endAt = new Subject();
+  lastKeypress: number = 0;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public ProdutoServiceProvider: ProdutoServiceProvider) {
-    console.log(this.showSpinnerProduto);
-    this.listaProdutos = this.ProdutoServiceProvider.listarProduto();
-    this.listaProdutos.subscribe(() => this.showSpinnerProduto = false); 
+  constructor(public navCtrl: NavController, public navParams: NavParams, public ProdutoServiceProvider: ProdutoServiceProvider) {}
+
+  ngOnInit() {
+    this.listaProdutos = this.ProdutoServiceProvider.filtrarProduto(this.startAt, this.endAt);
+    //this.ProdutoServiceProvider.listarProduto(this.startAt, this.endAt)
+    //              .subscribe(listaProdutos => this.listaProdutos)
   }
+
+  filtraProdutos($event) {
+    
+    var strSearch: string = $event.target.value;
+    
+    if ($event.timeStamp - this.lastKeypress > 200) {
+      this.startAt.next(strSearch.toLowerCase())
+      this.endAt.next(strSearch.toLowerCase() + "\uf8ff")
+    }
+    this.lastKeypress = $event.timeStamp
+    console.log(strSearch);
+  
+  }
+
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ProdutosPage');
