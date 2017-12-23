@@ -70,7 +70,7 @@ export class ProdutosPage {
   }
 
   localizar_produto() {
-    alert(this.codBarrasRetorno);
+    this.onGetBarcode();
   }
 
   novo_Produto() {
