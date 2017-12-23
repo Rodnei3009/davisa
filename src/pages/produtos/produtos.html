@@ -8,7 +8,7 @@
       </ion-buttons>
 
       <ion-buttons right>
-        <button ion-fab mini color="primary" (click)="localizar_produto()">
+        <button ion-fab mini color="primary" (click)="onGetBarcode()">
           <ion-icon name="barcode"></ion-icon>
         </button>
       </ion-buttons>  
@@ -28,7 +28,7 @@
     <ion-row *ngIf="!showSpinnerProduto" justify-content-center>
       
       <ion-row col-12>
-          <ion-searchbar placeholder="Pesquisar pelo nome" class="rounded" (ionInput)="filtraProdutos($event)"></ion-searchbar>
+          <ion-searchbar placeholder="Pesquisar pelo nome" class="rounded" (ionInput)="filtraProdutos($event, '')"></ion-searchbar>
       </ion-row>
       <div>{{ codBarrasRetorno }}</div>
 

@@ -19,29 +19,31 @@ export class ProdutoServiceProvider {
     //return this.afd.list('/produtos').$ref.orderByChild('desc').startAt('Cal');
   }
 
-  filtrarProduto (start, end) {
-    return this.afd.list('/produtos', { 
+  filtrarProduto (start, end, barcode) {
+
+    if (barcode != "") {
+      alert('AAA');
+      return this.afd.list('/produtos', { 
+        
+        query: {
+          orderByChild: 'codBarras',
+          equalTo: barcode 
+        } 
       
-      query: {
-        orderByChild: 'desc_lower',
-        startAt: start,
-        endAt: end
-      } 
-    
-    });
-    //return this.afd.list('/produtos').$ref.orderByChild('desc').startAt('Cal');
+      });
+    } else {
+      alert('BBB');
+      return this.afd.list('/produtos', { 
+        
+        query: {
+          orderByChild: 'desc_lower',
+          startAt: start,
+          endAt: end 
+        } 
+      
+      });
+    }
   }
-
-  localizarProduto (barcode) {
-    return this.afd.list('/produtos', { 
-      query: {
-        orderByChild: 'codBarras',
-        equalTo: barcode
-      } 
-    });
-  }
-
-  //{query: { orderByChild: this.sizeSubjectName, equalTo: this.sizeSubject,} }
 
   adicionarProduto (Produto) {
     this.afd.list('/produtos/').push(Produto);

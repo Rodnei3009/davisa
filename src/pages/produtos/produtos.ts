@@ -19,9 +19,11 @@ export class ProdutosPage {
   showSpinnerProduto: boolean = false;
   startAt = new Subject();
   endAt = new Subject();
+  equalTo = new Subject();
   lastKeypress: number = 0;
   barcodeResult: BarcodeScanResult;
   codBarrasRetorno: string = '';
+  querySearch: string = '';
 
   constructor(
     public navCtrl: NavController, 
@@ -31,38 +33,46 @@ export class ProdutosPage {
   ) {}
 
   ngOnInit() {
-    this.listaProdutos = this.ProdutoServiceProvider.filtrarProduto(this.startAt, this.endAt);
+    this.listaProdutos = this.ProdutoServiceProvider.filtrarProduto(this.startAt, this.endAt, "");
     //this.ProdutoServiceProvider.listarProduto(this.startAt, this.endAt)
     //              .subscribe(listaProdutos => this.listaProdutos)
   }
 
-  filtraProdutos($event) {
-    
-    var strSearch: string;
-    
-    if ($event.target.value === undefined) {
-      strSearch = "";
+  filtraProdutos($event, barCode) {
+
+    if (barCode != "") {
+      this.equalTo.next(barCode);
     } else {
-      strSearch = $event.target.value;
+
+      var strSearch: string;
+      
+      if ($event.target.value === undefined) {
+        strSearch = "";
+      } else {
+        strSearch = $event.target.value;
+      }
+      
+      if ($event.timeStamp - this.lastKeypress > 200) {
+        this.startAt.next(strSearch.toLowerCase())
+        this.endAt.next(strSearch.toLowerCase() + "\uf8ff")
+      }
+      this.lastKeypress = $event.timeStamp
+      console.log(strSearch);
+
     }
-    
-    if ($event.timeStamp - this.lastKeypress > 200) {
-      this.startAt.next(strSearch.toLowerCase())
-      this.endAt.next(strSearch.toLowerCase() + "\uf8ff")
-    }
-    this.lastKeypress = $event.timeStamp
-    console.log(strSearch);
   }
 
   onGetBarcode(): void {
+
     this.BarcodeScanner.scan()
       .then((barcodeResult: BarcodeScanResult) => {
         this.barcodeResult = barcodeResult;
         this.codBarrasRetorno = this.barcodeResult.text;
-        //this.localizar_produto();
+        this.listaProdutos = this.ProdutoServiceProvider.filtrarProduto("", "", this.codBarrasRetorno);
       }).catch((error: Error) => {
         console.log('barcode error: ', error);
       });
+
   }
 
   ionViewDidLoad() {
