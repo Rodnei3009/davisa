@@ -39,7 +39,7 @@ export class ProdutosPage {
   }
 
   filtraProdutos($event, barCode) {
-    alert('barcode: ' + barCode);
+    //alert('barcode: ' + barCode);
     if (barCode != '') {
       this.equalTo.next(barCode);
     } else {

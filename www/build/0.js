@@ -85,7 +85,7 @@ var ProdutosPage = (function () {
         //              .subscribe(listaProdutos => this.listaProdutos)
     };
     ProdutosPage.prototype.filtraProdutos = function ($event, barCode) {
-        alert('barcode: ' + barCode);
+        //alert('barcode: ' + barCode);
         if (barCode != '') {
             this.equalTo.next(barCode);
         }

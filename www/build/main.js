@@ -128,9 +128,9 @@ var ProdutoServiceProvider = (function () {
         //return this.afd.list('/produtos').$ref.orderByChild('desc').startAt('Cal');
     };
     ProdutoServiceProvider.prototype.filtrarProduto = function (start, end, barcode) {
-        alert('entrou filtrar');
+        //alert('entrou filtrar');    
         if (barcode != '') {
-            alert('AAA');
+            //alert('AAA');
             return this.afd.list('/produtos', {
                 query: {
                     orderByChild: 'codBarras',
@@ -139,7 +139,7 @@ var ProdutoServiceProvider = (function () {
             });
         }
         else {
-            alert('BBB');
+            //alert('BBB');
             return this.afd.list('/produtos', {
                 query: {
                     orderByChild: 'desc_lower',

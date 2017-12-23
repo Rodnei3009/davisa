@@ -20,9 +20,9 @@ export class ProdutoServiceProvider {
   }
 
   filtrarProduto (start, end, barcode) {
-    alert('entrou filtrar');    
+    //alert('entrou filtrar');    
     if (barcode != '') {
-      alert('AAA');
+      //alert('AAA');
       return this.afd.list('/produtos', { 
         
         query: {
@@ -32,7 +32,7 @@ export class ProdutoServiceProvider {
       
       });
     } else {
-      alert('BBB');
+      //alert('BBB');
       return this.afd.list('/produtos', { 
         
         query: {
