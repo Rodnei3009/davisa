@@ -80,13 +80,14 @@ var ProdutosPage = (function () {
         this.querySearch = '';
     }
     ProdutosPage.prototype.ngOnInit = function () {
-        this.listaProdutos = this.ProdutoServiceProvider.filtrarProduto(this.startAt, this.endAt, "");
+        //this.listaProdutos = this.ProdutoServiceProvider.filtrarProduto(this.startAt, this.endAt, "");
         //this.ProdutoServiceProvider.listarProduto(this.startAt, this.endAt)
         //              .subscribe(listaProdutos => this.listaProdutos)
     };
     ProdutosPage.prototype.filtraProdutos = function ($event, barCode) {
         alert('barcode: ' + barCode);
         if (barCode != '') {
+            this.listaProdutos = this.ProdutoServiceProvider.filtrarProduto('', '', this.codBarrasRetorno);
             this.equalTo.next(barCode);
         }
         else {
@@ -98,6 +99,7 @@ var ProdutosPage = (function () {
                 strSearch = $event.target.value;
             }
             if ($event.timeStamp - this.lastKeypress > 200) {
+                this.listaProdutos = this.ProdutoServiceProvider.filtrarProduto(this.startAt, this.endAt, "");
                 this.startAt.next(strSearch.toLowerCase());
                 this.endAt.next(strSearch.toLowerCase() + "\uf8ff");
             }
@@ -111,7 +113,6 @@ var ProdutosPage = (function () {
             .then(function (barcodeResult) {
             _this.barcodeResult = barcodeResult;
             _this.codBarrasRetorno = _this.barcodeResult.text;
-            _this.listaProdutos = _this.ProdutoServiceProvider.filtrarProduto('', '', _this.codBarrasRetorno);
         }).catch(function (error) {
             console.log('barcode error: ', error);
         });
