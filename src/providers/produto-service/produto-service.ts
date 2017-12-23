@@ -20,7 +20,7 @@ export class ProdutoServiceProvider {
   }
 
   filtrarProduto (start, end, barcode) {
-
+    alert('entrou filtrar');    
     if (barcode != "") {
       alert('AAA');
       return this.afd.list('/produtos', { 

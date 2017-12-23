@@ -68,7 +68,7 @@ export class ProdutosPage {
       .then((barcodeResult: BarcodeScanResult) => {
         this.barcodeResult = barcodeResult;
         this.codBarrasRetorno = this.barcodeResult.text;
-        this.listaProdutos = this.ProdutoServiceProvider.filtrarProduto("", "", this.codBarrasRetorno);
+        this.listaProdutos = this.ProdutoServiceProvider.filtrarProduto('', '', this.codBarrasRetorno);
       }).catch((error: Error) => {
         console.log('barcode error: ', error);
       });
