@@ -59,6 +59,7 @@ export class ProdutosPage {
       .then((barcodeResult: BarcodeScanResult) => {
         this.barcodeResult = barcodeResult;
         this.codBarrasRetorno = this.barcodeResult.text;
+        this.localizar_produto();
       }).catch((error: Error) => {
         console.log('barcode error: ', error);
       });
@@ -69,7 +70,6 @@ export class ProdutosPage {
   }
 
   localizar_produto() {
-    this.onGetBarcode();
     alert(this.codBarrasRetorno);
   }
 
