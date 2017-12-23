@@ -4,6 +4,8 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { FirebaseListObservable } from 'angularfire2/database';
 import { Subject } from 'rxjs/Subject';
 
+import { BarcodeScanner, BarcodeScanResult } from '@ionic-native/barcode-scanner';
+
 @IonicPage()
 @Component({
   selector: 'page-produtos',
@@ -18,8 +20,15 @@ export class ProdutosPage {
   startAt = new Subject();
   endAt = new Subject();
   lastKeypress: number = 0;
+  barcodeResult: BarcodeScanResult;
+  codBarrasRetorno: string = '';
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public ProdutoServiceProvider: ProdutoServiceProvider) {}
+  constructor(
+    public navCtrl: NavController, 
+    public navParams: NavParams, 
+    public ProdutoServiceProvider: ProdutoServiceProvider,
+    public BarcodeScanner: BarcodeScanner
+  ) {}
 
   ngOnInit() {
     this.listaProdutos = this.ProdutoServiceProvider.filtrarProduto(this.startAt, this.endAt);
@@ -29,7 +38,13 @@ export class ProdutosPage {
 
   filtraProdutos($event) {
     
-    var strSearch: string = $event.target.value;
+    var strSearch: string;
+    
+    if ($event.target.value === undefined) {
+      strSearch = "";
+    } else {
+      strSearch = $event.target.value;
+    }
     
     if ($event.timeStamp - this.lastKeypress > 200) {
       this.startAt.next(strSearch.toLowerCase())
@@ -37,12 +52,25 @@ export class ProdutosPage {
     }
     this.lastKeypress = $event.timeStamp
     console.log(strSearch);
-  
   }
 
+  onGetBarcode(): void {
+    this.BarcodeScanner.scan()
+      .then((barcodeResult: BarcodeScanResult) => {
+        this.barcodeResult = barcodeResult;
+        this.codBarrasRetorno = this.barcodeResult.text;
+      }).catch((error: Error) => {
+        console.log('barcode error: ', error);
+      });
+  }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ProdutosPage');
+  }
+
+  localizar_produto() {
+    this.codBarrasRetorno = this.onGetBarcode();
+    alert(this.codBarrasRetorno);
   }
 
   novo_Produto() {

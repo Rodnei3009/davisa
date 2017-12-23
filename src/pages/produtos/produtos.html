@@ -2,17 +2,17 @@
   <br>
   <ion-navbar>
       <ion-buttons right>
-          <ion-fab right middle>
-            <button ion-fab mini color="primary" (click)="novo_Produto()">
-              <ion-icon name="add"></ion-icon>
-            </button>
-          </ion-fab>
-          <!--
-          <button ion-button icon-only (click)="novo_Produto()">
-            <ion-icon name="add-circle"></ion-icon>
-          </button>
-        -->
+        <button ion-fab mini color="danger" (click)="novo_Produto()">
+          <ion-icon name="add"></ion-icon>
+        </button>
       </ion-buttons>
+
+      <ion-buttons right>
+        <button ion-fab mini color="primary" (click)="localizar_produto()">
+          <ion-icon name="barcode"></ion-icon>
+        </button>
+      </ion-buttons>  
+
     <ion-title>Produtos</ion-title>
   </ion-navbar>
 </ion-header>
@@ -28,9 +28,9 @@
     <ion-row *ngIf="!showSpinnerProduto" justify-content-center>
       
       <ion-row col-12>
-        <ion-searchbar placeholder="Pesquisar" class="rounded" (ionInput)="filtraProdutos($event)"></ion-searchbar>
+          <ion-searchbar placeholder="Pesquisar pelo nome" class="rounded" (ionInput)="filtraProdutos($event)"></ion-searchbar>
       </ion-row>
-      
+
       <ion-col>
 
         <!--
@@ -47,13 +47,17 @@
               </ion-row>
               
               <ion-row>
-                <ion-col class="prod_detail" justify-content-start col-4>Tam: {{ item.tamanho }}</ion-col>
+                <ion-col class="prod_detail" justify-content-start col-5>Tam: {{ item.tamanho }}</ion-col>
                 <ion-col class="prod_detail" justify-content-end col-3>Cor: {{ item.cor }}</ion-col>
               </ion-row>
 
               <ion-row>
-                <ion-col class="prod_detail" justify-content-start col-4>Marca: {{ item.marca }}</ion-col>
+                <ion-col class="prod_detail" justify-content-start col-5>Marca: {{ item.marca }}</ion-col>
                 <ion-col class="prod_detail" justify-content-end col-3>Preço: {{ item.valVenda }}</ion-col>
+              </ion-row>
+
+              <ion-row>
+                <ion-col class="prod_detail" justify-content-start col-5>Disp.: {{ item.qtd_disp }}</ion-col>
               </ion-row>
                          
               

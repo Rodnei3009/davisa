@@ -46,6 +46,8 @@ export class ProdutoPage {
 
     this.dadosProduto = this.navParams.get('dadosProduto');
     this.funcao = this.navParams.get('funcao');
+    this.descricao = this.navParams.get('dadosProduto').desc;
+    this.descricao_lower = this.navParams.get('dadosProduto').desc_lower;
     console.log(this.dadosProduto);
     console.log(this.funcao);
 

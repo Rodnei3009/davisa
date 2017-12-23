@@ -136,6 +136,14 @@ var ProdutoServiceProvider = (function () {
         });
         //return this.afd.list('/produtos').$ref.orderByChild('desc').startAt('Cal');
     };
+    ProdutoServiceProvider.prototype.localizarProduto = function (barcode) {
+        return this.afd.list('/produtos', {
+            query: {
+                orderByChild: 'codBarras',
+                equalTo: barcode
+            }
+        });
+    };
     //{query: { orderByChild: this.sizeSubjectName, equalTo: this.sizeSubject,} }
     ProdutoServiceProvider.prototype.adicionarProduto = function (Produto) {
         this.afd.list('/produtos/').push(Produto);

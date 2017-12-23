@@ -32,6 +32,15 @@ export class ProdutoServiceProvider {
     //return this.afd.list('/produtos').$ref.orderByChild('desc').startAt('Cal');
   }
 
+  localizarProduto (barcode) {
+    return this.afd.list('/produtos', { 
+      query: {
+        orderByChild: 'codBarras',
+        equalTo: barcode
+      } 
+    });
+  }
+
   //{query: { orderByChild: this.sizeSubjectName, equalTo: this.sizeSubject,} }
 
   adicionarProduto (Produto) {
