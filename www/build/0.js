@@ -113,6 +113,7 @@ var ProdutosPage = (function () {
     };
     ProdutosPage.prototype.localizar_produto = function () {
         this.onGetBarcode();
+        this.listaProdutos = this.ProdutoServiceProvider.localizarProduto(this.codBarrasRetorno);
     };
     ProdutosPage.prototype.novo_Produto = function () {
         this.navCtrl.push('ProdutoPage', { dadosProduto: {}, funcao: 'incluir' });

@@ -71,6 +71,7 @@ export class ProdutosPage {
 
   localizar_produto() {
     this.onGetBarcode();
+    this.listaProdutos = this.ProdutoServiceProvider.localizarProduto(this.codBarrasRetorno);
   }
 
   novo_Produto() {
