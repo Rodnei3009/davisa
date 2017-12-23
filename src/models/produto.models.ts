@@ -9,7 +9,8 @@ export class Produto {
         public cor: string,
         public tamanho: string,
         public valCompra: string,
-        public valVenda: string
+        public valVenda: string,
+        public qtd_disp: number
 
     ) {}
 }

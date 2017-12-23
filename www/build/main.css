@@ -25789,3 +25789,7 @@ hide {
   display: none;
   visibility: hidden;
 }
+
+.prod_detail {
+  font-size: 10px;
+}

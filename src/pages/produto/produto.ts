@@ -40,7 +40,8 @@ export class ProdutoPage {
       cor: [this.navParams.get('dadosProduto').cor],
       tamanho: [this.navParams.get('dadosProduto').tamanho],
       valCompra: [this.navParams.get('dadosProduto').valCompra],
-      valVenda: [this.navParams.get('dadosProduto').valVenda]
+      valVenda: [this.navParams.get('dadosProduto').valVenda],
+      qtd_disp: [this.navParams.get('dadosProduto').qtd_disp]
     });
 
     this.dadosProduto = this.navParams.get('dadosProduto');

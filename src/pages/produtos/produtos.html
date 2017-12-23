@@ -28,7 +28,7 @@
     <ion-row *ngIf="!showSpinnerProduto" justify-content-center>
       
       <ion-row col-12>
-        <ion-searchbar (ionInput)="filtraProdutos($event)"></ion-searchbar>
+        <ion-searchbar placeholder="Pesquisar" class="rounded" (ionInput)="filtraProdutos($event)"></ion-searchbar>
       </ion-row>
       
       <ion-col>
@@ -41,19 +41,19 @@
             
             <ion-item (click)="selecionaProduto(item)" detail-push>
               <ion-icon name="shirt" item-left></ion-icon>
-
+              
               <ion-row>
                 <ion-col justify-content-start>{{item.desc}}</ion-col>
               </ion-row>
               
               <ion-row>
-                <ion-col justify-content-start col-4><h6> Tam: {{ item.tamanho }}</h6></ion-col>
-                <ion-col justify-content-end col-3><h6> Cor: {{ item.cor }}</h6></ion-col>
+                <ion-col class="prod_detail" justify-content-start col-4>Tam: {{ item.tamanho }}</ion-col>
+                <ion-col class="prod_detail" justify-content-end col-3>Cor: {{ item.cor }}</ion-col>
               </ion-row>
 
               <ion-row>
-                <ion-col justify-content-start col-4><h6> Marca: {{ item.marca }}</h6></ion-col>
-                <ion-col justify-content-end col-3><h6> Preço: {{ item.valVenda }}</h6></ion-col>
+                <ion-col class="prod_detail" justify-content-start col-4>Marca: {{ item.marca }}</ion-col>
+                <ion-col class="prod_detail" justify-content-end col-3>Preço: {{ item.valVenda }}</ion-col>
               </ion-row>
                          
               
