@@ -33,7 +33,7 @@ export class ProdutosPage {
   ) {}
 
   ngOnInit() {
-    //this.listaProdutos = this.ProdutoServiceProvider.filtrarProduto(this.startAt, this.endAt, "");
+    this.listaProdutos = this.ProdutoServiceProvider.filtrarProduto(this.startAt, this.endAt, '');
     //this.ProdutoServiceProvider.listarProduto(this.startAt, this.endAt)
     //              .subscribe(listaProdutos => this.listaProdutos)
   }
@@ -41,7 +41,6 @@ export class ProdutosPage {
   filtraProdutos($event, barCode) {
     alert('barcode: ' + barCode);
     if (barCode != '') {
-      this.listaProdutos = this.ProdutoServiceProvider.filtrarProduto('', '', this.codBarrasRetorno);
       this.equalTo.next(barCode);
     } else {
 
@@ -54,7 +53,6 @@ export class ProdutosPage {
       }
       
       if ($event.timeStamp - this.lastKeypress > 200) {
-        this.listaProdutos = this.ProdutoServiceProvider.filtrarProduto(this.startAt, this.endAt, "");
         this.startAt.next(strSearch.toLowerCase())
         this.endAt.next(strSearch.toLowerCase() + "\uf8ff")
       }
@@ -70,7 +68,7 @@ export class ProdutosPage {
       .then((barcodeResult: BarcodeScanResult) => {
         this.barcodeResult = barcodeResult;
         this.codBarrasRetorno = this.barcodeResult.text;
-
+        this.listaProdutos = this.ProdutoServiceProvider.filtrarProduto('', '', this.codBarrasRetorno);
       }).catch((error: Error) => {
         console.log('barcode error: ', error);
       });

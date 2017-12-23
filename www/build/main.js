@@ -129,7 +129,7 @@ var ProdutoServiceProvider = (function () {
     };
     ProdutoServiceProvider.prototype.filtrarProduto = function (start, end, barcode) {
         alert('entrou filtrar');
-        if (barcode != "") {
+        if (barcode != '') {
             alert('AAA');
             return this.afd.list('/produtos', {
                 query: {
