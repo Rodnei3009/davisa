@@ -64,11 +64,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 var ProdutosPage = (function () {
-    function ProdutosPage(navCtrl, navParams, ProdutoServiceProvider, BarcodeScanner) {
+    function ProdutosPage(navCtrl, navParams, ProdutoServiceProvider, BarcodeScanner, loadingCRTL) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
         this.ProdutoServiceProvider = ProdutoServiceProvider;
         this.BarcodeScanner = BarcodeScanner;
+        this.loadingCRTL = loadingCRTL;
         this.novoProduto = '';
         this.codBarras = '';
         this.showSpinnerProduto = false;
@@ -78,11 +79,15 @@ var ProdutosPage = (function () {
         this.lastKeypress = 0;
         this.codBarrasRetorno = '';
         this.querySearch = '';
+        //this.listaProdutos = this.ProdutoServiceProvider.filtrarProduto(this.startAt, this.endAt, this.equalTo);
+        this.listaProdutos = this.ProdutoServiceProvider.filtrarProduto(this.startAt, this.endAt, '');
     }
     ProdutosPage.prototype.ngOnInit = function () {
-        this.listaProdutos = this.ProdutoServiceProvider.filtrarProduto(this.startAt, this.endAt, '');
+        //this.listaProdutos = this.ProdutoServiceProvider.filtrarProduto(this.startAt, this.endAt, '');
         //this.ProdutoServiceProvider.listarProduto(this.startAt, this.endAt)
         //              .subscribe(listaProdutos => this.listaProdutos)
+        //let loading: Loading = this.showLoading();
+        //this.listaProdutos.subscribe(() => this.loading.dismiss());
     };
     ProdutosPage.prototype.filtraProdutos = function ($event, barCode) {
         //alert('barcode: ' + barCode);
@@ -119,10 +124,12 @@ var ProdutosPage = (function () {
     ProdutosPage.prototype.ionViewDidLoad = function () {
         console.log('ionViewDidLoad ProdutosPage');
     };
-    ProdutosPage.prototype.localizar_produto = function () {
-        this.onGetBarcode();
-        this.listaProdutos = this.ProdutoServiceProvider.localizarProduto(this.codBarrasRetorno);
-    };
+    /*
+    localizar_produto() {
+      this.onGetBarcode();
+      this.listaProdutos = this.ProdutoServiceProvider.localizarProduto(this.codBarrasRetorno);
+    }
+    */
     ProdutosPage.prototype.novo_Produto = function () {
         this.navCtrl.push('ProdutoPage', { dadosProduto: {}, funcao: 'incluir' });
     };
@@ -133,16 +140,19 @@ var ProdutosPage = (function () {
     ProdutosPage.prototype.delProduto = function (codBarras) {
         this.ProdutoServiceProvider.deletarProduto(codBarras);
     };
+    ProdutosPage.prototype.showLoading = function () {
+        var loading = this.loadingCRTL.create({});
+        loading.present();
+        return loading;
+    };
     ProdutosPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["m" /* Component */])({
             selector: 'page-produtos',template:/*ion-inline-start:"C:\Users\rodnei.brassoroto\Documents\GitHub\ionic\davisa\src\pages\produtos\produtos.html"*/`<ion-header>\n  <br>\n  <ion-navbar>\n      <ion-buttons right>\n        <button ion-fab mini color="danger" (click)="novo_Produto()">\n          <ion-icon name="add"></ion-icon>\n        </button>\n      </ion-buttons>\n\n      <ion-buttons right>\n        <button ion-fab mini color="primary" (click)="onGetBarcode()">\n          <ion-icon name="barcode"></ion-icon>\n        </button>\n      </ion-buttons>  \n\n    <ion-title>Produtos</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content>\n  \n  <ion-grid>\n\n    <ion-row *ngIf="showSpinnerProduto" justify-content-center>\n      <ion-spinner color="primary" name="crescent"></ion-spinner>\n    </ion-row>\n\n    <ion-row *ngIf="!showSpinnerProduto" justify-content-center>\n      \n      <ion-row col-12>\n          <ion-searchbar placeholder="Pesquisar pelo nome" class="rounded" (ionInput)="filtraProdutos($event, \'\')"></ion-searchbar>\n      </ion-row>\n\n      <ion-col>\n\n        <!--\n        <ion-spinner name="circles"></ion-spinner>\n        -->\n        <ion-list>\n          <ion-item-sliding *ngFor="let item of listaProdutos | async">\n            \n            <ion-item (click)="selecionaProduto(item)" detail-push>\n              <ion-icon name="shirt" item-left></ion-icon>\n              \n              <ion-row>\n                <ion-col justify-content-start>{{item.desc}}</ion-col>\n              </ion-row>\n              \n              <ion-row>\n                <ion-col class="prod_detail" justify-content-start col-5>Tam: {{ item.tamanho }}</ion-col>\n                <ion-col class="prod_detail" justify-content-end col-3>Cor: {{ item.cor }}</ion-col>\n              </ion-row>\n\n              <ion-row>\n                <ion-col class="prod_detail" justify-content-start col-5>Marca: {{ item.marca }}</ion-col>\n                <ion-col class="prod_detail" justify-content-end col-3>Preço: {{ item.valVenda }}</ion-col>\n              </ion-row>\n\n              <ion-row>\n                <ion-col class="prod_detail" justify-content-start col-5>Disp.: {{ item.qtd_disp }}</ion-col>\n              </ion-row>\n                         \n              \n              <i class="icon ion-chevron-right"></i>\n            </ion-item>\n            \n            <ion-item-options side="right">\n              <button ion-button color="danger" icon-only (click)="delProduto(item.$key)">\n                  <ion-icon name="trash"></ion-icon>\n              </button>\n            </ion-item-options>\n          </ion-item-sliding>\n        </ion-list>\n\n        <!--\n        <button ion-button block (click)="novo_Produto()" color="danger">Novo Produto</button>\n        -->  \n\n      </ion-col>  \n    </ion-row>\n  </ion-grid>\n\n</ion-content>`/*ion-inline-end:"C:\Users\rodnei.brassoroto\Documents\GitHub\ionic\davisa\src\pages\produtos\produtos.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["g" /* NavController */],
-            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["h" /* NavParams */],
-            __WEBPACK_IMPORTED_MODULE_0__providers_produto_service_produto_service__["a" /* ProdutoServiceProvider */],
-            __WEBPACK_IMPORTED_MODULE_4__ionic_native_barcode_scanner__["a" /* BarcodeScanner */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["g" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["g" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["h" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["h" /* NavParams */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_0__providers_produto_service_produto_service__["a" /* ProdutoServiceProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__providers_produto_service_produto_service__["a" /* ProdutoServiceProvider */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_4__ionic_native_barcode_scanner__["a" /* BarcodeScanner */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__ionic_native_barcode_scanner__["a" /* BarcodeScanner */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["e" /* LoadingController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["e" /* LoadingController */]) === "function" && _e || Object])
     ], ProdutosPage);
     return ProdutosPage;
+    var _a, _b, _c, _d, _e;
 }());
 
 //# sourceMappingURL=produtos.js.map

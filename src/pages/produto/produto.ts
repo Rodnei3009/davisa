@@ -21,7 +21,6 @@ export class ProdutoPage {
   barcodeResult: BarcodeScanResult;
   descricao_lower: string;
   descricao: string;
-  //teste: string = "BL BLA";
  
   constructor(public navCtrl: NavController, 
     public navParams: NavParams, 

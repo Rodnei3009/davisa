@@ -2,9 +2,14 @@ import { Produto } from './../../models/produto.models';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from 'angularfire2/database';
+import { Subject } from 'rxjs/Subject';
 
 @Injectable()
 export class ProdutoServiceProvider {
+
+  startAt = new Subject();
+  endAt = new Subject();
+  equalTo = new Subject();
 
   constructor(public afd: AngularFireDatabase) { }
 
@@ -12,7 +17,7 @@ export class ProdutoServiceProvider {
     return this.afd.list('/produtos', { 
       
       query: {
-        orderByChild: 'desc'
+        orderByChild: 'desc_lower'
       } 
     
     });

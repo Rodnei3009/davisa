@@ -1,6 +1,6 @@
 import { ProdutoServiceProvider } from './../../providers/produto-service/produto-service';
 import { Component, OnInit } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Loading, LoadingController, IonicPage, NavController, NavParams } from 'ionic-angular';
 import { FirebaseListObservable } from 'angularfire2/database';
 import { Subject } from 'rxjs/Subject';
 
@@ -29,13 +29,21 @@ export class ProdutosPage {
     public navCtrl: NavController, 
     public navParams: NavParams, 
     public ProdutoServiceProvider: ProdutoServiceProvider,
-    public BarcodeScanner: BarcodeScanner
-  ) {}
+    public BarcodeScanner: BarcodeScanner,
+    public loadingCRTL: LoadingController
+  ) {
+    //this.listaProdutos = this.ProdutoServiceProvider.filtrarProduto(this.startAt, this.endAt, this.equalTo);
+    this.listaProdutos = this.ProdutoServiceProvider.filtrarProduto(this.startAt, this.endAt, '');    
+  }
 
   ngOnInit() {
-    this.listaProdutos = this.ProdutoServiceProvider.filtrarProduto(this.startAt, this.endAt, '');
+    //this.listaProdutos = this.ProdutoServiceProvider.filtrarProduto(this.startAt, this.endAt, '');
     //this.ProdutoServiceProvider.listarProduto(this.startAt, this.endAt)
     //              .subscribe(listaProdutos => this.listaProdutos)
+  
+    //let loading: Loading = this.showLoading();
+    
+    //this.listaProdutos.subscribe(() => this.loading.dismiss());
   }
 
   filtraProdutos($event, barCode) {
@@ -79,10 +87,12 @@ export class ProdutosPage {
     console.log('ionViewDidLoad ProdutosPage');
   }
 
+  /*
   localizar_produto() {
     this.onGetBarcode();
     this.listaProdutos = this.ProdutoServiceProvider.localizarProduto(this.codBarrasRetorno);
   }
+  */
 
   novo_Produto() {
     this.navCtrl.push('ProdutoPage', {dadosProduto: {}, funcao: 'incluir'});
@@ -95,6 +105,14 @@ export class ProdutosPage {
 
   delProduto(codBarras) {
     this.ProdutoServiceProvider.deletarProduto(codBarras);
+  }
+
+  private showLoading(): Loading {
+    let loading: Loading = this.loadingCRTL.create({
+      //content: 'carregando'
+    });
+    loading.present();
+    return loading;
   }
 
 }
