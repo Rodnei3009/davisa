@@ -1,0 +1,38 @@
+<ion-header>
+  <br>
+  <ion-navbar>
+    <ion-buttons right>
+        <ion-fab right middle>
+          <button ion-fab mini color="primary" (click)="closeModal('')">
+            <ion-icon name="close"></ion-icon>
+          </button>
+        </ion-fab>
+    </ion-buttons>
+    <ion-title>Pesquisa Cliente</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+    <ion-row col-12>
+        <ion-searchbar [(ngModel)]="clienteNome" placeholder="Pesquisar pelo nome" class="rounded"></ion-searchbar>
+        <button ion-button block type="button" color="primary" round (click)="pesquisarPorNome()">Pesquisar por Nome</button>
+    </ion-row>
+    <ion-row col-12>
+        <ion-searchbar [(ngModel)]="clienteCel" placeholder="Pesquisar pelo celular" class="rounded"></ion-searchbar>
+      <button ion-button block type="button" color="primary" round (click)="pesquisarPorCel()">Pesquisar por Celular</button>
+    </ion-row>
+
+    <ion-list>
+      <ion-item-sliding *ngFor="let item of listaCliente | async">
+        <ion-item (click)="closeModal(item)" detail-push>
+          <ion-icon name="contact" item-left></ion-icon>
+          {{item.nome}}
+          <i class="icon ion-chevron-right"></i>
+        </ion-item>
+      </ion-item-sliding>
+    </ion-list>
+
+</ion-content>

@@ -6,7 +6,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { HomePage } from '../pages/home/home';
 import { ClientesPage } from './../pages/clientes/clientes';
 import { ProdutosPage } from './../pages/produtos/produtos';
-import { EstoquePage } from './../pages/estoque/estoque';
+import { PedidosPage } from './../pages/pedidos/pedidos';
 
 @Component({
   templateUrl: 'app.html'
@@ -33,8 +33,8 @@ export class MyApp {
     this.nav.push('ProdutosPage');
   }
 
-  goEstoque () {
-    this.nav.push('EstoquePage');
+  goPedidos () {
+    this.nav.push('PedidosPage');
   }
   
 

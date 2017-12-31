@@ -16,6 +16,7 @@ import { AngularFireModule } from 'angularfire2';
 import { ClienteServiceProvider } from '../providers/firebase-service/cliente-service';
 import { ProdutoServiceProvider } from './../providers/produto-service/produto-service';
 
+
 const firebaseConfig = {
   apiKey: "AIzaSyBJfyA0HoyDRGspLSWQ8g8oCfJYYg2l6XQ",
   authDomain: "davisa-modaintima.firebaseapp.com",

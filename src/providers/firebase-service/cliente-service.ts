@@ -2,6 +2,7 @@ import { Cliente } from './../../models/cliente.models';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from 'angularfire2/database';
+import { FirebaseListFactoryOpts } from 'angularfire2/interfaces';
 
 @Injectable()
 export class ClienteServiceProvider {
@@ -10,8 +11,8 @@ export class ClienteServiceProvider {
 
   showSpinnerCliente: boolean = true;
 
-  listarCliente () {
-    return this.afd.list('/clientes', { query: {orderByChild: 'nome'} });    
+  listarCliente (strQuery) {
+    return this.afd.list('/clientes', strQuery);    
   }
 
   adicionarCliente (Cliente) {
@@ -26,5 +27,12 @@ export class ClienteServiceProvider {
     this.afd.list('/clientes/').remove(idCliente);    
   }
 
+  localizarClientePorNome (start, end, equal) {
+    return this.afd.list('/clientes', { query: {orderByChild: 'nome', startAt: start, endAt: end, equalTo: equal} });    
+  }
+
+  localizarClientePorCelular (celular) {
+    return this.afd.list('/clientes', { query: {orderByChild: 'celular', equalTo: celular} });
+  }
 
 }

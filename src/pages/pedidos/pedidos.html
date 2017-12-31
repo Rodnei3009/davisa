@@ -1,0 +1,100 @@
+<ion-header>
+  <br>
+  <ion-navbar>
+      <ion-buttons right>
+          <ion-fab right middle>
+            <button ion-fab mini color="primary">
+              <ion-icon name="barcode"></ion-icon>
+            </button>
+          </ion-fab>
+      </ion-buttons>
+    <ion-title>Pedidos</ion-title>
+  </ion-navbar>
+  <ion-row col-12>
+    <button ion-button block type="button" color="primary" round (click)="openModal()">Localizar Cliente</button>
+  </ion-row>
+</ion-header>
+
+
+<ion-content>
+  <br>
+
+  <ion-grid>
+    
+    <ion-row justify-content-center>
+      <ion-col>
+
+        <div>
+          <ion-icon name="contact" item-left></ion-icon>
+          {{nomeCliente}}
+        </div>
+
+        <ion-list>
+          <ion-item-sliding >
+            <ion-item>
+              
+              <ion-row>
+                <ion-col justify-content-start>Calcinha</ion-col>
+              </ion-row>
+              
+              <ion-row>
+                <ion-col class="prod_detail" justify-content-start col-5>Tam: GG</ion-col>
+                <ion-col class="prod_detail" justify-content-end col-3>Cor: Preta</ion-col>
+              </ion-row>
+
+              <ion-row>
+                <ion-col class="prod_detail" justify-content-start col-5>Marca: DeMillus</ion-col>
+                <ion-col class="prod_detail" justify-content-end col-3>Preço: 14,99</ion-col>
+              </ion-row>
+
+              <ion-row>
+                <ion-col class="prod_detail" justify-content-start col-5>Qtd: 1</ion-col>
+              </ion-row>
+              
+            </ion-item>
+            
+            <ion-item-options side="right">
+              <button ion-button color="danger" icon-only>
+                  <ion-icon name="trash"></ion-icon>
+              </button>
+            </ion-item-options>
+          </ion-item-sliding>
+
+          <ion-item-sliding >
+            <ion-item>
+              
+              <ion-row>
+                <ion-col justify-content-start>Sutiã</ion-col>
+              </ion-row>
+              
+              <ion-row>
+                <ion-col class="prod_detail" justify-content-start col-5>Tam: 46</ion-col>
+                <ion-col class="prod_detail" justify-content-end col-3>Cor: Branco</ion-col>
+              </ion-row>
+
+              <ion-row>
+                <ion-col class="prod_detail" justify-content-start col-5>Marca: Valisére</ion-col>
+                <ion-col class="prod_detail" justify-content-end col-3>Preço: 44,00</ion-col>
+              </ion-row>
+
+              <ion-row>
+                <ion-col class="prod_detail" justify-content-start col-5>Qtd: 1</ion-col>
+              </ion-row>
+              
+            </ion-item>
+            
+            <ion-item-options side="right">
+              <button ion-button color="danger" icon-only>
+                  <ion-icon name="trash"></ion-icon>
+              </button>
+            </ion-item-options>
+          </ion-item-sliding>
+        </ion-list>
+
+        <button ion-button block type="button" color="primary" round>Confirmar</button>
+
+      </ion-col>  
+    </ion-row>
+  </ion-grid>
+
+</ion-content>
