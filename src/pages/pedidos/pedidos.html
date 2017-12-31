@@ -2,13 +2,11 @@
   <br>
   <ion-navbar>
       <ion-buttons right>
-          <ion-fab right middle>
-            <button ion-fab mini color="primary">
-              <ion-icon name="barcode"></ion-icon>
-            </button>
-          </ion-fab>
+        <button ion-fab mini color="primary">
+            <ion-icon name="add"></ion-icon>
+        </button>
       </ion-buttons>
-    <ion-title>Pedidos</ion-title>
+    <ion-title>Novo Pedido</ion-title>
   </ion-navbar>
   <ion-row col-12>
     <button ion-button block type="button" color="primary" round (click)="openModal()">Localizar Cliente</button>
@@ -24,8 +22,10 @@
     <ion-row justify-content-center>
       <ion-col>
 
-        <div>
-          <ion-icon name="contact" item-left></ion-icon>
+        <div class="iconeCliente">
+          <ion-icon name="contact"></ion-icon>
+        </div>
+        <div class="nomeCliente">
           {{nomeCliente}}
         </div>
 

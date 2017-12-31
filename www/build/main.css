@@ -25785,6 +25785,15 @@ ion-spinner {
   animation-name: fadeInRight;
 }
 
+.iconeCliente {
+  text-align: center;
+  font-size: 30px;
+}
+
+.nomeCliente {
+  text-align: center;
+}
+
 hide {
   display: none;
   visibility: hidden;
