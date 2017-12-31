@@ -13,15 +13,8 @@ export class ProdutoServiceProvider {
 
   constructor(public afd: AngularFireDatabase) { }
 
-  listarProduto () {
-    return this.afd.list('/produtos', { 
-      
-      query: {
-        orderByChild: 'desc_lower'
-      } 
-    
-    });
-    //return this.afd.list('/produtos').$ref.orderByChild('desc').startAt('Cal');
+  listarProduto (query) {
+    return this.afd.list('/produtos', query);
   }
 
   filtrarProduto (start, end, barcode) {

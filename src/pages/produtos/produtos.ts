@@ -5,6 +5,7 @@ import { FirebaseListObservable } from 'angularfire2/database';
 import { Subject } from 'rxjs/Subject';
 
 import { BarcodeScanner, BarcodeScanResult } from '@ionic-native/barcode-scanner';
+import { FirebaseListFactoryOpts } from 'angularfire2/interfaces';
 
 @IonicPage()
 @Component({
@@ -22,8 +23,8 @@ export class ProdutosPage {
   equalTo = new Subject();
   lastKeypress: number = 0;
   barcodeResult: BarcodeScanResult;
-  codBarrasRetorno: string = '';
-  querySearch: string = '';
+  codBarrasRetorno: string = "";
+  strQueryProduto: FirebaseListFactoryOpts;
 
   constructor(
     public navCtrl: NavController, 
@@ -33,24 +34,10 @@ export class ProdutosPage {
     public loadingCRTL: LoadingController
   ) {
     //this.listaProdutos = this.ProdutoServiceProvider.filtrarProduto(this.startAt, this.endAt, this.equalTo);
-    this.listaProdutos = this.ProdutoServiceProvider.filtrarProduto(this.startAt, this.endAt, '');    
+    //this.listaProdutos = this.ProdutoServiceProvider.filtrarProduto(this.startAt, this.endAt, '');    
   }
 
-  ngOnInit() {
-    //this.listaProdutos = this.ProdutoServiceProvider.filtrarProduto(this.startAt, this.endAt, '');
-    //this.ProdutoServiceProvider.listarProduto(this.startAt, this.endAt)
-    //              .subscribe(listaProdutos => this.listaProdutos)
-  
-    //let loading: Loading = this.showLoading();
-    
-    //this.listaProdutos.subscribe(() => this.loading.dismiss());
-  }
-
-  filtraProdutos($event, barCode) {
-    //alert('barcode: ' + barCode);
-    if (barCode != '') {
-      this.equalTo.next(barCode);
-    } else {
+  filtraProdutos($event) {
 
       var strSearch: string;
       
@@ -60,23 +47,35 @@ export class ProdutosPage {
         strSearch = $event.target.value;
       }
       
-      if ($event.timeStamp - this.lastKeypress > 200) {
-        this.startAt.next(strSearch.toLowerCase())
-        this.endAt.next(strSearch.toLowerCase() + "\uf8ff")
+      if ($event.timeStamp - this.lastKeypress > 200 && strSearch != "") {
+
+        let loading: Loading = this.showLoading();
+
+        this.strQueryProduto = { query: {orderByChild: 'desc_lower', startAt: strSearch.toLowerCase(), endAt: strSearch.toLowerCase() + "\uf8ff"} };
+        
+        this.listaProdutos = this.ProdutoServiceProvider.listarProduto(this.strQueryProduto);
+        this.listaProdutos.subscribe(() => loading.dismiss());
+
       }
       this.lastKeypress = $event.timeStamp
       console.log(strSearch);
 
-    }
   }
 
   onGetBarcode(): void {
 
     this.BarcodeScanner.scan()
       .then((barcodeResult: BarcodeScanResult) => {
+        let loading: Loading = this.showLoading();
+
         this.barcodeResult = barcodeResult;
         this.codBarrasRetorno = this.barcodeResult.text;
-        this.listaProdutos = this.ProdutoServiceProvider.filtrarProduto('', '', this.codBarrasRetorno);
+
+        this.strQueryProduto = { query: {orderByChild: 'codBarras', equalTo: this.codBarrasRetorno} };
+
+        this.listaProdutos = this.ProdutoServiceProvider.listarProduto(this.strQueryProduto);
+        this.listaProdutos.subscribe(() => loading.dismiss());
+
       }).catch((error: Error) => {
         console.log('barcode error: ', error);
       });

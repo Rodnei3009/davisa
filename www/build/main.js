@@ -143,9 +143,10 @@ var ClienteServiceProvider = (function () {
     };
     ClienteServiceProvider = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])(),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_angularfire2_database__["a" /* AngularFireDatabase */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_angularfire2_database__["a" /* AngularFireDatabase */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_angularfire2_database__["a" /* AngularFireDatabase */]) === "function" && _a || Object])
     ], ClienteServiceProvider);
     return ClienteServiceProvider;
+    var _a;
 }());
 
 //# sourceMappingURL=cliente-service.js.map
@@ -180,13 +181,8 @@ var ProdutoServiceProvider = (function () {
         this.endAt = new __WEBPACK_IMPORTED_MODULE_2_rxjs_Subject__["Subject"]();
         this.equalTo = new __WEBPACK_IMPORTED_MODULE_2_rxjs_Subject__["Subject"]();
     }
-    ProdutoServiceProvider.prototype.listarProduto = function () {
-        return this.afd.list('/produtos', {
-            query: {
-                orderByChild: 'desc_lower'
-            }
-        });
-        //return this.afd.list('/produtos').$ref.orderByChild('desc').startAt('Cal');
+    ProdutoServiceProvider.prototype.listarProduto = function (query) {
+        return this.afd.list('/produtos', query);
     };
     ProdutoServiceProvider.prototype.filtrarProduto = function (start, end, barcode) {
         //alert('entrou filtrar');    
@@ -221,9 +217,10 @@ var ProdutoServiceProvider = (function () {
     };
     ProdutoServiceProvider = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])(),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_angularfire2_database__["a" /* AngularFireDatabase */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_angularfire2_database__["a" /* AngularFireDatabase */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_angularfire2_database__["a" /* AngularFireDatabase */]) === "function" && _a || Object])
     ], ProdutoServiceProvider);
     return ProdutoServiceProvider;
+    var _a;
 }());
 
 //# sourceMappingURL=produto-service.js.map
