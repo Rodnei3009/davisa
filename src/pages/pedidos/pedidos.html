@@ -2,14 +2,16 @@
   <br>
   <ion-navbar>
       <ion-buttons right>
+        <!--
         <button ion-fab mini color="primary">
             <ion-icon name="add"></ion-icon>
         </button>
+      -->
       </ion-buttons>
     <ion-title>Novo Pedido</ion-title>
   </ion-navbar>
   <ion-row col-12>
-    <button ion-button block type="button" color="primary" round (click)="openModal()">Localizar Cliente</button>
+    <button ion-button block type="button" color="primary" round (click)="openModalCliente()">Localizar Cliente</button>
   </ion-row>
 </ion-header>
 
@@ -23,11 +25,28 @@
       <ion-col>
 
         <div class="iconeCliente">
-          <ion-icon name="contact"></ion-icon>
+          <ion-icon  (click)="openModalCliente()" name="contact"></ion-icon>
         </div>
         <div class="nomeCliente">
           {{nomeCliente}}
         </div>
+
+        <br>
+
+        <ion-row>
+          Incluir item: 
+            <ion-buttons right>
+              <button ion-fab mini color="primary" (click)="openModalProduto()">
+                <ion-icon name="search"></ion-icon>
+              </button>
+            </ion-buttons>
+            
+            <ion-buttons right>
+              <button ion-fab mini color="primary">
+                <ion-icon name="barcode"></ion-icon>
+              </button>
+            </ion-buttons>
+        </ion-row>
 
         <ion-list>
           <ion-item-sliding >

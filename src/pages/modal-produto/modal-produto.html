@@ -1,0 +1,49 @@
+<ion-header>
+    <br>
+    <ion-navbar>
+      <ion-buttons right>
+        <button ion-fab mini color="primary" (click)="closeModal('')">
+            <ion-icon name="close"></ion-icon>
+        </button>
+      </ion-buttons>
+      <ion-title>Pesquisa Produto</ion-title>
+    </ion-navbar>
+  
+  </ion-header>
+  
+  
+  <ion-content padding>
+  
+      <ion-row col-12>
+          <ion-searchbar [(ngModel)]="desc_produto" placeholder="Pesquisar pelo nome" class="rounded" (ionInput)="filtraProdutos($event)"></ion-searchbar>
+          <!--
+          <button ion-button block type="button" color="primary" round (click)="pesquisarPorNome()">Pesquisar por Nome</button>
+          --> 
+        </ion-row>
+  
+      <ion-list>
+        <ion-item-sliding *ngFor="let item of listaProdutos | async">
+          <ion-item (click)="closeModal(item)" detail-push>
+
+            {{item.desc}}
+
+            <ion-row>
+              <ion-col class="prod_detail" justify-content-start col-5>Tam: {{ item.tamanho }}</ion-col>
+              <ion-col class="prod_detail" justify-content-end col-3>Cor: {{ item.cor }}</ion-col>
+            </ion-row>
+
+            <ion-row>
+              <ion-col class="prod_detail" justify-content-start col-5>Marca: {{ item.marca }}</ion-col>
+              <ion-col class="prod_detail" justify-content-end col-3>Preço: {{ item.valVenda }}</ion-col>
+            </ion-row>
+
+            <ion-row>
+              <ion-col class="prod_detail" justify-content-start col-5>Disp.: {{ item.qtd_disp }}</ion-col>
+            </ion-row>
+            
+            <i class="icon ion-chevron-right"></i>
+          </ion-item>
+        </ion-item-sliding>
+      </ion-list>
+  
+  </ion-content>

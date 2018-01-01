@@ -1,14 +1,14 @@
 webpackJsonp([4],{
 
-/***/ 424:
+/***/ 431:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ModalClientePageModule", function() { return ModalClientePageModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ModalProdutoPageModule", function() { return ModalProdutoPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(75);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__modal_cliente__ = __webpack_require__(430);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(77);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__modal_produto__ = __webpack_require__(438);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -18,36 +18,35 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var ModalClientePageModule = (function () {
-    function ModalClientePageModule() {
+var ModalProdutoPageModule = (function () {
+    function ModalProdutoPageModule() {
     }
-    ModalClientePageModule = __decorate([
+    ModalProdutoPageModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
             declarations: [
-                __WEBPACK_IMPORTED_MODULE_2__modal_cliente__["a" /* ModalClientePage */],
+                __WEBPACK_IMPORTED_MODULE_2__modal_produto__["a" /* ModalProdutoPage */],
             ],
             imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__modal_cliente__["a" /* ModalClientePage */]),
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__modal_produto__["a" /* ModalProdutoPage */]),
             ],
         })
-    ], ModalClientePageModule);
-    return ModalClientePageModule;
+    ], ModalProdutoPageModule);
+    return ModalProdutoPageModule;
 }());
 
-//# sourceMappingURL=modal-cliente.module.js.map
+//# sourceMappingURL=modal-produto.module.js.map
 
 /***/ }),
 
-/***/ 430:
+/***/ 438:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ModalClientePage; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ModalProdutoPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(75);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_firebase_service_cliente_service__ = __webpack_require__(269);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_Subject__ = __webpack_require__(38);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_Subject___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs_Subject__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(77);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_produto_service_produto_service__ = __webpack_require__(273);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_barcode_scanner__ = __webpack_require__(274);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -61,56 +60,52 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-var ModalClientePage = (function () {
-    function ModalClientePage(navParams, view, cliente, loadingCRTL) {
+var ModalProdutoPage = (function () {
+    function ModalProdutoPage(navParams, view, ProdutoServiceProvider, BarcodeScanner, loadingCRTL) {
         this.navParams = navParams;
         this.view = view;
-        this.cliente = cliente;
+        this.ProdutoServiceProvider = ProdutoServiceProvider;
+        this.BarcodeScanner = BarcodeScanner;
         this.loadingCRTL = loadingCRTL;
-        this.clienteCel = "";
-        this.clienteNome = "";
-        this.startAt = new __WEBPACK_IMPORTED_MODULE_3_rxjs_Subject__["Subject"]();
-        this.endAt = new __WEBPACK_IMPORTED_MODULE_3_rxjs_Subject__["Subject"]();
-        this.equalTo = new __WEBPACK_IMPORTED_MODULE_3_rxjs_Subject__["Subject"]();
+        this.lastKeypress = 0;
     }
-    ModalClientePage.prototype.closeModal = function (cliente) {
-        this.view.dismiss(cliente);
+    ModalProdutoPage.prototype.closeModal = function (produto) {
+        this.view.dismiss(produto);
     };
-    ModalClientePage.prototype.pesquisarPorNome = function () {
-        if (this.clienteNome != "") {
-            var loading_1 = this.showLoading();
-            var nome;
-            nome = this.clienteNome;
-            this.clienteCel = "";
-            this.strQuery = { query: { orderByChild: 'nome', startAt: nome, endAt: nome + '\uf8ff' } };
-            this.listaCliente = this.cliente.listarCliente(this.strQuery);
-            this.listaCliente.subscribe(function () { return loading_1.dismiss(); });
+    ModalProdutoPage.prototype.filtraProdutos = function ($event) {
+        var strSearch;
+        if ($event.target.value === undefined) {
+            strSearch = "";
         }
+        else {
+            strSearch = $event.target.value;
+        }
+        if ($event.timeStamp - this.lastKeypress > 1000 && strSearch != "" && strSearch.length > 4) {
+            //alert(strSearch);
+            var loading_1 = this.showLoading();
+            this.strQueryProduto = { query: { orderByChild: 'desc_lower', startAt: strSearch.toLowerCase(), endAt: strSearch.toLowerCase() + "\uf8ff" } };
+            this.listaProdutos = this.ProdutoServiceProvider.listarProduto(this.strQueryProduto);
+            this.listaProdutos.subscribe(function () { return loading_1.dismiss(); });
+        }
+        this.lastKeypress = $event.timeStamp;
+        console.log(strSearch);
     };
-    ModalClientePage.prototype.pesquisarPorCel = function () {
-        var loading = this.showLoading();
-        var celular;
-        celular = this.clienteCel;
-        this.clienteNome = "";
-        this.strQuery = { query: { orderByChild: 'celular', equalTo: celular } };
-        this.listaCliente = this.cliente.listarCliente(this.strQuery);
-        this.listaCliente.subscribe(function () { return loading.dismiss(); });
-    };
-    ModalClientePage.prototype.showLoading = function () {
+    ModalProdutoPage.prototype.showLoading = function () {
         var loading = this.loadingCRTL.create({});
         loading.present();
         return loading;
     };
-    ModalClientePage = __decorate([
+    ModalProdutoPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-modal-cliente',template:/*ion-inline-start:"C:\Users\rodnei.brassoroto\Documents\GitHub\ionic\davisa\src\pages\modal-cliente\modal-cliente.html"*/`<ion-header>\n  <br>\n  <ion-navbar>\n    <ion-buttons right>\n      <button ion-fab mini color="primary" (click)="closeModal(\'\')">\n          <ion-icon name="close"></ion-icon>\n      </button>\n    </ion-buttons>\n    <ion-title>Pesquisa Cliente</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n\n    <ion-row col-12>\n        <ion-searchbar [(ngModel)]="clienteNome" placeholder="Pesquisar pelo nome" class="rounded"></ion-searchbar>\n        <button ion-button block type="button" color="primary" round (click)="pesquisarPorNome()">Pesquisar por Nome</button>\n    </ion-row>\n    <ion-row col-12>\n        <ion-searchbar [(ngModel)]="clienteCel" placeholder="Pesquisar pelo celular" class="rounded"></ion-searchbar>\n      <button ion-button block type="button" color="primary" round (click)="pesquisarPorCel()">Pesquisar por Celular</button>\n    </ion-row>\n\n    <ion-list>\n      <ion-item-sliding *ngFor="let item of listaCliente | async">\n        <ion-item (click)="closeModal(item)" detail-push>\n          <ion-icon name="contact" item-left></ion-icon>\n          {{item.nome}}\n          <i class="icon ion-chevron-right"></i>\n        </ion-item>\n      </ion-item-sliding>\n    </ion-list>\n\n</ion-content>\n`/*ion-inline-end:"C:\Users\rodnei.brassoroto\Documents\GitHub\ionic\davisa\src\pages\modal-cliente\modal-cliente.html"*/,
+            selector: 'page-modal-produto',template:/*ion-inline-start:"C:\Users\rodnei.brassoroto\Documents\GitHub\ionic\davisa\src\pages\modal-produto\modal-produto.html"*/`<ion-header>\n    <br>\n    <ion-navbar>\n      <ion-buttons right>\n        <button ion-fab mini color="primary" (click)="closeModal(\'\')">\n            <ion-icon name="close"></ion-icon>\n        </button>\n      </ion-buttons>\n      <ion-title>Pesquisa Produto</ion-title>\n    </ion-navbar>\n  \n  </ion-header>\n  \n  \n  <ion-content padding>\n  \n      <ion-row col-12>\n          <ion-searchbar [(ngModel)]="desc_produto" placeholder="Pesquisar pelo nome" class="rounded" (ionInput)="filtraProdutos($event)"></ion-searchbar>\n          <!--\n          <button ion-button block type="button" color="primary" round (click)="pesquisarPorNome()">Pesquisar por Nome</button>\n          --> \n        </ion-row>\n  \n      <ion-list>\n        <ion-item-sliding *ngFor="let item of listaProdutos | async">\n          <ion-item (click)="closeModal(item)" detail-push>\n\n            {{item.desc}}\n\n            <ion-row>\n              <ion-col class="prod_detail" justify-content-start col-5>Tam: {{ item.tamanho }}</ion-col>\n              <ion-col class="prod_detail" justify-content-end col-3>Cor: {{ item.cor }}</ion-col>\n            </ion-row>\n\n            <ion-row>\n              <ion-col class="prod_detail" justify-content-start col-5>Marca: {{ item.marca }}</ion-col>\n              <ion-col class="prod_detail" justify-content-end col-3>Preço: {{ item.valVenda }}</ion-col>\n            </ion-row>\n\n            <ion-row>\n              <ion-col class="prod_detail" justify-content-start col-5>Disp.: {{ item.qtd_disp }}</ion-col>\n            </ion-row>\n            \n            <i class="icon ion-chevron-right"></i>\n          </ion-item>\n        </ion-item-sliding>\n      </ion-list>\n  \n  </ion-content>`/*ion-inline-end:"C:\Users\rodnei.brassoroto\Documents\GitHub\ionic\davisa\src\pages\modal-produto\modal-produto.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* ViewController */], __WEBPACK_IMPORTED_MODULE_2__providers_firebase_service_cliente_service__["a" /* ClienteServiceProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* LoadingController */]])
-    ], ModalClientePage);
-    return ModalClientePage;
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* ViewController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* ViewController */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__providers_produto_service_produto_service__["a" /* ProdutoServiceProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__providers_produto_service_produto_service__["a" /* ProdutoServiceProvider */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_3__ionic_native_barcode_scanner__["a" /* BarcodeScanner */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__ionic_native_barcode_scanner__["a" /* BarcodeScanner */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* LoadingController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* LoadingController */]) === "function" && _e || Object])
+    ], ModalProdutoPage);
+    return ModalProdutoPage;
+    var _a, _b, _c, _d, _e;
 }());
 
-//# sourceMappingURL=modal-cliente.js.map
+//# sourceMappingURL=modal-produto.js.map
 
 /***/ })
 
