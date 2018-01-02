@@ -10,105 +10,104 @@
       </ion-buttons>
     <ion-title>Novo Pedido</ion-title>
   </ion-navbar>
-  <ion-row col-12>
+
+  <ion-row align-items-center>
+      <ion-col col-3>
+        <button ion-fab mini color="primary">
+            <ion-icon name="add"></ion-icon>
+        </button>
+      </ion-col>      
+      <ion-col col-6>
+        <div class="iconeCliente">
+          <ion-icon name="contact"></ion-icon>
+        </div>
+      </ion-col>
+      <ion-col col-3>
+        <button ion-fab mini color="primary" (click)="openModalCliente()">
+            <ion-icon name="search"></ion-icon>
+        </button>
+      </ion-col>
+    <!--
     <button ion-button block type="button" color="primary" round (click)="openModalCliente()">Localizar Cliente</button>
+    -->  
   </ion-row>
+  <ion-row justify-content-center>
+    <div class="nomeCliente">
+      {{nomeCliente}}
+    </div>
+  </ion-row>
+  <br>
+  <ion-row justify-content-center>
+    <div class="nomeCliente">
+      Adicionar itens
+    </div>
+  </ion-row>
+  <ion-row align-items-center>
+      <ion-col col-6>
+        <button ion-fab mini color="primary" (click)="openModalProduto()">
+          <ion-icon name="search"></ion-icon>
+        </button>
+      </ion-col>
+      <ion-col col-6>
+        <button ion-fab mini color="primary">
+          <ion-icon name="barcode"></ion-icon>
+        </button>
+      </ion-col>
+    <!--
+    <button ion-button block type="button" color="primary" round (click)="openModalCliente()">Localizar Cliente</button>
+    -->  
+  </ion-row>
+
 </ion-header>
 
-
 <ion-content>
-  <br>
 
   <ion-grid>
     
     <ion-row justify-content-center>
       <ion-col>
-
-        <div class="iconeCliente">
-          <ion-icon  (click)="openModalCliente()" name="contact"></ion-icon>
-        </div>
-        <div class="nomeCliente">
-          {{nomeCliente}}
-        </div>
-
-        <br>
-
-        <ion-row>
-          Incluir item: 
-            <ion-buttons right>
-              <button ion-fab mini color="primary" (click)="openModalProduto()">
-                <ion-icon name="search"></ion-icon>
-              </button>
-            </ion-buttons>
-            
-            <ion-buttons right>
-              <button ion-fab mini color="primary">
-                <ion-icon name="barcode"></ion-icon>
-              </button>
-            </ion-buttons>
-        </ion-row>
-
+        
         <ion-list>
-          <ion-item-sliding >
+          <ion-item-sliding *ngFor="let item of arrayProdutos">
+            
             <ion-item>
               
               <ion-row>
-                <ion-col justify-content-start>Calcinha</ion-col>
+                <ion-col justify-content-start>{{item.desc}}</ion-col>
               </ion-row>
               
               <ion-row>
-                <ion-col class="prod_detail" justify-content-start col-5>Tam: GG</ion-col>
-                <ion-col class="prod_detail" justify-content-end col-3>Cor: Preta</ion-col>
+                <ion-col class="prod_detail" justify-content-start col-5>Tam: {{ item.tamanho }}</ion-col>
+                <ion-col class="prod_detail" justify-content-end col-3>Cor: {{ item.cor }}</ion-col>
               </ion-row>
 
               <ion-row>
-                <ion-col class="prod_detail" justify-content-start col-5>Marca: DeMillus</ion-col>
-                <ion-col class="prod_detail" justify-content-end col-3>Preço: 14,99</ion-col>
+                <ion-col class="prod_detail" justify-content-start col-5>Marca: {{ item.marca }}</ion-col>
+                <ion-col class="prod_detail" justify-content-end col-3>Preço: {{ item.valVenda }}</ion-col>
               </ion-row>
 
               <ion-row>
-                <ion-col class="prod_detail" justify-content-start col-5>Qtd: 1</ion-col>
+                <ion-col class="prod_detail" justify-content-start col-5>Disp.: {{ item.qtd_disp }}</ion-col>
               </ion-row>
+                          
               
+              <i class="icon ion-chevron-right"></i>
             </ion-item>
             
             <ion-item-options side="right">
-              <button ion-button color="danger" icon-only>
-                  <ion-icon name="trash"></ion-icon>
-              </button>
-            </ion-item-options>
-          </ion-item-sliding>
-
-          <ion-item-sliding >
-            <ion-item>
-              
-              <ion-row>
-                <ion-col justify-content-start>Sutiã</ion-col>
-              </ion-row>
-              
-              <ion-row>
-                <ion-col class="prod_detail" justify-content-start col-5>Tam: 46</ion-col>
-                <ion-col class="prod_detail" justify-content-end col-3>Cor: Branco</ion-col>
-              </ion-row>
-
-              <ion-row>
-                <ion-col class="prod_detail" justify-content-start col-5>Marca: Valisére</ion-col>
-                <ion-col class="prod_detail" justify-content-end col-3>Preço: 44,00</ion-col>
-              </ion-row>
-
-              <ion-row>
-                <ion-col class="prod_detail" justify-content-start col-5>Qtd: 1</ion-col>
-              </ion-row>
-              
-            </ion-item>
-            
-            <ion-item-options side="right">
-              <button ion-button color="danger" icon-only>
+              <button ion-button color="danger" icon-only (click)="excluirItem(item.codBarras)">
                   <ion-icon name="trash"></ion-icon>
               </button>
             </ion-item-options>
           </ion-item-sliding>
         </ion-list>
+
+        <ion-row>
+          <ion-col col-6>Itens: {{totalItens}}</ion-col>
+          <ion-col col-6>Valor: {{valorTotal | currency}}</ion-col>
+        </ion-row>
+
+        <br>
 
         <button ion-button block type="button" color="primary" round>Confirmar</button>
 
