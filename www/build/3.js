@@ -129,7 +129,7 @@ var PedidosPage = (function () {
             _this.listaProduto.subscribe(function (produtos) { return produtos.forEach(function (produto) { return _this.arrayProdutos.push(produto); }); });
             setTimeout(function () {
                 //do what you need here 
-            }, 500);
+            }, 3000);
             alert(_this.arrayProdutos.length);
             _this.totalItens = _this.arrayProdutos.length;
             _this.valorTotal = _this.arrayProdutos.reduce(function (prevVal, elem) {

@@ -109,7 +109,7 @@ export class PedidosPage {
 
         setTimeout(function(){
           //do what you need here 
-        }, 500);
+        }, 3000);
       
         alert(this.arrayProdutos.length);
 
