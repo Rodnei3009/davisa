@@ -107,6 +107,8 @@ export class PedidosPage {
         this.listaProduto = this.produto.listarProduto(this.strQueryProduto);
         this.listaProduto.subscribe(produtos => produtos.forEach(produto => this.arrayProdutos.push(produto)));
 
+        alert(this.arrayProdutos.length);
+
         this.totalItens = this.arrayProdutos.length;
         this.valorTotal = this.arrayProdutos.reduce(function(prevVal, elem) {
           return prevVal + parseFloat(elem.valVenda);
