@@ -93,8 +93,6 @@ var PedidosPage = (function () {
                 _this.valorTotal = _this.valorTotal + parseFloat(dataProd.valVenda);
                 _this.arrayProdutos.push(dataProd);
             }
-            //this.detalhesPedido.itens.push(dataProd);
-            //this.nomeCliente = this.dadosProduto.nome;
         });
         modal.present();
     };
@@ -124,7 +122,8 @@ var PedidosPage = (function () {
             _this.strQueryProduto = { query: { orderByChild: 'codBarras', equalTo: _this.codBarrasRetorno } };
             _this.listaProduto = _this.produto.listarProduto(_this.strQueryProduto);
             _this.listaProduto.subscribe(function () { return loading.dismiss(); });
-            alert(_this.listaProduto);
+            _this.arrayProdutos.push(_this.listaProduto);
+            //alert(this.listaProduto);
             //this.dadosProduto = dataProd;
             /*
             if(this.listaProduto.codBarras != "") {

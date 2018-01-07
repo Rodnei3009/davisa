@@ -59,9 +59,6 @@ export class PedidosPage {
           this.arrayProdutos.push(dataProd);
 
         }
-
-        //this.detalhesPedido.itens.push(dataProd);
-        //this.nomeCliente = this.dadosProduto.nome;
     });
     modal.present();
   }
@@ -103,7 +100,8 @@ export class PedidosPage {
         this.listaProduto = this.produto.listarProduto(this.strQueryProduto);
         this.listaProduto.subscribe(() => loading.dismiss());
 
-        alert(this.listaProduto);
+        this.arrayProdutos.push(this.listaProduto);
+        //alert(this.listaProduto);
         //this.dadosProduto = dataProd;
         /*
         if(this.listaProduto.codBarras != "") {
