@@ -121,8 +121,9 @@ var PedidosPage = (function () {
             _this.codBarrasRetorno = _this.barcodeResult.text;
             _this.strQueryProduto = { query: { orderByChild: 'codBarras', equalTo: _this.codBarrasRetorno } };
             _this.listaProduto = _this.produto.listarProduto(_this.strQueryProduto);
-            _this.listaProduto.subscribe(function () { return loading.dismiss(); });
-            _this.arrayProdutos.push(_this.listaProduto);
+            _this.listaProduto.subscribe(function (dados) { return _this.arrayProdutos.push(dados); });
+            loading.dismiss();
+            //this.arrayProdutos.push(this.listaProduto);
             //alert(this.listaProduto);
             //this.dadosProduto = dataProd;
             /*
