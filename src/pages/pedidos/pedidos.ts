@@ -1,10 +1,14 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ModalController, Modal } from 'ionic-angular';
+import { Loading, LoadingController, IonicPage, NavController, NavParams, ModalController, Modal } from 'ionic-angular';
 import { Cliente } from './../../models/cliente.models';
 import { Produto } from './../../models/produto.models';
 import { PedidoServiceProvider } from './../../providers/pedido-service/pedido-service';
+import { ProdutoServiceProvider } from './../../providers/produto-service/produto-service';
 import { DateTime } from 'ionic-angular/components/datetime/datetime';
 import { Pedido } from './../../models/pedido.models';
+import { FirebaseListObservable } from 'angularfire2/database';
+import { BarcodeScanner, BarcodeScanResult } from '@ionic-native/barcode-scanner';
+import { FirebaseListFactoryOpts } from 'angularfire2/interfaces';
 
 @IonicPage()
 @Component({
@@ -25,11 +29,19 @@ export class PedidosPage {
   dataHora: string = "";
   detalhesPedido: Pedido;
 
+  listaProduto: FirebaseListObservable<any[]>;
+  barcodeResult: BarcodeScanResult;
+  codBarrasRetorno: string = "";
+  strQueryProduto: FirebaseListFactoryOpts;
   
   constructor(public navCtrl: NavController, 
               public navParams: NavParams, 
               public modal: ModalController, 
-              public pedido: PedidoServiceProvider) {
+              public pedido: PedidoServiceProvider,
+              public BarcodeScanner: BarcodeScanner,
+              public loadingCRTL: LoadingController,
+              public produto: ProdutoServiceProvider
+            ) {
     this.dadosCliente = this.navParams.data;
   }
 
@@ -75,6 +87,45 @@ export class PedidosPage {
 
     this.pedido.criarPedido(detalhesPedido);
 
+  }
+
+  onGetBarcode(): void {
+    
+    this.BarcodeScanner.scan()
+      .then((barcodeResult: BarcodeScanResult) => {
+        let loading: Loading = this.showLoading();
+
+        this.barcodeResult = barcodeResult;
+        this.codBarrasRetorno = this.barcodeResult.text;
+
+        this.strQueryProduto = { query: {orderByChild: 'codBarras', equalTo: this.codBarrasRetorno} };
+
+        this.listaProduto = this.produto.listarProduto(this.strQueryProduto);
+        this.listaProduto.subscribe(() => loading.dismiss());
+
+        alert(this.listaProduto);
+        //this.dadosProduto = dataProd;
+        /*
+        if(this.listaProduto.codBarras != "") {
+          
+          this.totalItens = this.totalItens + 1;
+          this.valorTotal = this.valorTotal + parseFloat(this.listaProduto.valVenda);
+          this.arrayProdutos.push(this.listaProduto);
+
+        }
+        */
+      }).catch((error: Error) => {
+        console.log('barcode error: ', error);
+      });
+
+  }
+
+  private showLoading(): Loading {
+    let loading: Loading = this.loadingCRTL.create({
+      //content: 'carregando'
+    });
+    loading.present();
+    return loading;
   }
 
 }
