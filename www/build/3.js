@@ -121,7 +121,9 @@ var PedidosPage = (function () {
             _this.codBarrasRetorno = _this.barcodeResult.text;
             _this.strQueryProduto = { query: { orderByChild: 'codBarras', equalTo: _this.codBarrasRetorno } };
             _this.listaProduto = _this.produto.listarProduto(_this.strQueryProduto);
-            _this.listaProduto.subscribe(function (dados) { return _this.arrayProdutos.push(dados); });
+            _this.listaProduto.subscribe(function (dados) { return dados.map(function (produto) { return _this.dadosProduto = produto; }); });
+            _this.arrayProdutos.push(_this.dadosProduto);
+            alert(_this.dadosProduto.desc);
             loading.dismiss();
             //this.arrayProdutos.push(this.listaProduto);
             //alert(this.listaProduto);
