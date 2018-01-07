@@ -46,8 +46,8 @@ var PedidosPageModule = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(77);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_pedido_service_pedido_service__ = __webpack_require__(275);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_produto_service_produto_service__ = __webpack_require__(273);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_barcode_scanner__ = __webpack_require__(274);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_produto_service_produto_service__ = __webpack_require__(272);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_barcode_scanner__ = __webpack_require__(273);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -121,9 +121,7 @@ var PedidosPage = (function () {
             _this.codBarrasRetorno = _this.barcodeResult.text;
             _this.strQueryProduto = { query: { orderByChild: 'codBarras', equalTo: _this.codBarrasRetorno } };
             _this.listaProduto = _this.produto.listarProduto(_this.strQueryProduto);
-            _this.listaProduto.subscribe(function (dados) { return dados.map(function (produto) { return _this.dadosProduto = produto; }); });
-            _this.arrayProdutos.push(_this.dadosProduto);
-            alert(_this.dadosProduto.desc);
+            _this.listaProduto.subscribe(function (produtos) { return produtos.forEach(function (produto) { return alert(produto.desc); }); });
             loading.dismiss();
             //this.arrayProdutos.push(this.listaProduto);
             //alert(this.listaProduto);

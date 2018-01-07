@@ -43,7 +43,7 @@ var ClientesPageModule = (function () {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ClientesPage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__providers_firebase_service_cliente_service__ = __webpack_require__(272);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__providers_firebase_service_cliente_service__ = __webpack_require__(274);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(77);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
