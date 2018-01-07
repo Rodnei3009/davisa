@@ -1,0 +1,42 @@
+<ion-header>
+  <br>
+  <ion-navbar>
+      <ion-buttons right>
+        <!--
+        <button ion-fab mini color="primary">
+            <ion-icon name="add"></ion-icon>
+        </button>
+      -->
+      </ion-buttons>
+    <ion-title>Selecionar Cliente</ion-title>
+  </ion-navbar>
+
+  <ion-row align-items-center>
+      <ion-col col-3>
+        <button ion-fab mini color="primary" (click)="openModalAddCliente()">
+            <ion-icon name="add"></ion-icon>
+        </button>
+      </ion-col>      
+      <ion-col col-6>
+        <div class="iconeCliente">
+          <ion-icon name="contact"></ion-icon>
+        </div>
+      </ion-col>
+      <ion-col col-3>
+        <button ion-fab mini color="primary" (click)="openModalCliente()">
+            <ion-icon name="search"></ion-icon>
+        </button>
+      </ion-col>
+  </ion-row>
+  <ion-row justify-content-center>
+    <div class="nomeCliente">
+      {{nomeCliente}}
+    </div>
+  </ion-row>
+</ion-header>
+
+
+<ion-content padding>
+    <br><br>
+    <button ion-button block type="button" [disabled]="!prosseguir" color="primary" round (click)="goPedidos()">Prosseguir</button>    
+</ion-content>

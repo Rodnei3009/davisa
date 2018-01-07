@@ -25789,9 +25789,9 @@ ion-spinner {
   font-size: 12px;
 }
 
-.iconeCliente {
+.iconeCli {
   text-align: center;
-  font-size: 40px;
+  font-size: 30px;
   -webkit-align-content: center;
   -ms-flex-line-pack: center;
   align-content: center;
@@ -25802,9 +25802,10 @@ ion-spinner {
   color: white;
 }
 
-.nomeCliente {
+.nomeCli {
   text-align: center;
   color: white;
+  font-size: 12px;
 }
 
 .botao {
@@ -25822,4 +25823,21 @@ hide {
 
 .prod_detail {
   font-size: 12px;
+}
+
+.iconeCliente {
+  text-align: center;
+  font-size: 80px;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  color: white;
+}
+
+.nomeCliente {
+  color: white;
 }

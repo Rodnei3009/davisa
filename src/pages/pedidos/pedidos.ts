@@ -26,29 +26,11 @@ export class PedidosPage {
   detalhesPedido: Pedido;
 
   
-  constructor(public navCtrl: NavController, public navParams: NavParams, public modal: ModalController, public pedido: PedidoServiceProvider) {}
-
-  openModalCliente() {
-    let modal = this.modal.create('ModalClientePage');
-    modal.onDidDismiss(data => {
-        // Do things with data coming from modal, for instance :
-        console.log(data);
-        this.dadosCliente = data;
-        this.nomeCliente = this.dadosCliente.nome;
-        this.celCliente = this.dadosCliente.celular;
-
-        //this.detalhesPedido.celCliente = this.celCliente;
-        //this.detalhesPedido.nomCliente = this.nomeCliente;        
-        //this.detalhesPedido.dataHora =  new Date().toISOString(); 
-
-        if (this.celCliente != "") {
-          this.clienteSelecionado = true;
-          //this.criaPedido(this.detalhesPedido);
-        } else {
-          this.clienteSelecionado = false;
-        }
-    });
-    modal.present();
+  constructor(public navCtrl: NavController, 
+              public navParams: NavParams, 
+              public modal: ModalController, 
+              public pedido: PedidoServiceProvider) {
+    this.dadosCliente = this.navParams.data;
   }
 
   openModalProduto() {

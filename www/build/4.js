@@ -1,14 +1,14 @@
 webpackJsonp([4],{
 
-/***/ 431:
+/***/ 432:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ModalProdutoPageModule", function() { return ModalProdutoPageModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "NovoClientePageModule", function() { return NovoClientePageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(77);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__modal_produto__ = __webpack_require__(438);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__novo_cliente__ = __webpack_require__(440);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -18,35 +18,35 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var ModalProdutoPageModule = (function () {
-    function ModalProdutoPageModule() {
+var NovoClientePageModule = (function () {
+    function NovoClientePageModule() {
     }
-    ModalProdutoPageModule = __decorate([
+    NovoClientePageModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
             declarations: [
-                __WEBPACK_IMPORTED_MODULE_2__modal_produto__["a" /* ModalProdutoPage */],
+                __WEBPACK_IMPORTED_MODULE_2__novo_cliente__["a" /* NovoClientePage */],
             ],
             imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__modal_produto__["a" /* ModalProdutoPage */]),
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__novo_cliente__["a" /* NovoClientePage */]),
             ],
         })
-    ], ModalProdutoPageModule);
-    return ModalProdutoPageModule;
+    ], NovoClientePageModule);
+    return NovoClientePageModule;
 }());
 
-//# sourceMappingURL=modal-produto.module.js.map
+//# sourceMappingURL=novo-cliente.module.js.map
 
 /***/ }),
 
-/***/ 438:
+/***/ 440:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ModalProdutoPage; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return NovoClientePage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(77);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_produto_service_produto_service__ = __webpack_require__(273);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_barcode_scanner__ = __webpack_require__(274);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(21);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_firebase_service_cliente_service__ = __webpack_require__(272);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -60,55 +60,91 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-var ModalProdutoPage = (function () {
-    function ModalProdutoPage(navParams, view, ProdutoServiceProvider, BarcodeScanner, loadingCRTL) {
+var NovoClientePage = (function () {
+    function NovoClientePage(navCtrl, navParams, formBuilder, ClienteServiceProvider, view, loadingCRTL) {
+        this.navCtrl = navCtrl;
         this.navParams = navParams;
+        this.formBuilder = formBuilder;
+        this.ClienteServiceProvider = ClienteServiceProvider;
         this.view = view;
-        this.ProdutoServiceProvider = ProdutoServiceProvider;
-        this.BarcodeScanner = BarcodeScanner;
         this.loadingCRTL = loadingCRTL;
-        this.lastKeypress = 0;
-    }
-    ModalProdutoPage.prototype.closeModal = function (produto) {
-        this.view.dismiss(produto);
-    };
-    ModalProdutoPage.prototype.filtraProdutos = function ($event) {
-        var strSearch;
-        if ($event.target.value === undefined) {
-            strSearch = "";
+        this.isAtualizar = false;
+        this.isIncluir = false;
+        this.isIncluirFromPedido = false;
+        this.clienteForm = this.formBuilder.group({
+            nome: [this.navParams.get('dadosCliente').nome, __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required],
+            email: [this.navParams.get('dadosCliente').email],
+            celular: [this.navParams.get('dadosCliente').celular, __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required],
+            Sexo: [this.navParams.get('dadosCliente').Sexo],
+            prof: [this.navParams.get('dadosCliente').prof],
+            estcivil: [this.navParams.get('dadosCliente').estcivil],
+            aniver: [this.navParams.get('dadosCliente').aniver],
+            CPF: [this.navParams.get('dadosCliente').CPF],
+            RG: [this.navParams.get('dadosCliente').RG],
+            endereco: [this.navParams.get('dadosCliente').endereco],
+            complemento: [this.navParams.get('dadosCliente').complemento],
+            indicacao: [this.navParams.get('dadosCliente').indicacao]
+        });
+        this.dadosCliente = this.navParams.get('dadosCliente');
+        this.funcao = this.navParams.get('funcao');
+        console.log(this.dadosCliente);
+        console.log(this.funcao);
+        if (this.funcao === 'atualizar') {
+            this.isAtualizar = true;
+            this.isIncluir = false;
+            this.isIncluirFromPedido = false;
+            this.idCliente = this.navParams.get('dadosCliente').$key;
         }
         else {
-            strSearch = $event.target.value;
+            if (this.funcao === 'incluir') {
+                this.isAtualizar = false;
+                this.isIncluir = true;
+                this.isIncluirFromPedido = false;
+            }
+            else {
+                this.isAtualizar = false;
+                this.isIncluir = false;
+                this.isIncluirFromPedido = true;
+            }
         }
-        if ($event.timeStamp - this.lastKeypress > 1000 && strSearch != "" && strSearch.length > 4) {
-            //alert(strSearch);
-            var loading_1 = this.showLoading();
-            this.strQueryProduto = { query: { orderByChild: 'desc_lower', startAt: strSearch.toLowerCase(), endAt: strSearch.toLowerCase() + "\uf8ff" } };
-            this.listaProdutos = this.ProdutoServiceProvider.listarProduto(this.strQueryProduto);
-            this.listaProdutos.subscribe(function () { return loading_1.dismiss(); });
-        }
-        this.lastKeypress = $event.timeStamp;
-        console.log(strSearch);
+    }
+    NovoClientePage.prototype.ionViewDidLoad = function () {
+        console.log(this.dadosCliente);
     };
-    ModalProdutoPage.prototype.showLoading = function () {
-        var loading = this.loadingCRTL.create({});
-        loading.present();
-        return loading;
+    NovoClientePage.prototype.onSubmit = function () {
+        console.log(this.clienteForm.value);
+        this.ClienteServiceProvider.adicionarCliente(this.clienteForm.value);
+        this.navCtrl.pop();
     };
-    ModalProdutoPage = __decorate([
+    NovoClientePage.prototype.onUpdate = function () {
+        console.log(this.clienteForm.value);
+        this.ClienteServiceProvider.atualizarCliente(this.idCliente, this.clienteForm.value);
+        this.navCtrl.pop();
+    };
+    NovoClientePage.prototype.onIncluir = function () {
+        console.log(this.clienteForm.value);
+        this.ClienteServiceProvider.adicionarCliente(this.clienteForm.value);
+        this.closeModal(this.clienteForm.value);
+        //this.navCtrl.pop();
+    };
+    NovoClientePage.prototype.closeModal = function (cliente) {
+        this.view.dismiss(cliente);
+    };
+    NovoClientePage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-modal-produto',template:/*ion-inline-start:"C:\Users\rodnei.brassoroto\Documents\GitHub\ionic\davisa\src\pages\modal-produto\modal-produto.html"*/`<ion-header>\n    <br>\n    <ion-navbar>\n      <ion-buttons right>\n        <button ion-fab mini color="primary" (click)="closeModal(\'\')">\n            <ion-icon name="close"></ion-icon>\n        </button>\n      </ion-buttons>\n      <ion-title>Pesquisa Produto</ion-title>\n    </ion-navbar>\n  \n  </ion-header>\n  \n  \n  <ion-content padding>\n  \n      <ion-row col-12>\n          <ion-searchbar [(ngModel)]="desc_produto" placeholder="Pesquisar pelo nome" class="rounded" (ionInput)="filtraProdutos($event)"></ion-searchbar>\n          <!--\n          <button ion-button block type="button" color="primary" round (click)="pesquisarPorNome()">Pesquisar por Nome</button>\n          --> \n        </ion-row>\n  \n      <ion-list>\n        <ion-item-sliding *ngFor="let item of listaProdutos | async">\n          <ion-item (click)="closeModal(item)" detail-push>\n\n            {{item.desc}}\n\n            <ion-row>\n              <ion-col class="prod_detail" justify-content-start col-5>Tam: {{ item.tamanho }}</ion-col>\n              <ion-col class="prod_detail" justify-content-end col-3>Cor: {{ item.cor }}</ion-col>\n            </ion-row>\n\n            <ion-row>\n              <ion-col class="prod_detail" justify-content-start col-5>Marca: {{ item.marca }}</ion-col>\n              <ion-col class="prod_detail" justify-content-end col-3>Preço: {{ item.valVenda }}</ion-col>\n            </ion-row>\n\n            <ion-row>\n              <ion-col class="prod_detail" justify-content-start col-5>Disp.: {{ item.qtd_disp }}</ion-col>\n            </ion-row>\n            \n            <i class="icon ion-chevron-right"></i>\n          </ion-item>\n        </ion-item-sliding>\n      </ion-list>\n  \n  </ion-content>`/*ion-inline-end:"C:\Users\rodnei.brassoroto\Documents\GitHub\ionic\davisa\src\pages\modal-produto\modal-produto.html"*/,
+            selector: 'page-novo-cliente',template:/*ion-inline-start:"C:\Users\rodnei.brassoroto\Documents\GitHub\ionic\davisa\src\pages\novo-cliente\novo-cliente.html"*/`<ion-header>\n  <br>\n  <ion-navbar>\n    <ion-buttons right *ngIf="isIncluirFromPedido">\n      <button ion-fab mini color="primary" (click)="closeModal(\'\')">\n          <ion-icon name="close"></ion-icon>\n      </button>\n    </ion-buttons>\n    <ion-title>Cliente</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content>\n\n    <ion-grid>\n      <ion-row justify-content-center>\n        <ion-col>\n\n          <form [formGroup]="clienteForm" (ngSubmit)="onSubmit(); $event.preventDefault()">\n            <ion-item>\n              <ion-icon name="person" item-left></ion-icon>\n              <ion-input type="text" placeholder="Nome" formControlName="nome"></ion-input>\n            </ion-item>\n\n            <ion-item>\n              <ion-icon name="phone-portrait" item-left></ion-icon>\n              <ion-input type="tel" placeholder="Celular" formControlName="celular"></ion-input>\n            </ion-item>\n\n            <ion-item>\n              <ion-icon name="at" item-left></ion-icon>\n              <ion-input type="text" placeholder="email" formControlName="email"></ion-input>\n            </ion-item>\n\n            <ion-item>\n              <ion-icon name="body" item-left></ion-icon>\n              <ion-label>Sexo</ion-label>\n              <ion-select interface="action-sheet" placeholder="Sexo" formControlName="Sexo">\n                <ion-option value="F">Feminino</ion-option>\n                <ion-option value="M">Masculino</ion-option>\n              </ion-select>  \n              <!--  \n              <ion-icon name="body" item-left></ion-icon>\n              <ion-input type="text" placeholder="Sexo" formControlName="Sexo"></ion-input>\n              -->  \n            </ion-item>\n\n            <ion-item>\n              <ion-icon name="construct" item-left></ion-icon>\n              <ion-input type="text" placeholder="Profissão" formControlName="prof"></ion-input>\n            </ion-item>\n            <ion-item>\n              <ion-icon name="contacts" item-left></ion-icon>\n              <ion-input type="text" placeholder="Estado Civil" formControlName="estcivil"></ion-input>\n            </ion-item>\n            <ion-item>\n              <ion-icon name="hand" item-left></ion-icon>\n              <ion-input type="text" placeholder="Aniversário" formControlName="aniver"></ion-input>\n            </ion-item>\n            <ion-item>\n              <ion-icon name="card" item-left></ion-icon>\n              <ion-input type="number" placeholder="CPF" formControlName="CPF"></ion-input>\n            </ion-item>\n            <ion-item>\n              <ion-icon name="finger-print" item-left></ion-icon>\n              <ion-input type="number" placeholder="RG" formControlName="RG"></ion-input>\n            </ion-item>\n            <ion-item>\n              <ion-icon name="home" item-left></ion-icon>\n              <ion-input type="text" placeholder="Endereço" formControlName="endereco"></ion-input>\n            </ion-item>\n            <ion-item>\n              <ion-icon name="infinite" item-left></ion-icon>\n              <ion-input type="text" placeholder="Complemento" formControlName="complemento"></ion-input>\n            </ion-item>\n            <ion-item>\n              <ion-icon name="information-circle" item-left></ion-icon>\n              <ion-input type="text" placeholder="indicacao" formControlName="indicacao"></ion-input>\n            </ion-item>\n            <br>\n            \n            <button ion-button block type="button" [disabled]="clienteForm.invalid" *ngIf="isIncluir" color="primary" round (click)="onSubmit()">Salvar</button>\n            <button ion-button block type="button" [disabled]="clienteForm.invalid" *ngIf="isAtualizar" color="danger" round (click)="onUpdate()">Atualizar</button>\n            <button ion-button block type="button" [disabled]="clienteForm.invalid" *ngIf="isIncluirFromPedido" color="primary" round (click)="onIncluir()">Incluir</button>\n\n          </form>\n\n        </ion-col>  \n      </ion-row>\n    </ion-grid>\n\n</ion-content>\n    `/*ion-inline-end:"C:\Users\rodnei.brassoroto\Documents\GitHub\ionic\davisa\src\pages\novo-cliente\novo-cliente.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */],
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */],
+            __WEBPACK_IMPORTED_MODULE_2__angular_forms__["a" /* FormBuilder */],
+            __WEBPACK_IMPORTED_MODULE_3__providers_firebase_service_cliente_service__["a" /* ClienteServiceProvider */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* ViewController */],
-            __WEBPACK_IMPORTED_MODULE_2__providers_produto_service_produto_service__["a" /* ProdutoServiceProvider */],
-            __WEBPACK_IMPORTED_MODULE_3__ionic_native_barcode_scanner__["a" /* BarcodeScanner */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* LoadingController */]])
-    ], ModalProdutoPage);
-    return ModalProdutoPage;
+    ], NovoClientePage);
+    return NovoClientePage;
 }());
 
-//# sourceMappingURL=modal-produto.js.map
+//# sourceMappingURL=novo-cliente.js.map
 
 /***/ })
 

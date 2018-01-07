@@ -7,6 +7,7 @@ import { HomePage } from '../pages/home/home';
 import { ClientesPage } from './../pages/clientes/clientes';
 import { ProdutosPage } from './../pages/produtos/produtos';
 import { PedidosPage } from './../pages/pedidos/pedidos';
+import { SelecionaClientePage } from './../pages/seleciona-cliente/seleciona-cliente';
 
 @Component({
   templateUrl: 'app.html'
@@ -34,7 +35,7 @@ export class MyApp {
   }
 
   goPedidos () {
-    this.nav.push('PedidosPage');
+    this.nav.push('SelecionaClientePage');
   }
   
 

@@ -1,4 +1,4 @@
-webpackJsonp([7],{
+webpackJsonp([8],{
 
 /***/ 146:
 /***/ (function(module, exports) {
@@ -23,30 +23,34 @@ webpackEmptyAsyncContext.id = 146;
 var map = {
 	"../pages/clientes/clientes.module": [
 		429,
-		6
+		7
 	],
 	"../pages/modal-cliente/modal-cliente.module": [
 		430,
-		5
+		6
 	],
 	"../pages/modal-produto/modal-produto.module": [
 		431,
-		4
+		5
 	],
 	"../pages/novo-cliente/novo-cliente.module": [
 		432,
-		3
+		4
 	],
 	"../pages/pedidos/pedidos.module": [
 		433,
-		2
+		3
 	],
 	"../pages/produto/produto.module": [
 		434,
-		1
+		2
 	],
 	"../pages/produtos/produtos.module": [
 		435,
+		1
+	],
+	"../pages/seleciona-cliente/seleciona-cliente.module": [
+		436,
 		0
 	]
 };
@@ -370,7 +374,8 @@ var AppModule = (function () {
                         { loadChildren: '../pages/novo-cliente/novo-cliente.module#NovoClientePageModule', name: 'NovoClientePage', segment: 'novo-cliente', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/pedidos/pedidos.module#PedidosPageModule', name: 'PedidosPage', segment: 'pedidos', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/produto/produto.module#ProdutoPageModule', name: 'ProdutoPage', segment: 'produto', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/produtos/produtos.module#ProdutosPageModule', name: 'ProdutosPage', segment: 'produtos', priority: 'low', defaultHistory: [] }
+                        { loadChildren: '../pages/produtos/produtos.module#ProdutosPageModule', name: 'ProdutosPage', segment: 'produtos', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/seleciona-cliente/seleciona-cliente.module#SelecionaClientePageModule', name: 'SelecionaClientePage', segment: 'seleciona-cliente', priority: 'low', defaultHistory: [] }
                     ]
                 })
             ],
@@ -441,7 +446,7 @@ var MyApp = (function () {
         this.nav.push('ProdutosPage');
     };
     MyApp.prototype.goPedidos = function () {
-        this.nav.push('PedidosPage');
+        this.nav.push('SelecionaClientePage');
     };
     __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_8" /* ViewChild */])(__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* Nav */]),

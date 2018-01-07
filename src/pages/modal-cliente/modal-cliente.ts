@@ -23,9 +23,10 @@ export class ModalClientePage {
 
   strQuery: FirebaseListFactoryOpts;
 
-  constructor(private navParams: NavParams, private view: ViewController, public cliente: ClienteServiceProvider, public loadingCRTL: LoadingController) {
-
-  }
+  constructor(private navParams: NavParams, 
+              private view: ViewController, 
+              public cliente: ClienteServiceProvider, 
+              public loadingCRTL: LoadingController) {}
 
   closeModal(cliente) {
     this.view.dismiss(cliente);    

@@ -1,6 +1,7 @@
 import { Cliente } from './../../models/cliente.models';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Loading, LoadingController, IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
+
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import { ClienteServiceProvider } from './../../providers/firebase-service/cliente-service';
@@ -18,9 +19,17 @@ export class NovoClientePage {
   dadosCliente: string;
   funcao: string;
   isAtualizar: boolean = false;
+  isIncluir: boolean = false;
+  isIncluirFromPedido: boolean = false;
   idCliente: string;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public formBuilder: FormBuilder, public ClienteServiceProvider: ClienteServiceProvider) {
+  constructor(public navCtrl: NavController, 
+              public navParams: NavParams, 
+              public formBuilder: FormBuilder, 
+              public ClienteServiceProvider: ClienteServiceProvider,        
+              private view: ViewController,
+              public loadingCRTL: LoadingController
+            ) {
     this.clienteForm = this.formBuilder.group({
       nome: [this.navParams.get('dadosCliente').nome, Validators.required],
       email: [this.navParams.get('dadosCliente').email],
@@ -42,9 +51,20 @@ export class NovoClientePage {
 
     if (this.funcao === 'atualizar') {
       this.isAtualizar = true;
+      this.isIncluir = false;
+      this.isIncluirFromPedido = false;
       this.idCliente = this.navParams.get('dadosCliente').$key;
     } else {
-      this.isAtualizar = false;
+      if (this.funcao === 'incluir') {
+        this.isAtualizar = false;
+        this.isIncluir = true;
+        this.isIncluirFromPedido = false;
+      } else {
+        this.isAtualizar = false;
+        this.isIncluir = false;
+        this.isIncluirFromPedido = true;
+      }
+      
     }
 
   }
@@ -64,6 +84,18 @@ export class NovoClientePage {
     this.ClienteServiceProvider.atualizarCliente(this.idCliente, this.clienteForm.value);
     this.navCtrl.pop();
   }
+
+  onIncluir(): void {
+    console.log(this.clienteForm.value);
+    this.ClienteServiceProvider.adicionarCliente(this.clienteForm.value);
+    this.closeModal(this.clienteForm.value);
+    //this.navCtrl.pop();
+  }
+
+  closeModal(cliente) {
+    this.view.dismiss(cliente);    
+  }
+
   
 
 }

@@ -1,14 +1,14 @@
 webpackJsonp([2],{
 
-/***/ 433:
+/***/ 434:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PedidosPageModule", function() { return PedidosPageModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ProdutoPageModule", function() { return ProdutoPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(77);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__pedidos__ = __webpack_require__(440);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__produto__ = __webpack_require__(442);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -18,34 +18,36 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var PedidosPageModule = (function () {
-    function PedidosPageModule() {
+var ProdutoPageModule = (function () {
+    function ProdutoPageModule() {
     }
-    PedidosPageModule = __decorate([
+    ProdutoPageModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["I" /* NgModule */])({
             declarations: [
-                __WEBPACK_IMPORTED_MODULE_2__pedidos__["a" /* PedidosPage */],
+                __WEBPACK_IMPORTED_MODULE_2__produto__["a" /* ProdutoPage */],
             ],
             imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__pedidos__["a" /* PedidosPage */]),
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__produto__["a" /* ProdutoPage */]),
             ],
         })
-    ], PedidosPageModule);
-    return PedidosPageModule;
+    ], ProdutoPageModule);
+    return ProdutoPageModule;
 }());
 
-//# sourceMappingURL=pedidos.module.js.map
+//# sourceMappingURL=produto.module.js.map
 
 /***/ }),
 
-/***/ 440:
+/***/ 442:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PedidosPage; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ProdutoPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(77);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__providers_pedido_service_pedido_service__ = __webpack_require__(275);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(21);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__providers_produto_service_produto_service__ = __webpack_require__(273);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_barcode_scanner__ = __webpack_require__(274);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -58,76 +60,100 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-var PedidosPage = (function () {
-    function PedidosPage(navCtrl, navParams, modal, pedido) {
+
+
+var ProdutoPage = (function () {
+    function ProdutoPage(navCtrl, navParams, formBuilder, ProdutoServiceProvider, BarcodeScanner) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
-        this.modal = modal;
-        this.pedido = pedido;
-        this.arrayProdutos = [];
-        this.totalItens = 0;
-        this.valorTotal = 0.00;
-        this.clienteSelecionado = false;
-        this.nomeCliente = "";
-        this.celCliente = "";
-        this.dataHora = "";
+        this.formBuilder = formBuilder;
+        this.ProdutoServiceProvider = ProdutoServiceProvider;
+        this.BarcodeScanner = BarcodeScanner;
+        this.isAtualizar = false;
+        this.codBarras = "";
+        //exemplos FormGroup https://www.concretepage.com/angular-2/angular-2-4-formbuilder-example#set-value
+        this.produtoForm = this.formBuilder.group({
+            codBarras: [this.navParams.get('dadosProduto').codBarras, __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required],
+            marca: [this.navParams.get('dadosProduto').marca],
+            codigo: [this.navParams.get('dadosProduto').codigo, __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required],
+            desc: [this.navParams.get('dadosProduto').desc],
+            desc_lower: [this.navParams.get('dadosProduto').desc_lower],
+            cor: [this.navParams.get('dadosProduto').cor],
+            tamanho: [this.navParams.get('dadosProduto').tamanho],
+            valCompra: [this.navParams.get('dadosProduto').valCompra],
+            valVenda: [this.navParams.get('dadosProduto').valVenda],
+            qtd_disp: [this.navParams.get('dadosProduto').qtd_disp]
+        });
+        this.dadosProduto = this.navParams.get('dadosProduto');
+        this.funcao = this.navParams.get('funcao');
+        this.descricao = this.navParams.get('dadosProduto').desc;
+        this.descricao_lower = this.navParams.get('dadosProduto').desc_lower;
+        console.log(this.dadosProduto);
+        console.log(this.funcao);
+        if (this.funcao === 'atualizar') {
+            this.isAtualizar = true;
+            this.codBarras = this.navParams.get('dadosProduto').$key;
+        }
+        else {
+            this.isAtualizar = false;
+        }
     }
-    PedidosPage.prototype.openModalCliente = function () {
+    ProdutoPage.prototype.ionViewDidLoad = function () {
+        console.log('ionViewDidLoad ProdutoPage');
+    };
+    ProdutoPage.prototype.onSubmit = function () {
+        console.log(this.produtoForm.value);
+        this.ProdutoServiceProvider.adicionarProduto(this.produtoForm.value);
+        this.navCtrl.pop();
+    };
+    ProdutoPage.prototype.onUpdate = function () {
+        console.log(this.produtoForm.value);
+        this.ProdutoServiceProvider.atualizarProduto(this.codBarras, this.produtoForm.value);
+        this.navCtrl.pop();
+    };
+    ProdutoPage.prototype.lower = function ($event) {
+        if ($event.currentTarget.value != undefined) {
+            //alert('qq');
+            this.descricao = $event.currentTarget.value;
+            this.descricao_lower = this.descricao.toLowerCase();
+            //this.teste = this.teste + this.desc;
+        }
+    };
+    ProdutoPage.prototype.onGetBarcode = function () {
         var _this = this;
-        var modal = this.modal.create('ModalClientePage');
-        modal.onDidDismiss(function (data) {
-            // Do things with data coming from modal, for instance :
-            console.log(data);
-            _this.dadosCliente = data;
-            _this.nomeCliente = _this.dadosCliente.nome;
-            _this.celCliente = _this.dadosCliente.celular;
-            //this.detalhesPedido.celCliente = this.celCliente;
-            //this.detalhesPedido.nomCliente = this.nomeCliente;        
-            //this.detalhesPedido.dataHora =  new Date().toISOString(); 
-            if (_this.celCliente != "") {
-                _this.clienteSelecionado = true;
-                //this.criaPedido(this.detalhesPedido);
-            }
-            else {
-                _this.clienteSelecionado = false;
-            }
+        this.BarcodeScanner.scan()
+            .then(function (barcodeResult) {
+            _this.barcodeResult = barcodeResult;
+            _this.codBarras = _this.barcodeResult.text;
+            //alert('codBarras: ' + this.codBarras);
+            //alert('codBarras 2: ' + this.codBarras);
+            //alert('antes do patchValue' + this.codBarras);
+            _this.produtoForm.patchValue({ 'codBarras': _this.codBarras });
+            //alert('get: ' + this.produtoForm.get('codBarras').value);
+            //alert('antes do setvalue' + this.codBarras);
+            //this.produtoForm.setValue({'codBarras' : this.codBarras});
+            //alert('get: ' + this.produtoForm.get('codBarras').value);
+            //alert('antes do patchValue sem aspas' + this.codBarras);
+            //this.produtoForm.patchValue({codBarras : this.codBarras});
+            //alert('get: ' + this.produtoForm.get('codBarras').value);
+        }).catch(function (error) {
+            console.log('barcode error: ', error);
         });
-        modal.present();
     };
-    PedidosPage.prototype.openModalProduto = function () {
-        var _this = this;
-        var modal = this.modal.create('ModalProdutoPage');
-        modal.onDidDismiss(function (dataProd) {
-            // Do things with data coming from modal, for instance :
-            console.log(dataProd);
-            _this.dadosProduto = dataProd;
-            if (dataProd != "") {
-                _this.totalItens = _this.totalItens + 1;
-                _this.valorTotal = _this.valorTotal + parseFloat(dataProd.valVenda);
-                _this.arrayProdutos.push(dataProd);
-            }
-            //this.detalhesPedido.itens.push(dataProd);
-            //this.nomeCliente = this.dadosProduto.nome;
-        });
-        modal.present();
-    };
-    PedidosPage.prototype.excluirItem = function (item) {
-        alert(item);
-        //this.arrayProdutos.splice(item);
-    };
-    PedidosPage.prototype.criaPedido = function (detalhesPedido) {
-        this.pedido.criarPedido(detalhesPedido);
-    };
-    PedidosPage = __decorate([
+    ProdutoPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-pedidos',template:/*ion-inline-start:"C:\Users\rodnei.brassoroto\Documents\GitHub\ionic\davisa\src\pages\pedidos\pedidos.html"*/`<ion-header>\n  <br>\n  <ion-navbar>\n      <ion-buttons right>\n        <!--\n        <button ion-fab mini color="primary">\n            <ion-icon name="add"></ion-icon>\n        </button>\n      -->\n      </ion-buttons>\n    <ion-title>Novo Pedido</ion-title>\n  </ion-navbar>\n\n  <ion-row align-items-center>\n      <ion-col col-3>\n        <button ion-fab mini color="primary">\n            <ion-icon name="add"></ion-icon>\n        </button>\n      </ion-col>      \n      <ion-col col-6>\n        <div class="iconeCliente">\n          <ion-icon name="contact"></ion-icon>\n        </div>\n      </ion-col>\n      <ion-col col-3>\n        <button ion-fab mini color="primary" (click)="openModalCliente()">\n            <ion-icon name="search"></ion-icon>\n        </button>\n      </ion-col>\n    <!--\n    <button ion-button block type="button" color="primary" round (click)="openModalCliente()">Localizar Cliente</button>\n    -->  \n  </ion-row>\n  <ion-row justify-content-center>\n    <div class="nomeCliente">\n      {{nomeCliente}}\n    </div>\n  </ion-row>\n  <br>\n  <ion-row justify-content-center>\n    <div class="nomeCliente">\n      Adicionar itens\n    </div>\n  </ion-row>\n  <ion-row align-items-center>\n      <ion-col col-6>\n        <button ion-fab mini color="primary" (click)="openModalProduto()">\n          <ion-icon name="search"></ion-icon>\n        </button>\n      </ion-col>\n      <ion-col col-6>\n        <button ion-fab mini color="primary">\n          <ion-icon name="barcode"></ion-icon>\n        </button>\n      </ion-col>\n    <!--\n    <button ion-button block type="button" color="primary" round (click)="openModalCliente()">Localizar Cliente</button>\n    -->  \n  </ion-row>\n\n</ion-header>\n\n<ion-content>\n\n  <ion-grid>\n    \n    <ion-row justify-content-center>\n      <ion-col>\n        \n        <ion-list>\n          <ion-item-sliding *ngFor="let item of arrayProdutos">\n            \n            <ion-item>\n              \n              <ion-row>\n                <ion-col justify-content-start>{{item.desc}}</ion-col>\n              </ion-row>\n              \n              <ion-row>\n                <ion-col class="prod_detail" justify-content-start col-5>Tam: {{ item.tamanho }}</ion-col>\n                <ion-col class="prod_detail" justify-content-end col-3>Cor: {{ item.cor }}</ion-col>\n              </ion-row>\n\n              <ion-row>\n                <ion-col class="prod_detail" justify-content-start col-5>Marca: {{ item.marca }}</ion-col>\n                <ion-col class="prod_detail" justify-content-end col-3>Preço: {{ item.valVenda }}</ion-col>\n              </ion-row>\n\n              <ion-row>\n                <ion-col class="prod_detail" justify-content-start col-5>Disp.: {{ item.qtd_disp }}</ion-col>\n              </ion-row>\n                          \n              \n              <i class="icon ion-chevron-right"></i>\n            </ion-item>\n            \n            <ion-item-options side="right">\n              <button ion-button color="danger" icon-only (click)="excluirItem(item.codBarras)">\n                  <ion-icon name="trash"></ion-icon>\n              </button>\n            </ion-item-options>\n          </ion-item-sliding>\n        </ion-list>\n\n        <ion-row>\n          <ion-col col-6>Itens: {{totalItens}}</ion-col>\n          <ion-col col-6>Valor: {{valorTotal | currency}}</ion-col>\n        </ion-row>\n\n        <br>\n\n        <button ion-button block type="button" color="primary" round>Confirmar</button>\n\n      </ion-col>  \n    </ion-row>\n  </ion-grid>\n\n</ion-content>\n`/*ion-inline-end:"C:\Users\rodnei.brassoroto\Documents\GitHub\ionic\davisa\src\pages\pedidos\pedidos.html"*/,
+            selector: 'page-produto',template:/*ion-inline-start:"C:\Users\rodnei.brassoroto\Documents\GitHub\ionic\davisa\src\pages\produto\produto.html"*/`<ion-header>\n  <br>\n  <ion-navbar>\n      <ion-buttons right>\n          <ion-fab right middle>\n            <button ion-fab mini color="primary" (click)="onGetBarcode()">\n              <ion-icon name="camera"></ion-icon>\n            </button>\n          </ion-fab>\n      </ion-buttons>\n    <ion-title>Produto</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n<ion-content>\n\n  <ion-grid>\n    <ion-row justify-content-center>\n      <ion-col>\n\n        <form [formGroup]="produtoForm" (ngSubmit)="onSubmit(); $event.preventDefault()">\n          \n          <ion-item>\n            <ion-icon name="barcode" item-left></ion-icon>\n            <ion-input type="text" placeholder="Código de barras" formControlName="codBarras"></ion-input>  \n          </ion-item>\n\n          <ion-item>\n            <ion-icon name="shirt" item-left></ion-icon>\n            <ion-input type="text" [(ngModel)]="descricao" placeholder="Produto" formControlName="desc" (input)="lower($event)"></ion-input>\n          </ion-item>\n\n          <div class="hide">\n            <ion-item>\n              <ion-icon name="shirt" item-left></ion-icon>\n              <ion-input type="text" [(ngModel)]="descricao_lower" placeholder="Produto lower" formControlName="desc_lower"></ion-input>\n            </ion-item>\n          </div>\n\n          <ion-item>\n            <ion-icon name="grid" item-left></ion-icon>\n            <ion-input type="text" placeholder="Código" formControlName="codigo"></ion-input>\n          </ion-item>\n\n          <ion-item>\n            <ion-icon name="list" item-left></ion-icon>\n            <ion-label>Marca</ion-label>\n            <ion-select interface="action-sheet" placeholder="Marca" formControlName="marca">\n              <ion-option value="DeMillus">DeMillus</ion-option>\n              <ion-option value="Valisere">Valisére</ion-option>\n              <ion-option value="ValFrance">ValFrance</ion-option>\n              <ion-option value="Toque Intimo">Toque Íntimo</ion-option>\n            </ion-select>\n            <!--\n            <ion-icon name="list" item-left></ion-icon>\n            <ion-input type="tel" placeholder="Marca" formControlName="marca"></ion-input>\n            -->  \n          </ion-item>\n\n          <ion-item>\n            <ion-icon name="color-palette" item-left></ion-icon>\n            <ion-input type="text" placeholder="Cor" formControlName="cor"></ion-input>  \n          </ion-item>\n\n          <ion-item>\n            <ion-icon name="expand" item-left></ion-icon>\n            <ion-input type="text" placeholder="Tamanho" formControlName="tamanho"></ion-input>\n          </ion-item>\n\n          <ion-item>\n            <ion-icon name="calculator" item-left></ion-icon>\n            <ion-input type="number" placeholder="Valor compra" formControlName="valCompra"></ion-input>\n          </ion-item>\n\n          <ion-item>\n            <ion-icon name="calculator" item-left></ion-icon>\n            <ion-input type="number" placeholder="Valor venda" formControlName="valVenda"></ion-input>\n          </ion-item>\n\n          <ion-item>\n            <ion-icon name="archive" item-left></ion-icon>\n            <ion-input type="number" placeholder="Quantidade" formControlName="qtd_disp"></ion-input>\n          </ion-item>\n\n          <br>\n          <button ion-button block type="button" [disabled]="produtoForm.invalid" *ngIf="!isAtualizar" color="primary" round (click)="onSubmit()">Salvar</button>\n          <button ion-button block type="button" [disabled]="produtoForm.invalid" *ngIf="isAtualizar" color="danger" round (click)="onUpdate()">Atualizar</button>\n          <!--\n          <button ion-button block type="button" color="primary" round (click)="onGetBarcode()">Código de Barras</button>\n          -->  \n          <!--\n          <div *ngIf="barcodeResult">\n            {{barcodeResult | json}}\n            <div>\n              {{barcodeResult.text}}\n            </div>\n          </div>\n        -->\n\n        </form>\n\n      </ion-col>  \n    </ion-row>\n  </ion-grid>  \n\n</ion-content>`/*ion-inline-end:"C:\Users\rodnei.brassoroto\Documents\GitHub\ionic\davisa\src\pages\produto\produto.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* ModalController */], __WEBPACK_IMPORTED_MODULE_2__providers_pedido_service_pedido_service__["a" /* PedidoServiceProvider */]])
-    ], PedidosPage);
-    return PedidosPage;
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */],
+            __WEBPACK_IMPORTED_MODULE_2__angular_forms__["a" /* FormBuilder */],
+            __WEBPACK_IMPORTED_MODULE_3__providers_produto_service_produto_service__["a" /* ProdutoServiceProvider */],
+            __WEBPACK_IMPORTED_MODULE_4__ionic_native_barcode_scanner__["a" /* BarcodeScanner */]])
+    ], ProdutoPage);
+    return ProdutoPage;
 }());
 
-//# sourceMappingURL=pedidos.js.map
+//# sourceMappingURL=produto.js.map
 
 /***/ })
 

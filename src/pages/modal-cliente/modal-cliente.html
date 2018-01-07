@@ -6,7 +6,7 @@
           <ion-icon name="close"></ion-icon>
       </button>
     </ion-buttons>
-    <ion-title>Pesquisa Cliente</ion-title>
+    <ion-title>Selecionar Cliente</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -27,7 +27,7 @@
       <ion-item-sliding *ngFor="let item of listaCliente | async">
         <ion-item (click)="closeModal(item)" detail-push>
           <ion-icon name="contact" item-left></ion-icon>
-          {{item.nome}}
+            {{item.nome}}
           <i class="icon ion-chevron-right"></i>
         </ion-item>
       </ion-item-sliding>
