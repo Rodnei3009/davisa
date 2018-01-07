@@ -83,15 +83,18 @@ var PedidosPage = (function () {
     }
     PedidosPage.prototype.openModalProduto = function () {
         var _this = this;
+        var val = 0;
         var modal = this.modal.create('ModalProdutoPage');
         modal.onDidDismiss(function (dataProd) {
             // Do things with data coming from modal, for instance :
             console.log(dataProd);
             _this.dadosProduto = dataProd;
             if (dataProd != "") {
-                _this.totalItens = _this.totalItens + 1;
-                _this.valorTotal = _this.valorTotal + parseFloat(dataProd.valVenda);
                 _this.arrayProdutos.push(dataProd);
+                _this.totalItens = _this.arrayProdutos.length;
+                _this.valorTotal = _this.arrayProdutos.reduce(function (prevVal, elem) {
+                    return prevVal + parseFloat(elem.valVenda);
+                }, 0);
             }
         });
         modal.present();
@@ -102,9 +105,11 @@ var PedidosPage = (function () {
         for (i = 0; i < this.arrayProdutos.length; i++) {
             //alert(this.arrayProdutos[i].codBarras);
             if (this.arrayProdutos[i].codBarras === item) {
-                this.totalItens = this.totalItens - 1;
-                this.valorTotal = this.valorTotal - parseFloat(this.arrayProdutos[i].valVenda);
                 this.arrayProdutos.splice(i, 1);
+                this.totalItens = this.arrayProdutos.length;
+                this.valorTotal = this.arrayProdutos.reduce(function (prevVal, elem) {
+                    return prevVal + parseFloat(elem.valVenda);
+                }, 0);
             }
         }
         //this.arrayProdutos.splice(item);
@@ -122,19 +127,11 @@ var PedidosPage = (function () {
             _this.strQueryProduto = { query: { orderByChild: 'codBarras', equalTo: _this.codBarrasRetorno } };
             _this.listaProduto = _this.produto.listarProduto(_this.strQueryProduto);
             _this.listaProduto.subscribe(function (produtos) { return produtos.forEach(function (produto) { return _this.arrayProdutos.push(produto); }); });
+            _this.totalItens = _this.arrayProdutos.length;
+            _this.valorTotal = _this.arrayProdutos.reduce(function (prevVal, elem) {
+                return prevVal + parseFloat(elem.valVenda);
+            }, 0);
             loading.dismiss();
-            //this.arrayProdutos.push(this.listaProduto);
-            //alert(this.listaProduto);
-            //this.dadosProduto = dataProd;
-            /*
-            if(this.listaProduto.codBarras != "") {
-              
-              this.totalItens = this.totalItens + 1;
-              this.valorTotal = this.valorTotal + parseFloat(this.listaProduto.valVenda);
-              this.arrayProdutos.push(this.listaProduto);
-    
-            }
-            */
         }).catch(function (error) {
             console.log('barcode error: ', error);
         });

@@ -46,6 +46,7 @@ export class PedidosPage {
   }
 
   openModalProduto() {
+    let val: number = 0;
     let modal = this.modal.create('ModalProdutoPage');
     modal.onDidDismiss(dataProd => {
         // Do things with data coming from modal, for instance :
@@ -54,9 +55,12 @@ export class PedidosPage {
 
         if(dataProd != "") {
           
-          this.totalItens = this.totalItens + 1;
-          this.valorTotal = this.valorTotal + parseFloat(dataProd.valVenda);
           this.arrayProdutos.push(dataProd);
+
+          this.totalItens = this.arrayProdutos.length;
+          this.valorTotal = this.arrayProdutos.reduce(function(prevVal, elem) {
+            return prevVal + parseFloat(elem.valVenda);
+        }, 0);
 
         }
     });
@@ -71,10 +75,13 @@ export class PedidosPage {
       //alert(this.arrayProdutos[i].codBarras);
       if (this.arrayProdutos[i].codBarras === item) {
         
-        this.totalItens = this.totalItens - 1;
-        this.valorTotal = this.valorTotal - parseFloat(this.arrayProdutos[i].valVenda);
-        
         this.arrayProdutos.splice(i, 1)
+
+        this.totalItens = this.arrayProdutos.length;
+        this.valorTotal = this.arrayProdutos.reduce(function(prevVal, elem) {
+          return prevVal + parseFloat(elem.valVenda);
+        }, 0);
+
       }
     }
     //this.arrayProdutos.splice(item);
@@ -99,22 +106,14 @@ export class PedidosPage {
 
         this.listaProduto = this.produto.listarProduto(this.strQueryProduto);
         this.listaProduto.subscribe(produtos => produtos.forEach(produto => this.arrayProdutos.push(produto)));
-        
+
+        this.totalItens = this.arrayProdutos.length;
+        this.valorTotal = this.arrayProdutos.reduce(function(prevVal, elem) {
+          return prevVal + parseFloat(elem.valVenda);
+        }, 0);
+
         loading.dismiss();
 
-        //this.arrayProdutos.push(this.listaProduto);
-        
-        //alert(this.listaProduto);
-        //this.dadosProduto = dataProd;
-        /*
-        if(this.listaProduto.codBarras != "") {
-          
-          this.totalItens = this.totalItens + 1;
-          this.valorTotal = this.valorTotal + parseFloat(this.listaProduto.valVenda);
-          this.arrayProdutos.push(this.listaProduto);
-
-        }
-        */
       }).catch((error: Error) => {
         console.log('barcode error: ', error);
       });
