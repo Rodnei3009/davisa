@@ -108,7 +108,7 @@ export class PedidosPage {
         this.listaProduto.subscribe(produtos => produtos.forEach(produto => this.arrayProdutos.push(produto)));
 
         setTimeout(function(){
-          //do what you need here
+          //do what you need here 
         }, 500);
       
         alert(this.arrayProdutos.length);
