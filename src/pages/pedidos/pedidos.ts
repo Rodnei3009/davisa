@@ -98,7 +98,7 @@ export class PedidosPage {
         this.strQueryProduto = { query: {orderByChild: 'codBarras', equalTo: this.codBarrasRetorno} };
 
         this.listaProduto = this.produto.listarProduto(this.strQueryProduto);
-        this.listaProduto.subscribe(produtos => produtos.forEach(produto => alert(produto.desc)));
+        this.listaProduto.subscribe(produtos => produtos.forEach(produto => this.arrayProdutos.push(produto)));
         
         loading.dismiss();
 
