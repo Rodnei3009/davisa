@@ -78,7 +78,6 @@ var PedidosPage = (function () {
         this.nomeCliente = "";
         this.celCliente = "";
         this.dataHora = "";
-        this.prd = [];
         this.codBarrasRetorno = "";
         this.dadosCliente = this.navParams.data;
     }
@@ -127,8 +126,7 @@ var PedidosPage = (function () {
             _this.codBarrasRetorno = _this.barcodeResult.text;
             _this.strQueryProduto = { query: { orderByChild: 'codBarras', equalTo: _this.codBarrasRetorno } };
             _this.listaProduto = _this.produto.listarProduto(_this.strQueryProduto);
-            _this.listaProduto.subscribe(function (produtos) { return produtos.forEach(function (produto) { return _this.prd; }); });
-            alert(_this.prd);
+            _this.listaProduto.subscribe(function (produtos) { return produtos.forEach(function (produto) { return _this.arrayProdutos.push(produto); }); });
             _this.totalItens = _this.arrayProdutos.length;
             _this.valorTotal = _this.arrayProdutos.reduce(function (prevVal, elem) {
                 return prevVal + parseFloat(elem.valVenda);
