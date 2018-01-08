@@ -29,6 +29,8 @@ export class PedidosPage {
   dataHora: string = "";
   detalhesPedido: Pedido;
 
+  prd = [];
+
   listaProduto: FirebaseListObservable<any[]>;
   barcodeResult: BarcodeScanResult;
   codBarrasRetorno: string = "";
@@ -60,7 +62,7 @@ export class PedidosPage {
           this.totalItens = this.arrayProdutos.length;
           this.valorTotal = this.arrayProdutos.reduce(function(prevVal, elem) {
             return prevVal + parseFloat(elem.valVenda);
-        }, 0);
+          }, 0);
 
         }
     });
@@ -105,13 +107,9 @@ export class PedidosPage {
         this.strQueryProduto = { query: {orderByChild: 'codBarras', equalTo: this.codBarrasRetorno} };
 
         this.listaProduto = this.produto.listarProduto(this.strQueryProduto);
-        this.listaProduto.subscribe(produtos => produtos.forEach(produto => this.arrayProdutos.push(produto)));
+        this.listaProduto.subscribe(produtos => produtos.forEach(produto => this.prd));
 
-        setTimeout(function(){
-          //do what you need here 
-        }, 3000);
-      
-        alert(this.arrayProdutos.length);
+        alert(this.prd);
 
         this.totalItens = this.arrayProdutos.length;
         this.valorTotal = this.arrayProdutos.reduce(function(prevVal, elem) {
