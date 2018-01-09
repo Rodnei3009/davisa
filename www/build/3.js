@@ -118,6 +118,7 @@ var PedidosPage = (function () {
         this.pedido.criarPedido(detalhesPedido);
     };
     PedidosPage.prototype.addProd = function (prod) {
+        alert(prod.codBarras + ' - ' + prod.desc);
         var arrayTam = 0;
         arrayTam = this.arrayProdutos.length;
         this.arrayProdutos.push(prod);

@@ -95,6 +95,8 @@ export class PedidosPage {
 
   addProd(prod) {
 
+    alert(prod.codBarras + ' - ' + prod.desc);
+
     let arrayTam: number = 0;
 
     arrayTam = this.arrayProdutos.length;
