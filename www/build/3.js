@@ -124,6 +124,7 @@ var PedidosPage = (function () {
         if (prod.codBarras != '' && prod.codBarras != undefined && prod.codBarras != "") {
             while (arrayTam === this.arrayProdutos.length) {
                 arrayTam = this.arrayProdutos.length;
+                alert(this.arrayProdutos.length);
             }
         }
     };
