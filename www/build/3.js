@@ -117,16 +117,29 @@ var PedidosPage = (function () {
     PedidosPage.prototype.criaPedido = function (detalhesPedido) {
         this.pedido.criarPedido(detalhesPedido);
     };
+    PedidosPage.prototype.addProd = function (prod, callback) {
+        var arrayAntes = 0;
+        if (prod.codBarras != '') {
+            arrayAntes = this.arrayProdutos.length;
+            this.arrayProdutos.push(prod);
+            while (arrayAntes < this.arrayProdutos.length) {
+                arrayAntes = this.arrayProdutos.length;
+                callback();
+            }
+        }
+    };
     PedidosPage.prototype.onGetBarcode = function () {
         var _this = this;
         this.BarcodeScanner.scan()
             .then(function (barcodeResult) {
             var loading = _this.showLoading();
+            var finalizou;
             _this.barcodeResult = barcodeResult;
             _this.codBarrasRetorno = _this.barcodeResult.text;
             _this.strQueryProduto = { query: { orderByChild: 'codBarras', equalTo: _this.codBarrasRetorno } };
             _this.listaProduto = _this.produto.listarProduto(_this.strQueryProduto);
-            _this.listaProduto.subscribe(function (produtos) { return produtos.forEach(function (produto) { return _this.arrayProdutos.push(produto); }); });
+            //this.listaProduto.subscribe(produtos => produtos.forEach(produto => this.arrayProdutos.push(produto)));
+            _this.listaProduto.subscribe(function (produtos) { return produtos.forEach(function (produto) { return _this.addProd(produto, finalizou); }); });
             _this.totalItens = _this.arrayProdutos.length;
             _this.valorTotal = _this.arrayProdutos.reduce(function (prevVal, elem) {
                 return prevVal + parseFloat(elem.valVenda);

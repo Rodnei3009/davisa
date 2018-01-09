@@ -93,19 +93,36 @@ export class PedidosPage {
 
   }
 
+  addProd(prod, callback) {
+    let arrayAntes: number = 0;
+
+    if(prod.codBarras != '') {
+      arrayAntes = this.arrayProdutos.length;
+      this.arrayProdutos.push(prod);
+
+      while (arrayAntes < this.arrayProdutos.length) {
+        arrayAntes = this.arrayProdutos.length;
+        callback();
+      }
+      
+    }
+  }
+
   onGetBarcode(): void {
     
     this.BarcodeScanner.scan()
       .then((barcodeResult: BarcodeScanResult) => {
         let loading: Loading = this.showLoading();
-
+        let finalizou: boolean;
+        
         this.barcodeResult = barcodeResult;
         this.codBarrasRetorno = this.barcodeResult.text;
 
         this.strQueryProduto = { query: {orderByChild: 'codBarras', equalTo: this.codBarrasRetorno} };
 
         this.listaProduto = this.produto.listarProduto(this.strQueryProduto);
-        this.listaProduto.subscribe(produtos => produtos.forEach(produto => this.arrayProdutos.push(produto)));
+        //this.listaProduto.subscribe(produtos => produtos.forEach(produto => this.arrayProdutos.push(produto)));
+        this.listaProduto.subscribe(produtos => produtos.forEach(produto => this.addProd(produto, finalizou)));
 
         this.totalItens = this.arrayProdutos.length;
         this.valorTotal = this.arrayProdutos.reduce(function(prevVal, elem) {
