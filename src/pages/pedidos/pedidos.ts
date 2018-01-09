@@ -93,19 +93,8 @@ export class PedidosPage {
 
   }
 
-  addProd(prod, callback) {
-    let arrayAntes: number = 0;
-
-    if(prod.codBarras != '') {
-      arrayAntes = this.arrayProdutos.length;
-      this.arrayProdutos.push(prod);
-
-      while (arrayAntes < this.arrayProdutos.length) {
-        arrayAntes = this.arrayProdutos.length;
-        callback();
-      }
-      
-    }
+  async addProd(prod) {
+    return await this.arrayProdutos.push(prod);
   }
 
   onGetBarcode(): void {
@@ -122,7 +111,7 @@ export class PedidosPage {
 
         this.listaProduto = this.produto.listarProduto(this.strQueryProduto);
         //this.listaProduto.subscribe(produtos => produtos.forEach(produto => this.arrayProdutos.push(produto)));
-        this.listaProduto.subscribe(produtos => produtos.forEach(produto => this.addProd(produto, finalizou)));
+        this.listaProduto.subscribe(produtos => produtos.forEach(produto => this.addProd(produto)));
 
         this.totalItens = this.arrayProdutos.length;
         this.valorTotal = this.arrayProdutos.reduce(function(prevVal, elem) {
