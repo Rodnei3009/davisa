@@ -93,8 +93,21 @@ export class PedidosPage {
 
   }
 
-  async addProd(prod) {
-    return await this.arrayProdutos.push(prod);
+  addProd(prod) {
+
+    let arrayTam: number = 0;
+
+    arrayTam = this.arrayProdutos.length;
+
+    this.arrayProdutos.push(prod);
+
+    if (prod.codBarras != '' && prod.codBarras != undefined && prod.codBarras != "") {
+      while (arrayTam === this.arrayProdutos.length) {
+        arrayTam = this.arrayProdutos.length
+      }
+      
+    }
+  
   }
 
   onGetBarcode(): void {
@@ -113,7 +126,7 @@ export class PedidosPage {
         //this.listaProduto.subscribe(produtos => produtos.forEach(produto => this.arrayProdutos.push(produto)));
         this.listaProduto.subscribe(produtos => produtos.forEach(produto => this.addProd(produto)));
 
-        
+
         this.totalItens = this.arrayProdutos.length;
         this.valorTotal = this.arrayProdutos.reduce(function(prevVal, elem) {
           return prevVal + parseFloat(elem.valVenda);
