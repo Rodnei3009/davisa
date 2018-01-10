@@ -19,6 +19,9 @@ import { PedidoServiceProvider } from './../providers/pedido-service/pedido-serv
 import { HttpModule } from '@angular/http';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 
+import { SocialSharing } from '@ionic-native/social-sharing';
+
+
 const firebaseConfig = {
   apiKey: "AIzaSyBJfyA0HoyDRGspLSWQ8g8oCfJYYg2l6XQ",
   authDomain: "davisa-modaintima.firebaseapp.com",
@@ -56,7 +59,8 @@ const firebaseConfig = {
     PedidoServiceProvider,
     HttpModule,
     HttpClient,
-    HttpClientModule
+    HttpClientModule,
+    SocialSharing
   ]
 })
 export class AppModule {}
