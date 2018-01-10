@@ -132,6 +132,10 @@ var PedidosPage = (function () {
                 alert(this.arrayProdutos.length);
             }
         }
+        this.totalItens = this.arrayProdutos.length;
+        this.valorTotal = this.arrayProdutos.reduce(function (prevVal, elem) {
+            return prevVal + parseFloat(elem.valVenda);
+        }, 0);
     };
     PedidosPage.prototype.onGetBarcode = function () {
         var _this = this;
@@ -145,10 +149,6 @@ var PedidosPage = (function () {
             _this.listaProduto = _this.produto.listarProduto(_this.strQueryProduto);
             //this.listaProduto.subscribe(produtos => produtos.forEach(produto => this.arrayProdutos.push(produto)));
             _this.listaProduto.subscribe(function (produtos) { return produtos.forEach(function (produto) { return _this.addProd(produto); }); });
-            _this.totalItens = _this.arrayProdutos.length;
-            _this.valorTotal = _this.arrayProdutos.reduce(function (prevVal, elem) {
-                return prevVal + parseFloat(elem.valVenda);
-            }, 0);
             loading.dismiss();
         }).catch(function (error) {
             console.log('barcode error: ', error);
