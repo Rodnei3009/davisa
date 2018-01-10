@@ -95,31 +95,13 @@ export class PedidosPage {
 
   addProd(prod) {
 
-    alert(prod.codBarras + ' - ' + prod.desc);
-
-    let arrayTam: number = 0;
-
-    arrayTam = this.arrayProdutos.length;
-
-    alert('arrayTam = ' + arrayTam);
-    alert('this.arrayProdutos.length = ' + this.arrayProdutos.length);
-
     this.arrayProdutos.push(prod);
-
-    alert('after push Len = ' + this.arrayProdutos.length);
-
-    if (prod.codBarras != '' && prod.codBarras != undefined && prod.codBarras != "") {
-      alert('entrou no if');
-      while (arrayTam === this.arrayProdutos.length) {
-        arrayTam = this.arrayProdutos.length
-        alert(this.arrayProdutos.length);
-      }
-    }
 
     this.totalItens = this.arrayProdutos.length;
     this.valorTotal = this.arrayProdutos.reduce(function(prevVal, elem) {
       return prevVal + parseFloat(elem.valVenda);
     }, 0);
+
   }
 
   onGetBarcode(): void {
@@ -135,7 +117,6 @@ export class PedidosPage {
         this.strQueryProduto = { query: {orderByChild: 'codBarras', equalTo: this.codBarrasRetorno} };
 
         this.listaProduto = this.produto.listarProduto(this.strQueryProduto);
-        //this.listaProduto.subscribe(produtos => produtos.forEach(produto => this.arrayProdutos.push(produto)));
         this.listaProduto.subscribe(produtos => produtos.forEach(produto => this.addProd(produto)));
 
         loading.dismiss();
