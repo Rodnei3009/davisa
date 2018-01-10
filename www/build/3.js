@@ -121,8 +121,12 @@ var PedidosPage = (function () {
         alert(prod.codBarras + ' - ' + prod.desc);
         var arrayTam = 0;
         arrayTam = this.arrayProdutos.length;
+        alert('arrayTam = ' + arrayTam);
+        alert('this.arrayProdutos.length = ' + this.arrayProdutos.length);
         this.arrayProdutos.push(prod);
+        alert('after push Len = ' + this.arrayProdutos.length);
         if (prod.codBarras != '' && prod.codBarras != undefined && prod.codBarras != "") {
+            alert('entrou no if');
             while (arrayTam === this.arrayProdutos.length) {
                 arrayTam = this.arrayProdutos.length;
                 alert(this.arrayProdutos.length);
