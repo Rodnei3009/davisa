@@ -114,7 +114,6 @@ export class PedidosPage {
         arrayTam = this.arrayProdutos.length
         alert(this.arrayProdutos.length);
       }
-      
     }
   
   }
