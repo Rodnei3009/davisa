@@ -9,6 +9,8 @@ import { Pedido } from './../../models/pedido.models';
 import { FirebaseListObservable } from 'angularfire2/database';
 import { BarcodeScanner, BarcodeScanResult } from '@ionic-native/barcode-scanner';
 import { FirebaseListFactoryOpts } from 'angularfire2/interfaces';
+import { SocialSharing } from '@ionic-native/social-sharing';
+
 
 @IonicPage()
 @Component({
@@ -40,9 +42,43 @@ export class PedidosPage {
               public pedido: PedidoServiceProvider,
               public BarcodeScanner: BarcodeScanner,
               public loadingCRTL: LoadingController,
-              public produto: ProdutoServiceProvider
+              public produto: ProdutoServiceProvider,
+              private socialSharing: SocialSharing
             ) {
     this.dadosCliente = this.navParams.data;
+
+    this.socialSharing.canShareViaEmail().then(() => {
+      alert('Ok para envio do email');
+    }).catch(() => {
+      alert('Sharing via email is not possible');
+      // Sharing via email is not possible
+    });
+    
+    // Share via email
+    this.socialSharing.shareViaEmail('Aqui vai o corpo da mensagem', 'Mensagem do app Davisa', ['rodnei.brassoroto@accenture.com']).then(() => {
+      alert('email enviado com sucesso');
+    }).catch(() => {
+      alert('erro ao enviar email');      
+    });
+
+    this.socialSharing.shareViaWhatsApp('mensagem', '', '').then(() => {
+      alert('whats com sucesso');
+    }).catch(() => {
+      alert('whats com erro');      
+    });
+    
+    this.socialSharing.shareViaWhatsAppToReceiver('+5511984888468', 'Davisa', '', '').then(() => {
+      alert('whats com sucesso');
+    }).catch(() => {
+      alert('whats com erro');      
+    });
+
+    this.socialSharing.shareViaSMS('Mensagem SMS automática do aplicativo Davisa', '+5511984206847').then(() => {
+      alert('SMS com sucesso');
+    }).catch(() => {
+      alert('SMS com erro');      
+    });
+    
   }
 
   openModalProduto() {
@@ -50,41 +86,29 @@ export class PedidosPage {
     let modal = this.modal.create('ModalProdutoPage');
     modal.onDidDismiss(dataProd => {
         // Do things with data coming from modal, for instance :
-        console.log(dataProd);
+        let loading: Loading = this.showLoading();
+        
         this.dadosProduto = dataProd;
 
         if(dataProd != "") {
-          
-          this.arrayProdutos.push(dataProd);
-
-          this.totalItens = this.arrayProdutos.length;
-          this.valorTotal = this.arrayProdutos.reduce(function(prevVal, elem) {
-            return prevVal + parseFloat(elem.valVenda);
-          }, 0);
-
+          this.addProd(dataProd);
         }
+        loading.dismiss();
     });
     modal.present();
   }
   
   excluirItem(item): void {
-    //alert(item);
     let i: number = 0;
-
+    let loading: Loading = this.showLoading();
+    
     for (i=0;i<this.arrayProdutos.length;i++) {
-      //alert(this.arrayProdutos[i].codBarras);
       if (this.arrayProdutos[i].codBarras === item) {
-        
         this.arrayProdutos.splice(i, 1)
-
-        this.totalItens = this.arrayProdutos.length;
-        this.valorTotal = this.arrayProdutos.reduce(function(prevVal, elem) {
-          return prevVal + parseFloat(elem.valVenda);
-        }, 0);
-
+        this.totalizarPedido();
       }
     }
-    //this.arrayProdutos.splice(item);
+    loading.dismiss();
   }
 
   criaPedido(detalhesPedido): void {
@@ -94,14 +118,8 @@ export class PedidosPage {
   }
 
   addProd(prod) {
-
     this.arrayProdutos.push(prod);
-
-    this.totalItens = this.arrayProdutos.length;
-    this.valorTotal = this.arrayProdutos.reduce(function(prevVal, elem) {
-      return prevVal + parseFloat(elem.valVenda);
-    }, 0);
-
+    this.totalizarPedido();
   }
 
   onGetBarcode(): void {
@@ -109,7 +127,6 @@ export class PedidosPage {
     this.BarcodeScanner.scan()
       .then((barcodeResult: BarcodeScanResult) => {
         let loading: Loading = this.showLoading();
-        let finalizou: boolean;
         
         this.barcodeResult = barcodeResult;
         this.codBarrasRetorno = this.barcodeResult.text;
@@ -125,6 +142,13 @@ export class PedidosPage {
         console.log('barcode error: ', error);
       });
 
+  }
+
+  totalizarPedido() {
+    this.totalItens = this.arrayProdutos.length;
+    this.valorTotal = this.arrayProdutos.reduce(function(prevVal, elem) {
+      return prevVal + parseFloat(elem.valVenda);
+    }, 0);
   }
 
   private showLoading(): Loading {
