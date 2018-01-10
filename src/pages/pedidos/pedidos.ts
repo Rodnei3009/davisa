@@ -43,42 +43,9 @@ export class PedidosPage {
               public BarcodeScanner: BarcodeScanner,
               public loadingCRTL: LoadingController,
               public produto: ProdutoServiceProvider,
-              private socialSharing: SocialSharing
+              public socialSharing: SocialSharing
             ) {
     this.dadosCliente = this.navParams.data;
-
-    this.socialSharing.canShareViaEmail().then(() => {
-      alert('Ok para envio do email');
-    }).catch(() => {
-      alert('Sharing via email is not possible');
-      // Sharing via email is not possible
-    });
-    
-    // Share via email
-    this.socialSharing.shareViaEmail('Aqui vai o corpo da mensagem', 'Mensagem do app Davisa', ['rodnei.brassoroto@accenture.com']).then(() => {
-      alert('email enviado com sucesso');
-    }).catch(() => {
-      alert('erro ao enviar email');      
-    });
-
-    this.socialSharing.shareViaWhatsApp('mensagem', '', '').then(() => {
-      alert('whats com sucesso');
-    }).catch(() => {
-      alert('whats com erro');      
-    });
-    
-    this.socialSharing.shareViaWhatsAppToReceiver('+5511984888468', 'Davisa', '', '').then(() => {
-      alert('whats com sucesso');
-    }).catch(() => {
-      alert('whats com erro');      
-    });
-
-    this.socialSharing.shareViaSMS('Mensagem SMS automática do aplicativo Davisa', '+5511984206847').then(() => {
-      alert('SMS com sucesso');
-    }).catch(() => {
-      alert('SMS com erro');      
-    });
-    
   }
 
   openModalProduto() {
@@ -158,5 +125,45 @@ export class PedidosPage {
     loading.present();
     return loading;
   }
-  
+
+  enviarEmail() {
+    this.socialSharing.canShareViaEmail().then(() => {
+      alert('Ok para envio do email');
+    }).catch(() => {
+      alert('Sharing via email is not possible');
+      // Sharing via email is not possible
+    });
+    
+    // Share via email
+    this.socialSharing.shareViaEmail('Aqui vai o corpo da mensagem', 'Mensagem do app Davisa', ['rodnei.brassoroto@accenture.com']).then(() => {
+      alert('email enviado com sucesso');
+    }).catch(() => {
+      alert('erro ao enviar email');      
+    });
+  }
+
+  enviarSMS() {
+    this.socialSharing.shareViaSMS('Mensagem SMS automática do aplicativo Davisa', '+5511984206847').then(() => {
+      alert('SMS com sucesso');
+    }).catch(() => {
+      alert('SMS com erro');      
+    });
+  }
+
+  enviarWhats1() {
+    this.socialSharing.shareViaWhatsApp('mensagem', '', '').then(() => {
+      alert('whats com sucesso');
+    }).catch(() => {
+      alert('whats com erro');      
+    });
+  }
+
+  enviarWhats2() {
+    this.socialSharing.shareViaWhatsAppToReceiver('+5511984888468', 'Davisa', '', '').then(() => {
+      alert('whats com sucesso');
+    }).catch(() => {
+      alert('whats com erro');      
+    });
+  }
+
 }
