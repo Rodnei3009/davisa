@@ -5,6 +5,7 @@ export class Pedido {
         public celCliente: string,
         public nomCliente: string,
         public dataHora: string,
-        public itens: [Produto]
+        public totalItens: number,
+        public valTotal: number
     ) {}
 }

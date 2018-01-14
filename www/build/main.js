@@ -258,8 +258,16 @@ var PedidoServiceProvider = (function () {
         this.http = http;
         this.afd = afd;
     }
-    PedidoServiceProvider.prototype.criarPedido = function (dadosPedido) {
-        this.afd.list('/pedidos/').push(dadosPedido);
+    PedidoServiceProvider.prototype.criarPedido = function (dadosPedido, dadosProdutos) {
+        var _this = this;
+        var i;
+        this.afd.list('/pedidos/').push(dadosPedido).then(function (pedido) {
+            //alert(pedido.key);
+            for (i = 0; i < dadosProdutos.length; i++) {
+                //alert(i);
+                _this.afd.list('/pedidos/' + pedido.key + '/itens/').push(dadosProdutos[i]);
+            }
+        });
     };
     PedidoServiceProvider.prototype.listarCliente = function (strQuery) {
         return this.afd.list('/pedidos', strQuery);
@@ -278,10 +286,10 @@ var PedidoServiceProvider = (function () {
     };
     PedidoServiceProvider = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["A" /* Injectable */])(),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_0__angular_common_http__["a" /* HttpClient */],
-            __WEBPACK_IMPORTED_MODULE_2_angularfire2_database__["a" /* AngularFireDatabase */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["a" /* HttpClient */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["a" /* HttpClient */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2_angularfire2_database__["a" /* AngularFireDatabase */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_angularfire2_database__["a" /* AngularFireDatabase */]) === "function" && _b || Object])
     ], PedidoServiceProvider);
     return PedidoServiceProvider;
+    var _a, _b;
 }());
 
 //# sourceMappingURL=pedido-service.js.map

@@ -9,15 +9,27 @@ export class PedidoServiceProvider {
   constructor(public http: HttpClient,
               public afd: AngularFireDatabase) {}
 
-  criarPedido (dadosPedido) {
-    this.afd.list('/pedidos/').push(dadosPedido);
+  criarPedido (dadosPedido, dadosProdutos) {
+
+    let i: number;
+    
+    this.afd.list('/pedidos/').push(dadosPedido).then((pedido) => {
+      //alert(pedido.key);
+
+      for (i=0; i<dadosProdutos.length;i++) {
+        //alert(i);
+        this.afd.list('/pedidos/' + pedido.key + '/itens/').push(dadosProdutos[i]);    
+      }
+
+    });
   }
+
+
+
 
   listarCliente (strQuery) {
     return this.afd.list('/pedidos', strQuery);    
   }
-
-
 
   atualizarCliente (idCliente, dadosCliente) {
     this.afd.list('/pedidos/').update(idCliente, dadosCliente);

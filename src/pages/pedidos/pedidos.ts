@@ -2,16 +2,15 @@ import { Component } from '@angular/core';
 import { Loading, LoadingController, IonicPage, NavController, NavParams, ModalController, Modal } from 'ionic-angular';
 import { Cliente } from './../../models/cliente.models';
 import { Produto } from './../../models/produto.models';
+import { Pedido } from './../../models/pedido.models';
 import { PedidoServiceProvider } from './../../providers/pedido-service/pedido-service';
 import { ProdutoServiceProvider } from './../../providers/produto-service/produto-service';
 import { DateTime } from 'ionic-angular/components/datetime/datetime';
-import { Pedido } from './../../models/pedido.models';
 import { FirebaseListObservable } from 'angularfire2/database';
 import { BarcodeScanner, BarcodeScanResult } from '@ionic-native/barcode-scanner';
 import { FirebaseListFactoryOpts } from 'angularfire2/interfaces';
 import { SocialSharing } from '@ionic-native/social-sharing';
 import { Contacts, Contact, ContactField, ContactFieldType, ContactName } from '@ionic-native/contacts';
-
 
 @IonicPage()
 @Component({
@@ -30,12 +29,13 @@ export class PedidosPage {
   nomeCliente: string = "";
   celCliente: string = "";
   dataHora: string = "";
-  detalhesPedido: Pedido;
 
   listaProduto: FirebaseListObservable<any[]>;
   barcodeResult: BarcodeScanResult;
   codBarrasRetorno: string = "";
   strQueryProduto: FirebaseListFactoryOpts;
+
+  detalhesPedido = new Pedido('','','', 0, 0.00);              
 
   contactFieldtoSearch: ContactFieldType[] = ["phoneNumbers"];  
   
@@ -82,9 +82,18 @@ export class PedidosPage {
     loading.dismiss();
   }
 
-  criaPedido(detalhesPedido): void {
+  criaPedido(): void {
 
-    this.pedido.criarPedido(detalhesPedido);
+    this.detalhesPedido.celCliente = this.dadosCliente.celular;
+    this.detalhesPedido.nomCliente = this.dadosCliente.nome;
+    this.detalhesPedido.totalItens = this.totalItens;
+    this.detalhesPedido.valTotal = this.valorTotal;
+    this.detalhesPedido.dataHora = '14/01/2018 - 14:00';
+    //this.detalhesPedido.itens = this.arrayProdutos[];    
+
+    this.pedido.criarPedido(this.detalhesPedido, this.arrayProdutos);
+
+    this.enviarSMS('Obrigado por comprar na Davisa. Detalhes do seu pedido => Itens:' + this.totalItens + ', Valor: ' + this.valorTotal + ', Detalhes: ' + this.arrayProdutos, this.dadosCliente.celular)
 
   }
 
@@ -146,8 +155,8 @@ export class PedidosPage {
     });
   }
 
-  enviarSMS() {
-    this.socialSharing.shareViaSMS('Mensagem SMS automática do aplicativo Davisa', '+5511984206847').then(() => {
+  enviarSMS(mensagem, celCliente) {
+    this.socialSharing.shareViaSMS(mensagem, celCliente).then(() => {
       alert('SMS com sucesso');
     }).catch(() => {
       alert('SMS com erro');      
