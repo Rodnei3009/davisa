@@ -62,7 +62,7 @@ const firebaseConfig = {
     HttpClient,
     HttpClientModule,
     SocialSharing,
-    Contact
+    Contacts
   ]
 })
 export class AppModule {}
