@@ -20,6 +20,7 @@ import { HttpModule } from '@angular/http';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 import { SocialSharing } from '@ionic-native/social-sharing';
+import { Contacts, Contact } from '@ionic-native/contacts'
 
 
 const firebaseConfig = {
@@ -60,7 +61,8 @@ const firebaseConfig = {
     HttpModule,
     HttpClient,
     HttpClientModule,
-    SocialSharing
+    SocialSharing,
+    Contact
   ]
 })
 export class AppModule {}

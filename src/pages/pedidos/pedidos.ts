@@ -10,6 +10,7 @@ import { FirebaseListObservable } from 'angularfire2/database';
 import { BarcodeScanner, BarcodeScanResult } from '@ionic-native/barcode-scanner';
 import { FirebaseListFactoryOpts } from 'angularfire2/interfaces';
 import { SocialSharing } from '@ionic-native/social-sharing';
+import { Contacts, Contact, ContactField, ContactFieldType, ContactName } from '@ionic-native/contacts';
 
 
 @IonicPage()
@@ -35,6 +36,9 @@ export class PedidosPage {
   barcodeResult: BarcodeScanResult;
   codBarrasRetorno: string = "";
   strQueryProduto: FirebaseListFactoryOpts;
+
+  contatos: Contacts;
+  contactFieldtoSearch: ContactFieldType[] = ["phoneNumbers"];  
   
   constructor(public navCtrl: NavController, 
               public navParams: NavParams, 
@@ -43,7 +47,8 @@ export class PedidosPage {
               public BarcodeScanner: BarcodeScanner,
               public loadingCRTL: LoadingController,
               public produto: ProdutoServiceProvider,
-              public socialSharing: SocialSharing
+              public socialSharing: SocialSharing,
+              private contacts: Contacts
             ) {
     this.dadosCliente = this.navParams.data;
   }
@@ -159,6 +164,14 @@ export class PedidosPage {
   }
 
   enviarWhats2() {
+
+    let strQuery: string = '02111984888468';
+
+    alert('antes de chamar');
+    this.contatos.find(this.contactFieldtoSearch, { filter: strQuery }).then((contacts) => {
+      alert(contacts);
+    });
+
     this.socialSharing.shareViaWhatsAppToReceiver('+5511984888468', 'Davisa', '', '').then(() => {
       alert('whats com sucesso');
     }).catch(() => {
