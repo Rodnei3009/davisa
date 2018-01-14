@@ -93,7 +93,7 @@ export class PedidosPage {
 
     this.pedido.criarPedido(this.detalhesPedido, this.arrayProdutos);
 
-    this.enviarSMS('Obrigado por comprar na Davisa. Detalhes do seu pedido => Itens:' + this.totalItens + ', Valor: ' + this.valorTotal + ', Detalhes: ' + this.arrayProdutos, this.dadosCliente.celular)
+    this.enviarSMS('Obrigado por comprar na Davisa. Detalhes do seu pedido => Itens:' + this.totalItens + ', Valor: ' + this.valorTotal + ', Detalhes: ' + this.arrayProdutos[].desc + ' - ' + this.arrayProdutos[].valVenda, this.dadosCliente.celular)
 
   }
 

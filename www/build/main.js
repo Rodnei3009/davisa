@@ -70,7 +70,7 @@ module.exports = webpackAsyncContext;
 
 /***/ }),
 
-/***/ 271:
+/***/ 270:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -109,6 +109,58 @@ var HomePage = (function () {
 /***/ }),
 
 /***/ 272:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ClienteServiceProvider; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_angularfire2_database__ = __webpack_require__(65);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var ClienteServiceProvider = (function () {
+    function ClienteServiceProvider(afd) {
+        this.afd = afd;
+        this.showSpinnerCliente = true;
+    }
+    ClienteServiceProvider.prototype.listarCliente = function (strQuery) {
+        return this.afd.list('/clientes', strQuery);
+    };
+    ClienteServiceProvider.prototype.adicionarCliente = function (Cliente) {
+        this.afd.list('/clientes/').push(Cliente);
+    };
+    ClienteServiceProvider.prototype.atualizarCliente = function (idCliente, dadosCliente) {
+        this.afd.list('/clientes/').update(idCliente, dadosCliente);
+    };
+    ClienteServiceProvider.prototype.deletarCliente = function (idCliente) {
+        this.afd.list('/clientes/').remove(idCliente);
+    };
+    ClienteServiceProvider.prototype.localizarClientePorNome = function (start, end, equal) {
+        return this.afd.list('/clientes', { query: { orderByChild: 'nome', startAt: start, endAt: end, equalTo: equal } });
+    };
+    ClienteServiceProvider.prototype.localizarClientePorCelular = function (celular) {
+        return this.afd.list('/clientes', { query: { orderByChild: 'celular', equalTo: celular } });
+    };
+    ClienteServiceProvider = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])(),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_angularfire2_database__["a" /* AngularFireDatabase */]])
+    ], ClienteServiceProvider);
+    return ClienteServiceProvider;
+}());
+
+//# sourceMappingURL=cliente-service.js.map
+
+/***/ }),
+
+/***/ 273:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -181,128 +233,13 @@ var ProdutoServiceProvider = (function () {
 
 /***/ }),
 
-/***/ 274:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ClienteServiceProvider; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_angularfire2_database__ = __webpack_require__(65);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-var ClienteServiceProvider = (function () {
-    function ClienteServiceProvider(afd) {
-        this.afd = afd;
-        this.showSpinnerCliente = true;
-    }
-    ClienteServiceProvider.prototype.listarCliente = function (strQuery) {
-        return this.afd.list('/clientes', strQuery);
-    };
-    ClienteServiceProvider.prototype.adicionarCliente = function (Cliente) {
-        this.afd.list('/clientes/').push(Cliente);
-    };
-    ClienteServiceProvider.prototype.atualizarCliente = function (idCliente, dadosCliente) {
-        this.afd.list('/clientes/').update(idCliente, dadosCliente);
-    };
-    ClienteServiceProvider.prototype.deletarCliente = function (idCliente) {
-        this.afd.list('/clientes/').remove(idCliente);
-    };
-    ClienteServiceProvider.prototype.localizarClientePorNome = function (start, end, equal) {
-        return this.afd.list('/clientes', { query: { orderByChild: 'nome', startAt: start, endAt: end, equalTo: equal } });
-    };
-    ClienteServiceProvider.prototype.localizarClientePorCelular = function (celular) {
-        return this.afd.list('/clientes', { query: { orderByChild: 'celular', equalTo: celular } });
-    };
-    ClienteServiceProvider = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])(),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_angularfire2_database__["a" /* AngularFireDatabase */]])
-    ], ClienteServiceProvider);
-    return ClienteServiceProvider;
-}());
-
-//# sourceMappingURL=cliente-service.js.map
-
-/***/ }),
-
 /***/ 275:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PedidoServiceProvider; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_common_http__ = __webpack_require__(229);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_database__ = __webpack_require__(65);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-var PedidoServiceProvider = (function () {
-    function PedidoServiceProvider(http, afd) {
-        this.http = http;
-        this.afd = afd;
-    }
-    PedidoServiceProvider.prototype.criarPedido = function (dadosPedido, dadosProdutos) {
-        var _this = this;
-        var i;
-        this.afd.list('/pedidos/').push(dadosPedido).then(function (pedido) {
-            //alert(pedido.key);
-            for (i = 0; i < dadosProdutos.length; i++) {
-                //alert(i);
-                _this.afd.list('/pedidos/' + pedido.key + '/itens/').push(dadosProdutos[i]);
-            }
-        });
-    };
-    PedidoServiceProvider.prototype.listarCliente = function (strQuery) {
-        return this.afd.list('/pedidos', strQuery);
-    };
-    PedidoServiceProvider.prototype.atualizarCliente = function (idCliente, dadosCliente) {
-        this.afd.list('/pedidos/').update(idCliente, dadosCliente);
-    };
-    PedidoServiceProvider.prototype.deletarCliente = function (idCliente) {
-        this.afd.list('/pedidos/').remove(idCliente);
-    };
-    PedidoServiceProvider.prototype.localizarClientePorNome = function (start, end, equal) {
-        return this.afd.list('/pedidos', { query: { orderByChild: 'nome', startAt: start, endAt: end, equalTo: equal } });
-    };
-    PedidoServiceProvider.prototype.localizarClientePorCelular = function (celular) {
-        return this.afd.list('/pedidos', { query: { orderByChild: 'celular', equalTo: celular } });
-    };
-    PedidoServiceProvider = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["A" /* Injectable */])(),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["a" /* HttpClient */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_common_http__["a" /* HttpClient */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2_angularfire2_database__["a" /* AngularFireDatabase */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_angularfire2_database__["a" /* AngularFireDatabase */]) === "function" && _b || Object])
-    ], PedidoServiceProvider);
-    return PedidoServiceProvider;
-    var _a, _b;
-}());
-
-//# sourceMappingURL=pedido-service.js.map
-
-/***/ }),
-
-/***/ 278:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__ = __webpack_require__(279);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_module__ = __webpack_require__(299);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__ = __webpack_require__(276);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_module__ = __webpack_require__(296);
 
 
 Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* platformBrowserDynamic */])().bootstrapModule(__WEBPACK_IMPORTED_MODULE_1__app_module__["a" /* AppModule */]);
@@ -310,7 +247,7 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 
 /***/ }),
 
-/***/ 299:
+/***/ 296:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -318,20 +255,20 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__ = __webpack_require__(33);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(78);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(269);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_barcode_scanner__ = __webpack_require__(273);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_native_status_bar__ = __webpack_require__(270);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__app_component__ = __webpack_require__(428);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_home_home__ = __webpack_require__(271);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(268);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__ionic_native_barcode_scanner__ = __webpack_require__(274);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__ionic_native_status_bar__ = __webpack_require__(269);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__app_component__ = __webpack_require__(421);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_home_home__ = __webpack_require__(270);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_angularfire2_database__ = __webpack_require__(65);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_angularfire2__ = __webpack_require__(429);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__providers_firebase_service_cliente_service__ = __webpack_require__(274);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__providers_produto_service_produto_service__ = __webpack_require__(272);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__providers_pedido_service_pedido_service__ = __webpack_require__(275);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__angular_http__ = __webpack_require__(430);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__angular_common_http__ = __webpack_require__(229);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__ionic_native_social_sharing__ = __webpack_require__(276);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__ionic_native_contacts__ = __webpack_require__(277);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_angularfire2__ = __webpack_require__(422);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__providers_firebase_service_cliente_service__ = __webpack_require__(272);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__providers_produto_service_produto_service__ = __webpack_require__(273);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__providers_pedido_service_pedido_service__ = __webpack_require__(423);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__angular_http__ = __webpack_require__(428);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__angular_common_http__ = __webpack_require__(271);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__ionic_native_social_sharing__ = __webpack_require__(429);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__ionic_native_contacts__ = __webpack_require__(430);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -419,16 +356,16 @@ var AppModule = (function () {
 
 /***/ }),
 
-/***/ 428:
+/***/ 421:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MyApp; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(78);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__ = __webpack_require__(270);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(269);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_home_home__ = __webpack_require__(271);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__ = __webpack_require__(269);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__ = __webpack_require__(268);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_home_home__ = __webpack_require__(270);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -476,7 +413,70 @@ var MyApp = (function () {
 
 //# sourceMappingURL=app.component.js.map
 
+/***/ }),
+
+/***/ 423:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return PedidoServiceProvider; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_common_http__ = __webpack_require__(271);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_database__ = __webpack_require__(65);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+var PedidoServiceProvider = (function () {
+    function PedidoServiceProvider(http, afd) {
+        this.http = http;
+        this.afd = afd;
+    }
+    PedidoServiceProvider.prototype.criarPedido = function (dadosPedido, dadosProdutos) {
+        var _this = this;
+        var i;
+        this.afd.list('/pedidos/').push(dadosPedido).then(function (pedido) {
+            //alert(pedido.key);
+            for (i = 0; i < dadosProdutos.length; i++) {
+                //alert(i);
+                _this.afd.list('/pedidos/' + pedido.key + '/itens/').push(dadosProdutos[i]);
+            }
+        });
+    };
+    PedidoServiceProvider.prototype.listarCliente = function (strQuery) {
+        return this.afd.list('/pedidos', strQuery);
+    };
+    PedidoServiceProvider.prototype.atualizarCliente = function (idCliente, dadosCliente) {
+        this.afd.list('/pedidos/').update(idCliente, dadosCliente);
+    };
+    PedidoServiceProvider.prototype.deletarCliente = function (idCliente) {
+        this.afd.list('/pedidos/').remove(idCliente);
+    };
+    PedidoServiceProvider.prototype.localizarClientePorNome = function (start, end, equal) {
+        return this.afd.list('/pedidos', { query: { orderByChild: 'nome', startAt: start, endAt: end, equalTo: equal } });
+    };
+    PedidoServiceProvider.prototype.localizarClientePorCelular = function (celular) {
+        return this.afd.list('/pedidos', { query: { orderByChild: 'celular', equalTo: celular } });
+    };
+    PedidoServiceProvider = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["A" /* Injectable */])(),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_0__angular_common_http__["a" /* HttpClient */],
+            __WEBPACK_IMPORTED_MODULE_2_angularfire2_database__["a" /* AngularFireDatabase */]])
+    ], PedidoServiceProvider);
+    return PedidoServiceProvider;
+}());
+
+//# sourceMappingURL=pedido-service.js.map
+
 /***/ })
 
-},[278]);
+},[275]);
 //# sourceMappingURL=main.js.map
