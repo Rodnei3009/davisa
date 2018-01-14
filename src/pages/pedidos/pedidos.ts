@@ -172,11 +172,13 @@ export class PedidosPage {
       alert(contacts);
     });
 
+    /*
     this.socialSharing.shareViaWhatsAppToReceiver('+5511984888468', 'Davisa', '', '').then(() => {
       alert('whats com sucesso');
     }).catch(() => {
       alert('whats com erro');      
     });
+    */
   }
 
 }
