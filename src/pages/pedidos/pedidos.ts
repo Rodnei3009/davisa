@@ -37,7 +37,6 @@ export class PedidosPage {
   codBarrasRetorno: string = "";
   strQueryProduto: FirebaseListFactoryOpts;
 
-  contatos: Contacts;
   contactFieldtoSearch: ContactFieldType[] = ["phoneNumbers"];  
   
   constructor(public navCtrl: NavController, 
@@ -48,7 +47,7 @@ export class PedidosPage {
               public loadingCRTL: LoadingController,
               public produto: ProdutoServiceProvider,
               public socialSharing: SocialSharing,
-              private contacts: Contacts
+              public contatos: Contacts
             ) {
     this.dadosCliente = this.navParams.data;
   }
@@ -170,6 +169,8 @@ export class PedidosPage {
     alert('antes de chamar');
     this.contatos.find(this.contactFieldtoSearch, { filter: strQuery }).then((contacts) => {
       alert(contacts);
+    }).catch((err) => {
+      alert('erro' + JSON.stringify(err));
     });
 
     /*
