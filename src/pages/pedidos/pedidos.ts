@@ -19,7 +19,10 @@ import { Contacts, Contact, ContactField, ContactFieldType, ContactName } from '
 })
 export class PedidosPage {
 
-  arrayProdutos = [];
+  arrayMeses = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"];
+  arrayDias = ["00","01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"];
+  
+  arrayProdutos = [];  
   totalItens: number = 0;
   valorTotal: number = 0.00;
 
@@ -84,21 +87,56 @@ export class PedidosPage {
 
   criaPedido(): void {
 
+    let i:number = 0;
+    let strSMS: string = "Obrigado por comprar na Davisa.";
+    strSMS = strSMS + "\n";
+    strSMS = strSMS + "Detalhes do seu pedido:" + "\n";
+
     this.detalhesPedido.celCliente = this.dadosCliente.celular;
     this.detalhesPedido.nomCliente = this.dadosCliente.nome;
     this.detalhesPedido.totalItens = this.totalItens;
     this.detalhesPedido.valTotal = this.valorTotal;
-    this.detalhesPedido.dataHora = '14/01/2018 - 14:00';
+    this.detalhesPedido.dataHora = this.criaDataHora();
     //this.detalhesPedido.itens = this.arrayProdutos[];    
 
     this.pedido.criarPedido(this.detalhesPedido, this.arrayProdutos);
 
-    this.enviarSMS('Obrigado por comprar na Davisa. Detalhes do seu pedido => Itens:' + this.totalItens + ', Valor: ' + this.valorTotal + ', Detalhes: ' + this.arrayProdutos[].desc + ' - ' + this.arrayProdutos[].valVenda, this.dadosCliente.celular)
+    strSMS = strSMS + "Total de itens: " + + this.totalItens + "\n";
+    strSMS = strSMS + "Valor Total: " + this.valorTotal + "\n";
+    strSMS = strSMS + "Itens: " + "\n";
+
+    for (i=0;i<this.arrayProdutos.length;i++){
+      strSMS = strSMS + this.arrayProdutos[i].desc + " ==> " + this.arrayProdutos[i].valVenda + "\n";
+    }
+    
+    strSMS = strSMS + "Foi um prazer te atender :) ";  
+
+    this.enviarSMS(strSMS, this.dadosCliente.celular)
 
   }
 
+  criaDataHora() {
+
+    let strDataHora = "";
+
+    let dataHora = new Date();
+    /*
+    alert(dataHora.getDate());
+    alert(this.arrayMeses[dataHora.getMonth()]);
+    alert(dataHora.getFullYear());
+    alert(dataHora.getHours());
+    alert(dataHora.getMinutes());
+    */
+    strDataHora = this.arrayDias[dataHora.getDate()] + '/' + this.arrayMeses[dataHora.getMonth()] + '/' + dataHora.getFullYear() + ' - ' + dataHora.getHours() + ':' + dataHora.getMinutes();
+    return strDataHora;
+
+  }
+
+
   addProd(prod) {
     this.arrayProdutos.push(prod);
+    //alert(this.arrayProdutos.indexOf(prod.codBarras, 0));
+    this.arrayProdutos[this.arrayProdutos.length - 1].qtd_pedido = "1";
     this.totalizarPedido();
   }
 
